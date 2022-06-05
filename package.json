@@ -2,6 +2,10 @@
   "name": "testrunner-packages",
   "private": true,
   "scripts": {
+    "install:all": "npm run install:mocha-examples && npm run install:testrunner",
+    "install:mocha-examples": "cd mocha-examples && npm install",
+    "install:testrunner": "cd testrunner && npm install",
+    "preinstall": "echo Use `npm run install:all` && exit 1",
     "test": "npm run test:mocha-examples && npm run test:testrunner",
     "test:mocha-examples": "cd mocha-examples && npm test",
     "test:testrunner": "cd testrunner && npm test"

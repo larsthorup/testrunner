@@ -3,7 +3,8 @@
 A better test runner.
 
 ```bash
-npm test
+npm run install:all
+npm run test
 ```
 
 ## Scope
