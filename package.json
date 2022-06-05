@@ -1,0 +1,9 @@
+{
+  "name": "testrunner-packages",
+  "private": true,
+  "scripts": {
+    "test": "npm run test:mocha-examples && npm run test:testrunner",
+    "test:mocha-examples": "cd mocha-examples && npm test",
+    "test:testrunner": "cd testrunner && npm test"
+  }
+}

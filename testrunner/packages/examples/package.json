@@ -1,0 +1,22 @@
+{
+  "name": "@larsthorup/testrunner-examples",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "testrunner"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larsthorup/testrunner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/larsthorup/testrunner/issues"
+  },
+  "homepage": "https://github.com/larsthorup/testrunner#readme"
+}

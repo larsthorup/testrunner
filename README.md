@@ -1,32 +1,44 @@
 # @larsthorup/testrunner
 
+A better test runner.
+
+```bash
+npm test
+```
+
 ## Scope
 
-- [ ] no globals (simplicity)
-- [ ] no commonjs support (modernity)
-- [ ] typed (modernity)
-- [ ] run mixed tests and describes in order (fix)
-- [ ] pass in test context (extensibility)
-- [ ] dynamic skip (fix)
-- [ ] tests in production code files (fix)
-- [ ] do not capture output (fix)
-- [ ] useSetup (fix)
+- [x] comparison with mocha,
+- [x] no commonjs support (modernity)
+- [x] no globals (simplicity)
+- [x] external assertion library (node:assert)
+- [x] do not capture output (fix)
+- [ ] nested describe, it (standard)
+- [ ] run mixed tests and describes in defined order (fix)
 - [ ] sync and async (standard)
-- [ ] process isolation - default off - op-in per test (catch more bugs)
+- [ ] self tested
+- [ ] typed (modernity)
+- [ ] pass in test context (extensibility)
+- [ ] tests in production code files (fix)
+- [ ] dynamic skip (fix)
+- [ ] useSetup (fix)
 - [ ] extendable timeouts (fix)
-- [ ] pluggable reporting
-- [ ] controlable parallelism
-- [ ] run in node or browser
-- [ ] run on windows and posix
+- [ ] process isolation - default off - opt-in per test (catch more bugs)
+- [ ] random test order - default off - opt-in per test (catch more bugs)
+- [ ] pluggable reporting (standard)
+- [ ] controlable parallelism (standard)
+- [ ] run in node or browser (standard)
+- [ ] run on windows and posix (standard)
+- [ ] IDE integration
+- [ ] comparison with node:test, vitest, jest, tap, ava
 - [ ] compose with other module loaders
-- [ ] external assertion library (chai)
+- [ ] external assertion library (node:assert, chai, jest)
 - [ ] external esm mocking (esmock, quibble)
 - [ ] external code coverage (c8)
 - [ ] external watch tool (based on same --loader as the esm mocking??)
 - [ ] external bundler (vite),
 - [ ] external transpiler (typescript, jsx)
 - [ ] external DOM (browser, jsdom, happy-dom)
-- [ ] comparison with vitest, mocha, jest, tap, ava
 
 ## ESM module mocking
 
