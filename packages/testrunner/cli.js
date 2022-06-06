@@ -5,5 +5,10 @@ import { runner } from './index.js';
 // TODO: use glob arg to find test files
 // TODO: multiple test files
 import '../examples/example.test.js';
-runner();
-console.log('testrunner: done');
+
+const main = async () => {
+  await runner();
+  console.log('testrunner: done');
+};
+
+main().catch(console.error);

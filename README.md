@@ -9,7 +9,6 @@ npm run test
 
 ## TODO
 
-- eslint
 - typescript check types imported with jsdoc
 
 ## Scope
@@ -21,7 +20,7 @@ npm run test
 - [x] do not capture output (fix)
 - [x] nested describe, it (standard)
 - [x] run mixed its and describes in defined order (fix)
-- [ ] sync and async (standard)
+- [x] sync and async (standard)
 - [ ] typed (modernity)
 - [ ] self tested
 - [ ] useSetup (fix)

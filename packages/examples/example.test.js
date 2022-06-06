@@ -17,3 +17,10 @@ describe('outer', () => {
     assert.equal(2 + 2, 4);
   });
 });
+
+describe('async', () => {
+  it('should await', async () => {
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    assert.equal(2 + 2, 4);
+  });
+});

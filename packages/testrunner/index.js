@@ -1,3 +1,5 @@
+import { isPromise } from 'util/types';
+
 const globalTest = { type: 'describe', testList: [] };
 let currentTest = globalTest;
 
@@ -20,15 +22,15 @@ export const it = (name, fn) => {
 // TODO: beforeAll, beforeEach, afterAll, afterEach
 // TODO: useSetup
 
-export const runner = () => {
+export const runner = async () => {
   // TODO: instrument for coverage
-  run(globalTest, []);
+  await run(globalTest, []);
   // TODO: report test results
   // TODO: report coverage
   // TODO: report delta coverage compared to base branch
 };
 
-const run = (test, parentTestList) => {
+const run = async (test, parentTestList) => {
   // TODO: filter tests based on explicit criteria, watched changes, explicit test order
   // TODO: randomize test order or not
   // TODO: parallelism or not
@@ -37,7 +39,7 @@ const run = (test, parentTestList) => {
     const fullTestList = parentTestList.concat([childTest]);
     switch (type) {
       case 'describe':
-        run(childTest, fullTestList);
+        await run(childTest, fullTestList);
         break;
       case 'it':
         {
@@ -47,9 +49,9 @@ const run = (test, parentTestList) => {
           try {
             // TODO: run in browser or node
             // TODO: process isolation or not
-            // TODO: wait for promise
             // TODO: pass in test context
-            fn();
+            const result = fn();
+            if (isPromise(result)) await result;
             console.log('✔', fullName);
           } catch (ex) {
             // TODO: pluggable reporter
