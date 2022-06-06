@@ -7,10 +7,6 @@ npm run install:all
 npm run test
 ```
 
-## TODO
-
-- typescript check types imported with jsdoc
-
 ## Scope
 
 - [x] comparison with mocha,
@@ -21,7 +17,7 @@ npm run test
 - [x] nested describe, it (standard)
 - [x] run mixed its and describes in defined order (fix)
 - [x] sync and async (standard)
-- [ ] typed (modernity)
+- [x] typed (modernity)
 - [ ] self tested
 - [ ] useSetup (fix)
 - [ ] pass in test context (extensibility)

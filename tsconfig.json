@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "lib": ["es2020"],
+    "noEmit": true,
+    "strict": true,
+    "types": ["node"]
+  },
+  "exclude": ["comparisons", "node_modules"],
+  "include": ["**/*.js", "**/.ts"]
+}

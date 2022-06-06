@@ -1,10 +1,20 @@
 import { isPromise } from 'util/types';
 
-const globalTest = { type: 'describe', testList: [] };
+/** @typedef { { type: 'describe'; name: string; testList: Test[] } } Describe */
+/** @typedef { { type: 'it'; name: string; fn: () => Promise<any> | void } } It */
+/** @typedef { Describe | It } Test */
+
+/** @type { Test} */
+const globalTest = { type: 'describe', name: '', testList: [] };
 let currentTest = globalTest;
 
+/**
+ * @param {string} name
+ * @param {() => void} fn
+ */
 export const describe = (name, fn) => {
   // console.log('describe', name);
+  /** @type { Describe} */
   const describe = { type: 'describe', name, testList: [] };
   currentTest.testList.push(describe);
   const previousTest = currentTest;
@@ -13,8 +23,13 @@ export const describe = (name, fn) => {
   currentTest = previousTest;
 };
 
+/**
+ * @param {string} name
+ * @param {() => Promise<any> | void} fn
+ */
 export const it = (name, fn) => {
   // console.log('it', name);
+  /** @type { It} */
   const it = { type: 'it', name, fn };
   currentTest.testList.push(it);
 };
@@ -30,36 +45,39 @@ export const runner = async () => {
   // TODO: report delta coverage compared to base branch
 };
 
+/**
+ * @param { Test } test
+ * @param { Test[] } parentTestList
+ */
 const run = async (test, parentTestList) => {
   // TODO: filter tests based on explicit criteria, watched changes, explicit test order
   // TODO: randomize test order or not
   // TODO: parallelism or not
-  for (const childTest of test.testList) {
-    const { type } = childTest;
-    const fullTestList = parentTestList.concat([childTest]);
-    switch (type) {
-      case 'describe':
+  switch (test.type) {
+    case 'describe':
+      for (const childTest of test.testList) {
+        const fullTestList = parentTestList.concat([childTest]);
         await run(childTest, fullTestList);
-        break;
-      case 'it':
-        {
-          const fullName = fullTestList.map(({ name }) => name).join(' - ');
-          const { fn } = childTest;
-          // console.log('before', fullName);
-          try {
-            // TODO: run in browser or node
-            // TODO: process isolation or not
-            // TODO: pass in test context
-            const result = fn();
-            if (isPromise(result)) await result;
-            console.log('✔', fullName);
-          } catch (ex) {
-            // TODO: pluggable reporter
-            console.log('x', fullName, ex.message);
-          }
-          // console.log('after', fullName);
+      }
+      break;
+    case 'it':
+      {
+        const fullName = parentTestList.map(({ name }) => name).join(' - ');
+        const { fn } = test;
+        // console.log('before', fullName);
+        try {
+          // TODO: run in browser or node
+          // TODO: process isolation or not
+          // TODO: pass in test context
+          const result = fn();
+          if (isPromise(result)) await result;
+          console.log('✔', fullName);
+        } catch (ex) {
+          // TODO: pluggable reporter
+          console.log('x', fullName, ex);
         }
-        break;
-    }
+        // console.log('after', fullName);
+      }
+      break;
   }
 };
