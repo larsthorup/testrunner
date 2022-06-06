@@ -18,13 +18,20 @@ export const it = (name, fn) => {
 };
 
 // TODO: beforeAll, beforeEach, afterAll, afterEach
+// TODO: useSetup
 
 export const runner = () => {
+  // TODO: instrument for coverage
   run(globalTest, []);
-  // TODO: stats
+  // TODO: report test results
+  // TODO: report coverage
+  // TODO: report delta coverage compared to base branch
 }
 
 const run = (test, parentTestList) => {
+  // TODO: filter tests based on explicit criteria, watched changes, explicit test order
+  // TODO: randomize test order or not
+  // TODO: parallelism or not
   for (const childTest of test.testList) {
     const { type } = childTest;
     const fullTestList = parentTestList.concat([childTest]);
@@ -37,9 +44,14 @@ const run = (test, parentTestList) => {
         const { fn } = childTest;
         // console.log('before', fullName);
         try {
+          // TODO: run in browser or node
+          // TODO: process isolation or not
+          // TODO: wait for promise
+          // TODO: pass in test context
           fn();
           console.log('✔', fullName)
         } catch (ex) {
+          // TODO: pluggable reporter
           console.log('x', fullName, ex.message)
         }
         // console.log('after', fullName);

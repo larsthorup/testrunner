@@ -7,6 +7,13 @@ npm run install:all
 npm run test
 ```
 
+## TODO
+
+- monorepo restructure
+- prettier
+- eslint
+- typescript check types imported with jsdoc
+
 ## Scope
 
 - [x] comparison with mocha,
