@@ -40,21 +40,23 @@ const run = (test, parentTestList) => {
         run(childTest, fullTestList);
         break;
       case 'it':
-        const fullName = fullTestList.map(({ name }) => name).join(' - ');
-        const { fn } = childTest;
-        // console.log('before', fullName);
-        try {
-          // TODO: run in browser or node
-          // TODO: process isolation or not
-          // TODO: wait for promise
-          // TODO: pass in test context
-          fn();
-          console.log('✔', fullName);
-        } catch (ex) {
-          // TODO: pluggable reporter
-          console.log('x', fullName, ex.message);
+        {
+          const fullName = fullTestList.map(({ name }) => name).join(' - ');
+          const { fn } = childTest;
+          // console.log('before', fullName);
+          try {
+            // TODO: run in browser or node
+            // TODO: process isolation or not
+            // TODO: wait for promise
+            // TODO: pass in test context
+            fn();
+            console.log('✔', fullName);
+          } catch (ex) {
+            // TODO: pluggable reporter
+            console.log('x', fullName, ex.message);
+          }
+          // console.log('after', fullName);
         }
-        // console.log('after', fullName);
         break;
     }
   }

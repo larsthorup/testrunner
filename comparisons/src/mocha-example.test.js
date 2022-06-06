@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import { strict as assert } from 'node:assert';
 
 describe('outer', () => {
