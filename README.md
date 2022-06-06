@@ -9,7 +9,6 @@ npm run test
 
 ## TODO
 
-- monorepo restructure
 - prettier
 - eslint
 - typescript check types imported with jsdoc

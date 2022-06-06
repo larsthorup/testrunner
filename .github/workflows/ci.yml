@@ -12,5 +12,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "16"
-      - run: npm run install:all
+      - run: npm install
       - run: npm test
+      - run: npm install:mocha-examples && npm test:mocha-examples
