@@ -26,7 +26,7 @@ export const runner = () => {
   // TODO: report test results
   // TODO: report coverage
   // TODO: report delta coverage compared to base branch
-}
+};
 
 const run = (test, parentTestList) => {
   // TODO: filter tests based on explicit criteria, watched changes, explicit test order
@@ -49,13 +49,13 @@ const run = (test, parentTestList) => {
           // TODO: wait for promise
           // TODO: pass in test context
           fn();
-          console.log('✔', fullName)
+          console.log('✔', fullName);
         } catch (ex) {
           // TODO: pluggable reporter
-          console.log('x', fullName, ex.message)
+          console.log('x', fullName, ex.message);
         }
         // console.log('after', fullName);
         break;
     }
   }
-}
+};

@@ -4,12 +4,16 @@
   "scripts": {
     "install:comparisons": "cd comparisons && npm install",
     "postinstall": "npm run install:comparisons",
-    "pretest": "npm run test:comparisons",
+    "pretest": "npm run test:comparisons && prettier . --check",
+    "prettier": "prettier . --write",
     "test": "npm test --workspaces",
     "test:comparisons": "cd comparisons && npm test"
   },
   "workspaces": [
     "packages/testrunner",
     "packages/examples"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "^2.6.2"
+  }
 }

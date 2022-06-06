@@ -9,7 +9,6 @@ npm run test
 
 ## TODO
 
-- prettier
 - eslint
 - typescript check types imported with jsdoc
 

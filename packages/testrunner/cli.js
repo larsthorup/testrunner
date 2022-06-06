@@ -6,4 +6,4 @@ import { runner } from './index.js';
 // TODO: multiple test files
 import '../examples/example.test.js';
 runner();
-console.log("testrunner: done");
+console.log('testrunner: done');
