@@ -9,7 +9,7 @@ npm run test
 
 ## Scope
 
-- [x] comparison with mocha, vitest
+- [x] comparison with jest, mocha, vitest
 - [x] no commonjs support (modernity)
 - [x] no globals (simplicity)
 - [x] external assertion library (node:assert)
@@ -36,7 +36,7 @@ npm run test
 - [ ] run in node or browser (standard)
 - [ ] run on windows and posix (standard)
 - [ ] IDE integration
-- [ ] comparison with node:test, jest, tap, ava, junit
+- [ ] comparison with node:test, tap, ava, junit
 - [ ] compose with other module loaders
 - [ ] external assertion library (chai, jest)
 - [ ] external esm mocking (esmock, quibble)

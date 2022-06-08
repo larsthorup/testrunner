@@ -7,7 +7,7 @@
     "pretest": "prettier . --check && eslint . && tsc && npm run test:comparisons",
     "prettier": "prettier . --write",
     "test": "npm test --workspaces",
-    "test:comparisons": "cd comparisons && tsc && npm test"
+    "test:comparisons": "cd comparisons && npm test"
   },
   "workspaces": [
     "packages/testrunner",

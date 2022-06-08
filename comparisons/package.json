@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "test": "npm run test:mocha && npm run test:vitest",
+    "test": "npm run test:jest && npm run test:mocha && npm run test:vitest",
+    "test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/jest-example.test.js",
     "test:mocha": "mocha src/mocha-example.test.js",
     "test:vitest": "vitest --run src/vitest-example.test.js"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.1",
     "chai": "^4.3.6",
+    "jest": "^28.1.1",
     "mocha": "^10.0.0",
     "vitest": "^0.14.1"
   }
