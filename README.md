@@ -23,12 +23,13 @@ npm run test
 - [x] hooks order is FILO (fix)
 - [x] useSetup (fix)
 - [ ] self tested
-- [ ] controlable parallelism (standard)
-- [ ] random test order - default off - opt-in per test (catch more bugs)
+- [ ] syntax for options: .skip, .todo, .concurrent, .only, .randomize, .each, .if, .unless, .fails (fix)
+- [ ] describe({concurrent,serial}) - default serial - inherited (standard)
+- [ ] describe({random, sequential}) - default random - inherited (catch more bugs)
 - [ ] named hooks (fix)
 - [ ] pass in test context (extensibility)
 - [ ] tests in production code files (fix)
-- [ ] dynamic skip (fix)
+- [ ] dynamic skip, todo (fix)
 - [ ] extendable timeouts (fix)
 - [ ] process isolation - default off - opt-in per test (catch more bugs)
 - [ ] pluggable reporting (standard)
@@ -44,6 +45,16 @@ npm run test
 - [ ] external bundler (vite),
 - [ ] external transpiler (typescript, jsx)
 - [ ] external DOM (browser, jsdom, happy-dom)
+
+## Syntax for options (ideas)
+
+- `it("should fail", {only, fails, each: [0, false]}, (value) => { assert(value); })`
+  - optional second parameter
+  - used by node:test
+  - any order
+  - surprising syntax?
+- `it.only.fails.each([0, false])("should fail", (value) => { assert(value); })`
+  - implementation-wise tricky to ensure any order
 
 ## ESM module mocking
 

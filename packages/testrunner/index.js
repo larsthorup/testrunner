@@ -87,11 +87,7 @@ export const useSetup = (setup) => {
 };
 
 export const runner = async () => {
-  // TODO: instrument for coverage
   await runTests(globalTest, []);
-  // TODO: report test results
-  // TODO: report coverage
-  // TODO: report delta coverage compared to base branch
 };
 
 /**
@@ -99,9 +95,9 @@ export const runner = async () => {
  * @param { Test[] } parentTestList
  */
 const runTests = async (test, parentTestList) => {
-  // TODO: filter tests based on explicit criteria, watched changes, explicit test order
-  // TODO: randomize test order or not
-  // TODO: parallelism or not
+  // TODO: filter tests based on explicit criteria, watch filter, explicit test order
+  // TODO: shuffle tests based on serial / random test order
+  // TODO: concurrent or sequential or not
   switch (test.type) {
     case 'describe':
       {
@@ -162,8 +158,6 @@ const runTest = async (test, parentTestList) => {
   const fullName = parentTestList.map(({ name }) => name).join(' - ');
   const { fn } = test;
   try {
-    // TODO: run in browser or node
-    // TODO: process isolation or not
     // TODO: pass in test context
     const result = fn();
     if (isPromise(result)) await result;
