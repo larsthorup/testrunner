@@ -83,6 +83,7 @@ describe('hooks run FILO', () => {
   });
 });
 
+// Note: this requires FILO hook order, and will not work in mocha, vitest
 describe('useSetup', () => {
   /** @type { string[] } */
   let order = [];

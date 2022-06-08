@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "npm run test:mocha && npm run test:vitest",
-    "test:mocha": "mocha mocha-example.test.js",
-    "test:vitest": "vitest --run vitest-example.test.js"
+    "test:mocha": "mocha src/mocha-example.test.js",
+    "test:vitest": "vitest --run src/vitest-example.test.js"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.1",
