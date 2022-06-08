@@ -6,6 +6,7 @@ import {
   beforeEach,
   describe,
   it,
+  useSetup,
 } from '@larsthorup/testrunner';
 
 describe('outer', () => {
@@ -79,5 +80,67 @@ describe('hooks run FILO', () => {
   });
   afterAll(() => {
     assert.equal(order, 'BDiCA');
+  });
+});
+
+describe('useSetup', () => {
+  /** @type { string[] } */
+  let order = [];
+  describe('block', () => {
+    /** @typedef { { some: string} } Db*/
+    const getDb = useSetup(() => {
+      /** @type { Db | undefined } */
+      let db;
+      return {
+        before: () => {
+          db = { some: 'db' };
+          order.push('setup db');
+        },
+        after: () => {
+          db = undefined;
+          order.push('teardown db');
+        },
+        get: () => {
+          order.push('get db');
+          return db;
+        },
+      };
+    });
+    /** @typedef { { db: Db} } Server */
+    const getServer = useSetup(() => {
+      /** @type { Server | undefined } */
+      let server;
+      return {
+        before: () => {
+          const db = getDb();
+          server = { db };
+          order.push('setup server');
+        },
+        after: () => {
+          server = undefined;
+          order.push('teardown server');
+        },
+        get: () => {
+          order.push('get server');
+          return server;
+        },
+      };
+    });
+    it('should have setup', () => {
+      const server = getServer();
+      assert.deepEqual(server, { db: { some: 'db' } });
+      order.push('test');
+    });
+  });
+  afterAll(() => {
+    assert.deepEqual(order, [
+      'setup db',
+      'get db',
+      'setup server',
+      'get server',
+      'test',
+      'teardown server',
+      'teardown db',
+    ]);
   });
 });

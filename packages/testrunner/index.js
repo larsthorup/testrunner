@@ -73,8 +73,16 @@ export const it = (name, fn) => {
   currentTest.testList.push(it);
 };
 
-// TODO: beforeAll, beforeEach, afterAll, afterEach
-// TODO: useSetup
+/**
+ * @param {any} setup
+ * @returns
+ */
+export const useSetup = (setup) => {
+  const { before, after, get } = setup();
+  beforeAll(before);
+  afterAll(after);
+  return get;
+};
 
 export const runner = async () => {
   // TODO: instrument for coverage
@@ -96,7 +104,7 @@ const runTests = async (test, parentTestList) => {
     case 'describe':
       {
         const beforeAllList = /** @type BeforeAll[] */ (
-          parentTestList.filter(({ type }) => type === 'beforeAll')
+          test.testList.filter(({ type }) => type === 'beforeAll')
         );
         for (const beforeAll of beforeAllList) {
           const fullTestList = parentTestList.concat([beforeAll]);
@@ -107,7 +115,7 @@ const runTests = async (test, parentTestList) => {
           await runTests(childTest, fullTestList);
         }
         const afterAllList = /** @type AfterAll[] */ (
-          parentTestList.filter(({ type }) => type === 'afterAll')
+          test.testList.filter(({ type }) => type === 'afterAll')
         );
         for (const afterAll of afterAllList.reverse()) {
           const fullTestList = parentTestList.concat([afterAll]);
