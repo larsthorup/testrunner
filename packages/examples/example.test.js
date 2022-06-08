@@ -106,7 +106,7 @@ describe('useSetup', () => {
         },
       };
     });
-    /** @typedef { { db: Db} } Server */
+    /** @typedef { { db: Db | undefined } } Server */
     const getServer = useSetup(() => {
       /** @type { Server | undefined } */
       let server;

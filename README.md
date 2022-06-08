@@ -21,10 +21,10 @@ npm run test
 - [x] hooks (standard)
 - [x] closures (local state)
 - [x] hooks order is FILO (fix)
-- [ ] useSetup (fix)
+- [x] useSetup (fix)
+- [ ] self tested
 - [ ] controlable parallelism (standard)
 - [ ] random test order - default off - opt-in per test (catch more bugs)
-- [ ] self tested
 - [ ] named hooks (fix)
 - [ ] pass in test context (extensibility)
 - [ ] tests in production code files (fix)

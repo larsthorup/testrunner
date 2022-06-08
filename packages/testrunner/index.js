@@ -74,8 +74,10 @@ export const it = (name, fn) => {
 };
 
 /**
- * @param {any} setup
- * @returns
+ * @function
+ * @template T
+ * @param {() => { before: Fn; after: Fn; get: () => T; } } setup
+ * @returns {() => T}
  */
 export const useSetup = (setup) => {
   const { before, after, get } = setup();
