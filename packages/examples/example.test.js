@@ -57,3 +57,27 @@ describe('async', () => {
     assert.equal(2 + 2, 4);
   });
 });
+
+describe('hooks run FILO', () => {
+  let order = '';
+  describe('block', () => {
+    beforeAll(() => {
+      order += 'B';
+    });
+    afterAll(() => {
+      order += 'A';
+    });
+    beforeAll(() => {
+      order += 'D';
+    });
+    afterAll(() => {
+      order += 'C';
+    });
+    it('should run all hooks', () => {
+      order += 'i';
+    });
+  });
+  afterAll(() => {
+    assert.equal(order, 'BDiCA');
+  });
+});

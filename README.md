@@ -19,11 +19,12 @@ npm run test
 - [x] sync and async (standard)
 - [x] typed (modernity)
 - [x] hooks (standard)
-- [ ] closures (local state)
+- [x] closures (local state)
+- [x] hooks order is FILO (fix)
+- [ ] useSetup (fix)
 - [ ] controlable parallelism (standard)
 - [ ] random test order - default off - opt-in per test (catch more bugs)
 - [ ] self tested
-- [ ] useSetup (fix)
 - [ ] named hooks (fix)
 - [ ] pass in test context (extensibility)
 - [ ] tests in production code files (fix)
@@ -34,9 +35,9 @@ npm run test
 - [ ] run in node or browser (standard)
 - [ ] run on windows and posix (standard)
 - [ ] IDE integration
-- [ ] comparison with node:test, vitest, jest, tap, ava
+- [ ] comparison with node:test, vitest, jest, tap, ava, junit
 - [ ] compose with other module loaders
-- [ ] external assertion library (node:assert, chai, jest)
+- [ ] external assertion library (chai, jest)
 - [ ] external esm mocking (esmock, quibble)
 - [ ] external code coverage (c8)
 - [ ] external watch tool (based on same --loader as the esm mocking??)

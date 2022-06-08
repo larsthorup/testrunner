@@ -51,3 +51,27 @@ describe('async', () => {
     assert.equal(2 + 2, 4);
   });
 });
+
+describe('hooks run FIFO', () => {
+  let order = '';
+  describe('block', () => {
+    before(() => {
+      order += 'B';
+    });
+    after(() => {
+      order += 'A';
+    });
+    before(() => {
+      order += 'D';
+    });
+    after(() => {
+      order += 'C';
+    });
+    it('should run all hooks', () => {
+      order += 'i';
+    });
+  });
+  after(() => {
+    assert.equal(order, 'BDiAC');
+  });
+});
