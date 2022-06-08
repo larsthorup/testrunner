@@ -3,10 +3,16 @@
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
-    "lib": ["es2020"],
+    "lib": [
+      "es2020",
+      "DOM" // Note: required by esbuild / vitest?
+    ],
     "noEmit": true,
     "strict": true,
-    "types": ["mocha", "node"]
+    "types": [
+      "mocha", // Note: required by mocha
+      "node"
+    ]
   },
   "exclude": ["node_modules"],
   "include": ["**/*.js", "**/.ts"]
