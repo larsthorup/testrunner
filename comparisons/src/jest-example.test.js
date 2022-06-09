@@ -75,3 +75,71 @@ describe('hooks run FIFO', () => {
     assert.equal(order, 'BDiAC');
   });
 });
+
+// useSetup - simulate FILO using nested describe blocks
+const useSetup = (setup) => {
+  const { before, after, get } = setup();
+  beforeAll(before);
+  afterAll(after);
+  return get;
+};
+describe('useSetup', () => {
+  let order = [];
+  describe('block', () => {
+    const getDb = useSetup(() => {
+      let db;
+      return {
+        before: () => {
+          db = { some: 'db' };
+          order.push('setup db');
+        },
+        after: () => {
+          db = undefined;
+          order.push('teardown db');
+        },
+        get: () => {
+          order.push('get db');
+          return db;
+        },
+      };
+    });
+    describe('nested block', () => {
+      const getServer = useSetup(() => {
+        let server;
+        return {
+          before: () => {
+            const db = getDb();
+            server = { db };
+            order.push('setup server');
+          },
+          after: () => {
+            server = undefined;
+            order.push('teardown server');
+          },
+          get: () => {
+            order.push('get server');
+            return server;
+          },
+        };
+      });
+      it('should have setup', () => {
+        const server = getServer();
+        assert.deepEqual(server, { db: { some: 'db' } });
+        order.push('test');
+      });
+    });
+  });
+  afterAll(() => {
+    assert.deepEqual(order, [
+      'setup db',
+      'get db',
+      'setup server',
+      'get server',
+      'test',
+      'teardown server',
+      'teardown db',
+    ]);
+  });
+});
+
+// useSetup, composition - have to compose nested describe blocks?

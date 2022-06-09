@@ -52,8 +52,8 @@ npm run test
 
 ## useSetup spec
 
-- { before, after, get}
-- { setup, teardown, get}
+- { before, after, get} - nice to reuse names
+- { setup, teardown, get} - nice to use setup like useSetup
 - useFixture
 - RAII in C++ also FILO
 - using
