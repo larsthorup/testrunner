@@ -145,3 +145,65 @@ describe('useSetup', () => {
     ]);
   });
 });
+
+describe('useSetup, composition', () => {
+  /** @typedef { { some: string} } Db*/
+  /**
+   * @returns {() => Db | undefined}
+   */
+  const useDb = () => {
+    return useSetup(() => {
+      /** @type { Db | undefined } */
+      let db;
+      return {
+        before: () => {
+          db = { some: 'db' };
+        },
+        after: () => {
+          db = undefined;
+        },
+        get: () => {
+          return db;
+        },
+      };
+    });
+  };
+  /** @typedef { { db: Db | undefined } } Server */
+  /**
+   * @param {() => Db | undefined} getDb
+   * @returns {() => Server | undefined}
+   */
+  const useServer = (getDb) => {
+    return useSetup(() => {
+      /** @type { Server | undefined } */
+      let server;
+      return {
+        before: () => {
+          const db = getDb();
+          server = { db };
+        },
+        after: () => {
+          server = undefined;
+        },
+        get: () => {
+          return server;
+        },
+      };
+    });
+  };
+  /**
+   * @returns { {getDb: () => Db | undefined, getServer: () => Server | undefined } }
+   */
+  const useInfra = () => {
+    const getDb = useDb();
+    const getServer = useServer(getDb);
+    return { getDb, getServer };
+  };
+  describe('block', () => {
+    const { getServer } = useInfra();
+    it('should have setup', () => {
+      const server = getServer();
+      assert.deepEqual(server, { db: { some: 'db' } });
+    });
+  });
+});
