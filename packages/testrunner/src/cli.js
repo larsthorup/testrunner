@@ -3,8 +3,8 @@
 import { runner } from './index.js';
 
 // TODO: use glob arg to find test files
-// TODO: multiple test files
 import '../../examples/src/example.test.js';
+import '../../examples/src/chai-example.test.js';
 
 const main = async () => {
   // TODO: use watcher to provide additional test filter
