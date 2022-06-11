@@ -46,7 +46,7 @@ describe('outer', () => {
     order += '4';
   });
 
-  afterAll(() => {
+  afterAll('verify order', () => {
     order += 'A';
     assert.equal(order, 'B1b2ab3a4A');
   });
@@ -78,7 +78,7 @@ describe('hooks run FILO', () => {
       order += 'i';
     });
   });
-  afterAll(() => {
+  afterAll('verify order', () => {
     assert.equal(order, 'BDiCA');
   });
 });
@@ -133,7 +133,7 @@ describe('useSetup', () => {
       order.push('test');
     });
   });
-  afterAll(() => {
+  afterAll('verify order', () => {
     assert.deepEqual(order, [
       'setup db',
       'get db',

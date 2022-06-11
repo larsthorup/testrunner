@@ -14,11 +14,19 @@ const globalTest = { type: 'describe', name: '', testList: [] };
 let currentTest = globalTest;
 
 /**
- * @param {Fn} fn
+ * @param {string | Fn} nameOrFn
+ * @param {Fn | undefined} fnOrUndefined
  */
-export const afterAll = (fn) => {
+export const afterAll = (nameOrFn = 'afterAll', fnOrUndefined = undefined) => {
+  const name = typeof nameOrFn === 'string' ? nameOrFn : 'afterAll';
+  const fn =
+    typeof nameOrFn === 'function'
+      ? nameOrFn
+      : fnOrUndefined !== undefined
+      ? fnOrUndefined
+      : () => {};
   /** @type { AfterAll } */
-  const afterAll = { type: 'afterAll', name: 'afterAll', fn };
+  const afterAll = { type: 'afterAll', name, fn };
   currentTest.testList.push(afterAll);
 };
 

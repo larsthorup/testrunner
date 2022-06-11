@@ -24,12 +24,14 @@ npm run test
 - [x] hooks order is FILO (fix)
 - [x] useSetup (fix)
 - [x] useSetup composition (fix)
+- [x] named hooks (fix)
+- [ ] external assertion library (chai, unexpected)
 - [ ] external esm mocking (esmock, quibble)
 - [ ] scoped mocks, use mocks in useSetup (fix)
 - [ ] snapshot (via assertion library?, useLogSnapshot) (standard)
 - [ ] self tested
-- [ ] named hooks (fix)
 - [ ] syntax for options: .skip, .todo, .concurrent, .only, .randomize, .each, .if, .unless, .fails (fix)
+- [ ] black list file with test name pattern and option (eg: `[BUG-123] - fails`) for bug tracker integration for "open" issues
 - [ ] describe({concurrent,serial}) - default serial - inherited (standard)
 - [ ] describe({random, sequential}) - default random - inherited (catch more bugs)
 - [ ] pass in test context (extensibility)
@@ -42,24 +44,16 @@ npm run test
 - [ ] IDE integration
 - [ ] comparison with node:test, tap, ava, junit
 - [ ] compose with other module loaders
-- [ ] external assertion library (chai, jest)
+- [ ] external snapshot matcher (unexpected-snapshot, chai-jest-snapshot)
 - [ ] external code coverage (c8)
+- [ ] external differential code coverage (https://github.com/romeovs/lcov-reporter-action#lcov-base-optional)
+- [ ] external timing spike alert / trend chart generator
 - [ ] external watch tool (based on same --loader as the esm mocking??)
 - [ ] external continuous testing (wallaby)
 - [ ] external bundler (vite),
 - [ ] external transpiler (typescript, jsx)
 - [ ] external DOM (browser, jsdom, happy-dom)
-
-## useSetup spec
-
-- { before, after, get} - nice to reuse names
-- { setup, teardown, get} - nice to use setup like useSetup
-- useFixture
-- RAII in C++ also FILO
-- using
-- scopes are FILO
-- nestede describes??
-- use cases for composing hooks (call useSetup inside a generic useX)
+- [ ] external sequence diagram generation tool (bestbrains/projects/commons-dotnet-bestbrains/System/SequenceDiagram.cs)
 
 ## Syntax for options (ideas)
 
@@ -73,10 +67,14 @@ npm run test
 - `it.only.fails.each([0, false])("should fail", (value) => { assert(value); })`
   - implementation-wise tricky to ensure any order
 
-## ESM module mocking
+## ESM module mocking in Node
 
 - https://dev.to/giltayar/mock-all-you-want-supporting-es-modules-in-the-testdouble-js-mocking-library-3gh1
 - https://www.npmjs.com/package/esmock
 - https://github.com/testdouble/testdouble.js - td.replaceEsm
 - https://www.npmjs.com/package/quibble
 - native npm support for mocking via standard supplied --loader ??
+
+## ESM module mocking in browser
+
+- https://javascript.plainenglish.io/testing-and-mocking-javascript-modules-in-browser-ae9fc333ee5d
