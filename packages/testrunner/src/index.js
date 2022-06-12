@@ -15,7 +15,7 @@ let currentTest = globalTest;
 
 /**
  * @param {string | Fn} nameOrFn
- * @param {Fn | undefined} fnOrUndefined
+ * @param {Fn | undefined} [fnOrUndefined]
  */
 export const afterAll = (nameOrFn = 'afterAll', fnOrUndefined = undefined) => {
   const name = typeof nameOrFn === 'string' ? nameOrFn : 'afterAll';
@@ -59,16 +59,18 @@ export const beforeEach = (fn) => {
 
 /**
  * @param {string} name
- * @param {() => void} fn
+ * @param {() => void | undefined} [fn]
  */
 export const describe = (name, fn) => {
   /** @type { Describe} */
   const describe = { type: 'describe', name, testList: [] };
   currentTest.testList.push(describe);
-  const previousTest = currentTest;
-  currentTest = describe;
-  fn();
-  currentTest = previousTest;
+  if (fn) {
+    const previousTest = currentTest;
+    currentTest = describe;
+    fn();
+    currentTest = previousTest;
+  }
 };
 
 /**

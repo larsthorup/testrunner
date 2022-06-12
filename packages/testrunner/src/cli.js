@@ -1,23 +1,35 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --experimental-import-meta-resolve
+
+import { pathToFileURL } from 'node:url';
+import { promisify } from 'node:util';
+
+import glob from 'glob';
 
 import { runner } from './index.js';
 
-// TODO: use glob arg to find test files
-const testFilePaths = [
-  '../../examples/src/example.test.js',
-  '../../examples/src/chai-example.test.js',
-];
-
 const main = async () => {
+  // TODO: specify pattern as CLI argument
+  const testFilePattern = './src/*.test.js';
+  const testFilePaths = await promisify(glob)(testFilePattern);
+  const testFileUrls = testFilePaths.map(
+    (filePath) => pathToFileURL(filePath).href
+  );
+
   // TODO: use watcher to provide additional test filter
   // TODO: instrument for coverage
   // TODO: run in browser or node
   // TODO: tab / process / worker isolation or not
-  await Promise.all(testFilePaths.map((testFilePath) => import(testFilePath)));
+
+  // Note: register all tests by loading all test files and running global side effects
+  await Promise.all(testFileUrls.map((testFileUrl) => import(testFileUrl)));
+
+  // Note: run tests
   await runner();
+
   // TODO: report test results
   // TODO: report coverage
   // TODO: report delta coverage compared to base branch
+
   console.log('testrunner: done');
 };
 

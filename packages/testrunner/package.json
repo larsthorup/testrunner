@@ -6,7 +6,6 @@
   "bin": {
     "testrunner": "src/cli.js"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "exit 0"
   },
@@ -20,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/larsthorup/testrunner/issues"
   },
-  "homepage": "https://github.com/larsthorup/testrunner#readme"
+  "homepage": "https://github.com/larsthorup/testrunner#readme",
+  "dependencies": {
+    "glob": "^8.0.3"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0"
+  }
 }

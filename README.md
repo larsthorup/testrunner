@@ -26,8 +26,10 @@ npm run test
 - [x] useSetup composition (fix)
 - [x] named hooks (fix)
 - [x] external assertion library (chai)
-- [ ] external esm mocking (esmock, quibble)
-- [ ] scoped mocks, use mocks in useSetup (fix)
+- [ ] external js lib mocking (sinon)
+- [ ] external method mocking (sinon, testdouble)
+- [ ] external esm mocking (import map, esmock (node only))
+- [ ] scoped mocks, use mocks in useSetup (node only) (fix)
 - [ ] snapshot (via assertion library?, useLogSnapshot) (standard)
 - [ ] self tested
 - [ ] syntax for options: .skip, .todo, .concurrent, .only, .randomize, .each, .if, .unless, .fails (fix)
