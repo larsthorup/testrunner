@@ -1,6 +1,7 @@
 /* global after, afterEach, before, beforeEach, describe, it */
 
 import { strict as assert } from 'node:assert';
+import FakeTimers from '@sinonjs/fake-timers';
 
 describe('outer', () => {
   let order = '';
@@ -73,5 +74,34 @@ describe('hooks run FIFO', () => {
   });
   after(() => {
     assert.equal(order, 'BDiAC');
+  });
+});
+
+describe('fake-timers', () => {
+  let clock;
+  beforeEach(() => {
+    clock = FakeTimers.install();
+  });
+  describe('setTimeout', () => {
+    it('should speed up time', async () => {
+      try {
+        const promise = new Promise((resolve) => setTimeout(resolve, 50));
+        clock.tick(50);
+        await promise;
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  });
+  describe('Date.now', () => {
+    it('should fix wall time', () => {
+      assert.equal(
+        new Date(Date.now()).toISOString(),
+        '1970-01-01T00:00:00.000Z'
+      );
+    });
+  });
+  afterEach(() => {
+    clock.uninstall();
   });
 });

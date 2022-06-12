@@ -26,7 +26,8 @@ npm run test
 - [x] useSetup composition (fix)
 - [x] named hooks (fix)
 - [x] external assertion library (chai)
-- [ ] external js lib mocking (sinon)
+- [ ] sandboxing - so time mocking doesn't impact test runner
+- [ ] external timer mocking (@sinonjs/fake-timers) - requires sandboxing
 - [ ] external method mocking (sinon, testdouble)
 - [ ] external esm mocking (import map, esmock (node only))
 - [ ] scoped mocks, use mocks in useSetup (node only) (fix)
@@ -36,12 +37,13 @@ npm run test
 - [ ] black list file with test name pattern and option (eg: `[BUG-123] - fails`) for bug tracker integration for "open" issues
 - [ ] describe({concurrent,serial}) - default serial - inherited (standard)
 - [ ] describe({random, sequential}) - default random - inherited (catch more bugs)
+- [ ] test file order - random/sorted + concurrent/serial
 - [ ] pass in test context (extensibility)
 - [ ] tests in production code files (fix)
 - [ ] dynamic skip, todo (fix)
 - [ ] configurable test file set (standard)
 - [ ] extendable timeouts (fix)
-- [ ] process isolation - default off - opt-in per test (catch more bugs)
+- [ ] test isolation - default off - opt-in per test (catch more bugs)
 - [ ] pluggable reporting (standard)
 - [ ] run in node or browser (standard)
 - [ ] IDE integration

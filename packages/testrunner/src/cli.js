@@ -1,11 +1,19 @@
 #!/usr/bin/env node
 
+import process from 'node:process';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 
 import glob from 'glob';
 
 import { runner } from './index.js';
+
+process.on('uncaughtException', (err, origin) => {
+  console.log('uncaughtException', err, origin);
+});
+process.on('unhandledRejection', (reason) => {
+  console.log('unhandledRejection', reason);
+});
 
 const main = async () => {
   // TODO: specify pattern as CLI argument
@@ -21,7 +29,12 @@ const main = async () => {
   // TODO: tab / process / worker isolation or not
 
   // Note: register all tests by loading all test files and running global side effects
-  await Promise.all(testFileUrls.map((testFileUrl) => import(testFileUrl)));
+  await Promise.all(
+    testFileUrls.map(async (testFileUrl) => {
+      await import(testFileUrl);
+      // console.log('loaded', testFileUrl);
+    })
+  );
 
   // Note: run tests
   await runner();
@@ -29,8 +42,8 @@ const main = async () => {
   // TODO: report test results
   // TODO: report coverage
   // TODO: report delta coverage compared to base branch
-
-  console.log('testrunner: done');
 };
 
-main().catch(console.error);
+main()
+  .then(() => console.log('testrunner: done'))
+  .catch(console.error);

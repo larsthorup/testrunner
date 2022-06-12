@@ -170,7 +170,9 @@ const runTest = async (test, parentTestList) => {
   try {
     // TODO: pass in test context
     const result = fn();
-    if (isPromise(result)) await result;
+    if (isPromise(result)) {
+      await result;
+    }
     console.log('✔', fullName);
   } catch (ex) {
     // TODO: pluggable reporter
