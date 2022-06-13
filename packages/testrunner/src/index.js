@@ -83,19 +83,6 @@ export const it = (name, fn) => {
   currentTest.testList.push(it);
 };
 
-/**
- * @function
- * @template T
- * @param {() => { before: Fn; after: Fn; get: () => T; } } setup
- * @returns {() => T}
- */
-export const useSetup = (setup) => {
-  const { before, after, get } = setup();
-  beforeAll(before);
-  afterAll(after);
-  return get;
-};
-
 export const runner = async () => {
   await runTests(globalTest, []);
 };

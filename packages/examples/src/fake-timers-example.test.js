@@ -16,18 +16,6 @@ describe('fake-timers', () => {
         clock.tick(50);
         await promise;
       });
-      // TODO: figure out how to report error when test does not settle
-      // it('should timeout', async () => {
-      //   try {
-      //     const promise = new Promise((resolve) => setTimeout(resolve, 50));
-      //     console.log('before await');
-      //     // clock.tick(50);
-      //     await promise;
-      //     console.log('after await');
-      //   } catch (err) {
-      //     console.error(err);
-      //   }
-      // });
     });
     describe('Date.now', () => {
       it('should fix wall time', () => {

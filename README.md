@@ -3,31 +3,41 @@
 A better test runner.
 
 ```bash
-npm run install:all
-npm run test
+npm install
+npm test
 ```
 
 ## Scope
 
 - [x] comparison with jest, mocha, vitest
-- [x] run on windows and posix (standard)
 - [x] no commonjs support (modernity)
 - [x] no globals (simplicity)
-- [x] external assertion library (node:assert)
-- [x] do not capture output (fix)
+- [x] no console output capture (fix)
+
+### Built-in features
+
+- [x] run on windows and posix (standard)
 - [x] nested describe, it (standard)
 - [x] run mixed its and describes in defined order (fix)
 - [x] sync and async (standard)
 - [x] typed (modernity)
-- [x] hooks (standard)
-- [x] closures (local state)
+- [x] hooks - before/after all/each (standard)
+- [x] closures - local state
 - [x] hooks order is FILO (fix)
-- [x] useSetup (fix)
-- [x] useSetup composition (fix)
 - [x] named hooks (fix)
+
+### User-land features
+
+- [x] external assertion library (node:assert)
+- [x] useSetup hook (fix)
+- [x] useSetup composition (fix)
 - [x] external assertion library (chai)
-- [ ] sandboxing - so time mocking doesn't impact test runner
-- [ ] external timer mocking (@sinonjs/fake-timers) - requires sandboxing
+- [x] external timer mocking (@sinonjs/fake-timers)
+
+## TODO
+
+- [ ] export types for use in user land, like Fn for useSetup
+- [ ] external timeout handling - https://github.com/lukeed/uvu/issues/33
 - [ ] external method mocking (sinon, testdouble)
 - [ ] external esm mocking (import map, esmock (node only))
 - [ ] scoped mocks, use mocks in useSetup (node only) (fix)
@@ -47,7 +57,7 @@ npm run test
 - [ ] pluggable reporting (standard)
 - [ ] run in node or browser (standard)
 - [ ] IDE integration
-- [ ] comparison with node:test, tap, ava, junit
+- [ ] comparison with uvu, node:test, tap, ava, junit
 - [ ] compose with other module loaders
 - [ ] external snapshot matcher (unexpected-snapshot, chai-jest-snapshot)
 - [ ] external code coverage (c8)

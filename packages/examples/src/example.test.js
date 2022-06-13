@@ -6,8 +6,8 @@ import {
   beforeEach,
   describe,
   it,
-  useSetup,
 } from '@larsthorup/testrunner';
+import { useSetup } from './lib/useSetup.js';
 
 describe('outer', () => {
   let order = '';
@@ -57,6 +57,9 @@ describe('async', () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
     assert.equal(2 + 2, 4);
   });
+  // it('should timeout', () => {
+  //   return new Promise((resolve) => null /* resolve */);
+  // });
 });
 
 describe('hooks run FILO', () => {
