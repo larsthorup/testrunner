@@ -22,21 +22,19 @@ npm test
 - [x] sync and async (standard)
 - [x] typed (modernity)
 - [x] hooks - before/after all/each (standard)
-- [x] closures - local state
+- [x] closures - local state (standard)
 - [x] hooks order is FILO (fix)
 - [x] named hooks (fix)
 
 ### User-land features
 
-- [x] external assertion library (node:assert)
-- [x] useSetup hook (fix)
-- [x] useSetup composition (fix)
-- [x] external assertion library (chai)
+- [x] external assertion library (node:assert, chai)
+- [x] external useSetup hook (fix)
+- [x] external useSetup composition (fix)
 - [x] external timer mocking (@sinonjs/fake-timers)
 
 ## TODO
 
-- [ ] export types for use in user land, like Fn for useSetup
 - [ ] external timeout handling - https://github.com/lukeed/uvu/issues/33
 - [ ] external method mocking (sinon, testdouble)
 - [ ] external esm mocking (import map, esmock (node only))
@@ -50,11 +48,11 @@ npm test
 - [ ] test file order - random/sorted + concurrent/serial
 - [ ] pass in test context (extensibility)
 - [ ] tests in production code files (fix)
-- [ ] dynamic skip, todo (fix)
+- [ ] dynamic skip, todo, timeout, additional timeout (fix)
 - [ ] configurable test file set (standard)
 - [ ] extendable timeouts (fix)
 - [ ] test isolation - default off - opt-in per test (catch more bugs)
-- [ ] pluggable reporting (standard)
+- [ ] external reporters (jest, mocha, vitest)
 - [ ] run in node or browser (standard)
 - [ ] IDE integration
 - [ ] comparison with uvu, node:test, tap, ava, junit
@@ -72,15 +70,16 @@ npm test
 
 ## Syntax for options (ideas)
 
-- `it("should fail", {only, fails, each: [0, false]}, (value) => { assert(value); })`
-
+- `it("should fail", {only, fails, each: [0, false], timeout: 5000}, (ctx, value) => { assert(value); })`
   - optional second parameter
   - used by node:test
   - any order
   - surprising syntax?
-
-- `it.only.fails.each([0, false])("should fail", (value) => { assert(value); })`
+- `it("should fail", [only, fails, each[0, false], timeout(5000)], (ctx) => { assert(ctx.arg); })})
+  - user land options?
+- `it.only.fails.each([0, false])("should fail", (ctx) => { assert(ctx.arg); }, { timeout: 5000})`
   - implementation-wise tricky to ensure any order
+  - typing of ctx.arg
 
 ## ESM module mocking in Node
 

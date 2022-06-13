@@ -1,7 +1,6 @@
 import { afterAll, beforeAll } from '@larsthorup/testrunner';
 
-// TODO: import from testrunner
-/** @typedef { () => Promise<any> | void  } Fn */
+/** @typedef { import("@larsthorup/testrunner").Fn } Fn */
 
 /**
  * @function
