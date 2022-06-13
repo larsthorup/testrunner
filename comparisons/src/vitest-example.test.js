@@ -82,3 +82,11 @@ describe('hooks run FIFO', () => {
     assert.equal(order, 'BDiAC');
   });
 });
+
+describe('mark test expected to fail', () => {
+  it.fails('should fail', () => {
+    assert.equal(2 + 2, 5);
+  });
+
+  // mark test expected to fail with specific message - not available in vitest
+});

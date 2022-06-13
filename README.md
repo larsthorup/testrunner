@@ -32,6 +32,7 @@ npm test
 - [x] external useSetup hook (fix)
 - [x] external useSetup composition (fix)
 - [x] external timer mocking (@sinonjs/fake-timers)
+- [x] external fails handling (fix)
 
 ## TODO
 

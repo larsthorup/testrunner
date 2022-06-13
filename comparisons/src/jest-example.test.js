@@ -143,3 +143,11 @@ describe('useSetup', () => {
 });
 
 // useSetup, composition - have to compose nested describe blocks?
+
+describe('mark test expected to fail', () => {
+  it.failing('should fail', () => {
+    assert.equal(2 + 2, 5);
+  });
+
+  // mark test expected to fail with specific message - not available in jest
+});

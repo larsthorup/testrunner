@@ -1,4 +1,4 @@
-import { isPromise } from 'util/types';
+import { isPromise } from 'node:util/types';
 
 /** @typedef { { type: 'afterAll'; name: string;  fn: Fn} } AfterAll */
 /** @typedef { { type: 'afterEach'; name: string; fn: Fn } } AfterEach */

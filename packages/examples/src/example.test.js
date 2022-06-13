@@ -7,6 +7,9 @@ import {
   describe,
   it,
 } from '@larsthorup/testrunner';
+import { expect } from 'chai';
+
+import { fails } from './lib/fails.js';
 import { useSetup } from './lib/useSetup.js';
 
 describe('outer', () => {
@@ -209,4 +212,20 @@ describe('useSetup, composition', () => {
       assert.deepEqual(server, { db: { some: 'db' } });
     });
   });
+});
+
+describe('mark test expected to fail', () => {
+  it(
+    'should fail',
+    fails(() => {
+      expect(2 + 2).to.equal(5);
+    })
+  );
+
+  it(
+    'should fail with message',
+    fails('expected 4 to equal 5', () => {
+      expect(2 + 2).to.equal(5);
+    })
+  );
 });

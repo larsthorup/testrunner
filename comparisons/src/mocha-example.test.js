@@ -105,3 +105,5 @@ describe('fake-timers', () => {
     clock.uninstall();
   });
 });
+
+// mark test expected to fail - not available in mocha
