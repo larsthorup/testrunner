@@ -11,6 +11,7 @@ import { expect } from 'chai';
 
 import { fails } from './lib/fails.js';
 import { useSetup } from './lib/useSetup.js';
+import { timeout } from './lib/timeout.js';
 
 describe('outer', () => {
   let order = '';
@@ -60,9 +61,14 @@ describe('async', () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
     assert.equal(2 + 2, 4);
   });
-  // it('should timeout', () => {
-  //   return new Promise((resolve) => null /* resolve */);
-  // });
+  it(
+    'should timeout',
+    fails(
+      timeout(() => {
+        return new Promise(() => {});
+      }, 50)
+    )
+  );
 });
 
 describe('hooks run FILO', () => {

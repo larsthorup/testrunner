@@ -33,10 +33,10 @@ npm test
 - [x] external useSetup composition (fix)
 - [x] external timer mocking (@sinonjs/fake-timers)
 - [x] external fails handling (fix)
+- [x] external timeout handling (fix)
 
 ## TODO
 
-- [ ] external timeout handling - https://github.com/lukeed/uvu/issues/33
 - [ ] external method mocking (sinon, testdouble)
 - [ ] external esm mocking (import map, esmock (node only))
 - [ ] scoped mocks, use mocks in useSetup (node only) (fix)

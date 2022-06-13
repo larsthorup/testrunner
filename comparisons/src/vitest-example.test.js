@@ -57,6 +57,13 @@ describe('async', () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
     assert.equal(2 + 2, 4);
   });
+  it.fails(
+    'should timeout',
+    () => {
+      return new Promise(() => {});
+    },
+    50
+  );
 });
 
 describe('hooks run FIFO', () => {
