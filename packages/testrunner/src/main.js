@@ -28,9 +28,10 @@ export default async function main() {
   );
 
   // Note: run tests
-  await runner(globalTest);
+  const failureCount = await runner(globalTest);
 
   // TODO: report test results
   // TODO: report coverage
   // TODO: report delta coverage compared to base branch
+  return failureCount;
 }

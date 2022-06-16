@@ -30,7 +30,7 @@ export const skip = (reason) => {
  * @param { Test } root
  */
 export const runner = async (root) => {
-  await runTests(root, []);
+  return runTests(root, []);
 };
 
 /**
@@ -38,6 +38,7 @@ export const runner = async (root) => {
  * @param { Test[] } parentTestList
  */
 const runTests = async (test, parentTestList) => {
+  let failureCount = 0;
   // TODO: filter tests based on explicit criteria, watch filter, explicit test order
   // TODO: shuffle tests based on serial / random test order
   // TODO: concurrent or sequential or not
@@ -49,18 +50,18 @@ const runTests = async (test, parentTestList) => {
         );
         for (const beforeAll of beforeAllList) {
           const fullTestList = parentTestList.concat([beforeAll]);
-          await runTest(beforeAll, fullTestList);
+          failureCount += await runTest(beforeAll, fullTestList);
         }
         for (const childTest of test.testList) {
           const fullTestList = parentTestList.concat([childTest]);
-          await runTests(childTest, fullTestList);
+          failureCount += await runTests(childTest, fullTestList);
         }
         const afterAllList = /** @type AfterAll[] */ (
           test.testList.filter(({ type }) => type === 'afterAll')
         );
         for (const afterAll of afterAllList.reverse()) {
           const fullTestList = parentTestList.concat([afterAll]);
-          await runTest(afterAll, fullTestList);
+          failureCount += await runTest(afterAll, fullTestList);
         }
       }
       break;
@@ -75,22 +76,23 @@ const runTests = async (test, parentTestList) => {
           );
           for (const beforeEach of beforeEachList) {
             const fullTestList = parentTestList.concat([beforeEach]);
-            await runTest(beforeEach, fullTestList);
+            failureCount += await runTest(beforeEach, fullTestList);
           }
         }
-        await runTest(test, parentTestList);
+        failureCount += await runTest(test, parentTestList);
         for (const describe of describeList.reverse()) {
           const afterEachList = /** @type AfterEach[] */ (
             describe.testList.filter(({ type }) => type === 'afterEach')
           );
           for (const afterEach of afterEachList.reverse()) {
             const fullTestList = parentTestList.concat([afterEach]);
-            await runTest(afterEach, fullTestList);
+            failureCount += await runTest(afterEach, fullTestList);
           }
         }
       }
       break;
   }
+  return failureCount;
 };
 
 /**
@@ -98,6 +100,7 @@ const runTests = async (test, parentTestList) => {
  * @param { Test[] } parentTestList
  */
 const runTest = async (test, parentTestList) => {
+  let failureCount = 0;
   const fullName = parentTestList.map(({ name }) => name).join(' - ');
   const { fn } = test;
   try {
@@ -113,6 +116,8 @@ const runTest = async (test, parentTestList) => {
     } else {
       // TODO: pluggable reporter
       console.log('x', fullName, ' - ', ex);
+      failureCount += 1;
     }
   }
+  return failureCount;
 };

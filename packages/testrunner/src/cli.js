@@ -16,9 +16,13 @@ process.on('unhandledRejection', (reason) => {
 });
 
 try {
-  await main();
-  console.log('testrunner: done');
-  process.exit(0);
+  const failureCount = await main();
+  if (failureCount === 0) {
+    console.log('✔ testrunner: all tests passed');
+  } else {
+    console.error(`x testrunner: ${failureCount} failing tests`);
+  }
+  process.exit(failureCount);
 } catch (ex) {
   console.error(ex);
   process.exit(1);
