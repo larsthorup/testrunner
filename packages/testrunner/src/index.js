@@ -13,6 +13,16 @@ import { isPromise } from 'node:util/types';
 const globalTest = { type: 'describe', name: '', testList: [] };
 let currentTest = globalTest;
 
+class TestSkipException extends Error {
+  /**
+   *
+   * @param {string} reason
+   */
+  constructor(reason) {
+    super(reason);
+  }
+}
+
 /**
  * @param {string | Fn} nameOrFn
  * @param {Fn | undefined} [fnOrUndefined]
@@ -81,6 +91,14 @@ export const it = (name, fn) => {
   /** @type { It} */
   const it = { type: 'it', name, fn };
   currentTest.testList.push(it);
+};
+
+/**
+ *
+ * @param {string | undefined} [reason]
+ */
+export const skip = (reason) => {
+  throw new TestSkipException(reason || '');
 };
 
 export const runner = async () => {
@@ -162,7 +180,11 @@ const runTest = async (test, parentTestList) => {
     }
     console.log('✔', fullName);
   } catch (ex) {
-    // TODO: pluggable reporter
-    console.log('x', fullName, ex);
+    if (ex instanceof TestSkipException) {
+      console.log('↓', fullName, ' - ', ex.message);
+    } else {
+      // TODO: pluggable reporter
+      console.log('x', fullName, ' - ', ex);
+    }
   }
 };

@@ -6,6 +6,7 @@ import {
   beforeEach,
   describe,
   it,
+  skip,
 } from '@larsthorup/testrunner';
 import { expect } from 'chai';
 
@@ -234,4 +235,11 @@ describe('mark test expected to fail', () => {
       expect(2 + 2).to.equal(5);
     })
   );
+});
+
+describe('skip', () => {
+  it('should allow a test to bail out', () => {
+    skip('for reasons');
+    assert.equal(2 + 2, 5);
+  });
 });

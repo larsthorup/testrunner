@@ -107,3 +107,10 @@ describe('fake-timers', () => {
 });
 
 // mark test expected to fail - not available in mocha
+
+describe('skip', () => {
+  it('should allow a test to bail out', function () {
+    this.skip('for reasons');
+    assert.equal(2 + 2, 5);
+  });
+});

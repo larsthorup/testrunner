@@ -158,3 +158,10 @@ describe('mark test expected to fail', () => {
 
   // mark test expected to fail with specific message - not available in jest
 });
+
+describe('skip', () => {
+  it.skip('should allow a test to bail out', () => {
+    assert.equal(2 + 2, 5);
+  });
+  // dynamic skip not available in jest
+});

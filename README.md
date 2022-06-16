@@ -25,6 +25,7 @@ npm test
 - [x] closures - local state (standard)
 - [x] hooks order is FILO (fix)
 - [x] named hooks (fix)
+- [x] dynamic skip, todo (IgnoreError) (fix)
 
 ### User-land features
 
@@ -37,8 +38,15 @@ npm test
 
 ## TODO
 
-- [ ] external method mocking (sinon, testdouble)
+- [ ] design: extensible discovery (file glob)
+- [ ] design: extensible filtering (title pattern, only)
+- [ ] design: extensible ordering (concurrent/serial, random/sequential/sorted)
+- [ ] configurable test file set (standard)
+- [ ] extendable timeouts (fix)
+- [ ] external skip / each / skipIf / skipUnless / todo (fix)
+- [ ] external function / class method mocking (sinon, testdouble)
 - [ ] external esm mocking (import map, esmock (node only))
+- [ ] tests in production code files (fix)
 - [ ] scoped mocks, use mocks in useSetup (node only) (fix)
 - [ ] snapshot (via assertion library?, useLogSnapshot) (standard)
 - [ ] self tested
@@ -48,10 +56,6 @@ npm test
 - [ ] describe({random, sequential}) - default random - inherited (catch more bugs)
 - [ ] test file order - random/sorted + concurrent/serial
 - [ ] pass in test context (extensibility)
-- [ ] tests in production code files (fix)
-- [ ] dynamic skip, todo, timeout, additional timeout (fix)
-- [ ] configurable test file set (standard)
-- [ ] extendable timeouts (fix)
 - [ ] test isolation - default off - opt-in per test (catch more bugs)
 - [ ] external reporters (jest, mocha, vitest)
 - [ ] run in node or browser (standard)
