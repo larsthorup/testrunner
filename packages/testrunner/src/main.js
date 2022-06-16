@@ -3,7 +3,8 @@ import { promisify } from 'node:util';
 
 import glob from 'glob';
 
-import { runner } from './index.js';
+import { runner } from './runner.js';
+import { globalTest } from './collector.js';
 
 export default async function main() {
   // TODO: specify pattern as CLI argument
@@ -18,7 +19,7 @@ export default async function main() {
   // TODO: run in browser or node
   // TODO: tab / process / worker isolation or not
 
-  // Note: register all tests by loading all test files and running global side effects
+  // Note: collect all tests by loading all test files and running global side effects
   await Promise.all(
     testFileUrls.map(async (testFileUrl) => {
       await import(testFileUrl);
@@ -27,7 +28,7 @@ export default async function main() {
   );
 
   // Note: run tests
-  await runner();
+  await runner(globalTest);
 
   // TODO: report test results
   // TODO: report coverage
