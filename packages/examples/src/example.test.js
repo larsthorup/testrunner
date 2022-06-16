@@ -243,3 +243,11 @@ describe('skip', () => {
     assert.equal(2 + 2, 5);
   });
 });
+
+describe('each', () => {
+  [false, 0, '', null, undefined].map((value) =>
+    it(`should verify falsy-ness of ${value === '' ? '""' : value}`, () => {
+      assert.equal(!!value, false);
+    })
+  );
+});

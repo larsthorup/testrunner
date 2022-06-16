@@ -36,19 +36,20 @@ npm test
 - [x] external timer mocking (@sinonjs/fake-timers)
 - [x] external fails handling (fix)
 - [x] external timeout handling (fix)
-- [x] extensible syntactic sugar .skip, .todo, timeout
+- [x] extensible syntactic sugar .skip, .todo, timeout (fix)
+- [x] external each (standard)
 
 ## TODO
 
+- [ ] tests in production code files (fix)
+- [ ] pass in test context (extensibility)
 - [ ] external function / class method mocking (sinon, testdouble)
 - [ ] external esm mocking (import map, esmock (node only))
-- [ ] design: extensible discovery (file glob)
-- [ ] design: extensible filtering (title pattern, only)
-- [ ] design: extensible ordering (concurrent/serial, random/sequential/sorted)
+- [ ] design: extensible discovery: file glob
+- [ ] design: extensible filtering: title pattern, only
+- [ ] design: extensible ordering: concurrent/serial, random/sequential/sorted
 - [ ] configurable test file set (standard)
 - [ ] extendable timeouts (fix)
-- [ ] external skip / each / skipIf / skipUnless / todo (fix)
-- [ ] tests in production code files (fix)
 - [ ] scoped mocks, use mocks in useSetup (node only) (fix)
 - [ ] snapshot (via assertion library?, useLogSnapshot) (standard)
 - [ ] self tested
@@ -57,7 +58,6 @@ npm test
 - [ ] describe({concurrent,serial}) - default serial - inherited (standard)
 - [ ] describe({random, sequential}) - default random - inherited (catch more bugs)
 - [ ] test file order - random/sorted + concurrent/serial
-- [ ] pass in test context (extensibility)
 - [ ] test isolation - default off - opt-in per test (catch more bugs)
 - [ ] external reporters (jest, mocha, vitest)
 - [ ] run in node or browser (standard)

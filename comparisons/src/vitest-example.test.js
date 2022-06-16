@@ -104,3 +104,13 @@ describe('skip', () => {
   });
   // dynamic skip not available in vitest
 });
+
+describe('each', () => {
+  // no way to include the iterated value in the test title?
+  it.each([false, 0, '', null, undefined])(
+    `should verify falsy-ness`,
+    (value) => {
+      assert.equal(!!value, false);
+    }
+  );
+});
