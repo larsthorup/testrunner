@@ -5,9 +5,10 @@ import glob from 'glob';
 import { runner } from './runner.js';
 import { collector } from './collector.js';
 
-export default async function main() {
-  // TODO: specify pattern as CLI argument
-  const testFilePattern = './src/*.test.js';
+/**
+ * @param {string} testFilePattern
+ */
+export default async function main(testFilePattern) {
   const testFilePaths = await promisify(glob)(testFilePattern);
 
   // TODO: use watcher to provide additional test filter

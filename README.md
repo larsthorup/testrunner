@@ -27,6 +27,7 @@ npm test
 - [x] named hooks (fix)
 - [x] dynamic skip, todo (IgnoreError) (fix)
 - [x] exit code: number of failing tests (standard)
+- [x] configurable test file set (standard)
 
 ### User-land features
 
@@ -38,17 +39,16 @@ npm test
 - [x] external timeout handling (fix)
 - [x] extensible syntactic sugar .skip, .todo, timeout (fix)
 - [x] external each (standard)
+- [x] external support having tests in production code files (fix)
 
 ## TODO
 
-- [ ] tests in production code files (fix)
 - [ ] pass in test context (extensibility)
 - [ ] external function / class method mocking (sinon, testdouble)
 - [ ] external esm mocking (import map, esmock (node only))
 - [ ] design: extensible discovery: file glob
 - [ ] design: extensible filtering: title pattern, only
 - [ ] design: extensible ordering: concurrent/serial, random/sequential/sorted
-- [ ] configurable test file set (standard)
 - [ ] extendable timeouts (fix)
 - [ ] scoped mocks, use mocks in useSetup (node only) (fix)
 - [ ] snapshot (via assertion library?, useLogSnapshot) (standard)

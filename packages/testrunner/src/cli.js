@@ -16,7 +16,8 @@ process.on('unhandledRejection', (reason) => {
 });
 
 try {
-  const failureCount = await main();
+  const testFilePattern = process.argv[2];
+  const failureCount = await main(testFilePattern);
   if (failureCount === 0) {
     console.log('✔ testrunner: all tests passed');
   } else {
