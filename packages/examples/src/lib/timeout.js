@@ -3,7 +3,7 @@
 /**
  * @param {Fn} fn
  * @param {number} ms
- * @returns
+ * @returns Fn
  */
 export const timeout =
   (fn, ms = 2000) =>

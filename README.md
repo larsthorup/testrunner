@@ -35,9 +35,11 @@ npm test
 - [x] external timer mocking (@sinonjs/fake-timers)
 - [x] external fails handling (fix)
 - [x] external timeout handling (fix)
+- [x] extensible syntactic sugar .skip, .todo, timeout
 
 ## TODO
 
+- [ ] exit code: number of failing tests (standard)
 - [ ] design: extensible discovery (file glob)
 - [ ] design: extensible filtering (title pattern, only)
 - [ ] design: extensible ordering (concurrent/serial, random/sequential/sorted)
