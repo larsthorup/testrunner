@@ -44,7 +44,6 @@ npm test
 
 ## TODO
 
-- [ ] example/tinyspy: useMockLocalStorage
 - [ ] extract examples/src/lib into @larsthorup/testutils package
 - [ ] external module mocking (import map, esmock (node only))
 - [ ] pass in test context (extensibility)
