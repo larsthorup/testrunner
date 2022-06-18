@@ -1,8 +1,7 @@
 import { spyOn } from 'tinyspy';
 
 import { afterEach, beforeEach } from '@larsthorup/testrunner';
-
-import { useSetup } from '../lib/useSetup.js';
+import { useSetup } from '@larsthorup/testutils';
 
 import localstorage from './localstorage.js';
 

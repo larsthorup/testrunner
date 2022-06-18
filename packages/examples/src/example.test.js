@@ -8,11 +8,8 @@ import {
   it,
   skip,
 } from '@larsthorup/testrunner';
-import { expect } from 'chai';
 
-import { fails } from './lib/fails.js';
-import { useSetup } from './lib/useSetup.js';
-import { timeout } from './lib/timeout.js';
+import { fails, timeout, useSetup } from '@larsthorup/testutils';
 
 describe('outer', () => {
   let order = '';
@@ -217,14 +214,14 @@ describe('mark test expected to fail', () => {
   it(
     'should fail',
     fails(() => {
-      expect(2 + 2).to.equal(5);
+      assert.equal(2 + 2, 5);
     })
   );
 
   it(
     'should fail with message',
-    fails('expected 4 to equal 5', () => {
-      expect(2 + 2).to.equal(5);
+    fails('Expected values to be strictly equal:\n\n4 !== 5\n', () => {
+      assert.equal(2 + 2, 5);
     })
   );
 });

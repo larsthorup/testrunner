@@ -1,7 +1,7 @@
 import { strict as assert } from 'node:assert';
 
 import { describe } from '@larsthorup/testrunner';
-import { it } from './lib/sugar.js';
+import { it } from '@larsthorup/testutils';
 
 describe('sugar', () => {
   describe('it', () => {
