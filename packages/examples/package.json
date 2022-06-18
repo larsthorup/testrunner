@@ -12,8 +12,7 @@
   },
   "scripts": {
     "pretest": "node src/in-source/main",
-    "test": "bash -c \"IS_TEST=1 testrunner 'src/**/*.js'\"",
-    "test:experimental": "node --experimental-import-meta-resolve ../../node_modules/@larsthorup/testrunner/src/cli"
+    "test": "bash -c \"IS_TEST=1 testrunner 'src/**/*.js'\""
   },
   "repository": {
     "type": "git",
