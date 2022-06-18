@@ -105,39 +105,35 @@ describe('useSetup', () => {
     const getDb = useSetup(() => {
       /** @type { Db | undefined } */
       let db;
-      return {
-        before: () => {
-          db = { some: 'db' };
-          order.push('setup db');
-        },
-        after: () => {
-          db = undefined;
-          order.push('teardown db');
-        },
-        get: () => {
-          order.push('get db');
-          return db;
-        },
+      beforeAll(() => {
+        db = { some: 'db' };
+        order.push('setup db');
+      });
+      afterAll(() => {
+        db = undefined;
+        order.push('teardown db');
+      });
+      return () => {
+        order.push('get db');
+        return db;
       };
     });
     /** @typedef { { db: Db | undefined } } Server */
     const getServer = useSetup(() => {
       /** @type { Server | undefined } */
       let server;
-      return {
-        before: () => {
-          const db = getDb();
-          server = { db };
-          order.push('setup server');
-        },
-        after: () => {
-          server = undefined;
-          order.push('teardown server');
-        },
-        get: () => {
-          order.push('get server');
-          return server;
-        },
+      beforeAll(() => {
+        const db = getDb();
+        server = { db };
+        order.push('setup server');
+      });
+      afterAll(() => {
+        server = undefined;
+        order.push('teardown server');
+      });
+      return () => {
+        order.push('get server');
+        return server;
       };
     });
     it('should have setup', () => {
@@ -168,16 +164,14 @@ describe('useSetup, composition', () => {
     return useSetup(() => {
       /** @type { Db | undefined } */
       let db;
-      return {
-        before: () => {
-          db = { some: 'db' };
-        },
-        after: () => {
-          db = undefined;
-        },
-        get: () => {
-          return db;
-        },
+      beforeAll(() => {
+        db = { some: 'db' };
+      });
+      afterAll(() => {
+        db = undefined;
+      });
+      return () => {
+        return db;
       };
     });
   };
@@ -190,17 +184,15 @@ describe('useSetup, composition', () => {
     return useSetup(() => {
       /** @type { Server | undefined } */
       let server;
-      return {
-        before: () => {
-          const db = getDb();
-          server = { db };
-        },
-        after: () => {
-          server = undefined;
-        },
-        get: () => {
-          return server;
-        },
+      beforeAll(() => {
+        const db = getDb();
+        server = { db };
+      });
+      afterAll(() => {
+        server = undefined;
+      });
+      return () => {
+        return server;
       };
     });
   };

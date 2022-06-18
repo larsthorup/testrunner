@@ -44,7 +44,6 @@ npm test
 
 ## TODO
 
-- [ ] const getServer = useSetup(() => { const server; beforeAll(); afterAll(); return () => server; }
 - [ ] example/tinyspy: useMockLocalStorage
 - [ ] extract examples/src/lib into @larsthorup/testutils package
 - [ ] external module mocking (import map, esmock (node only))
