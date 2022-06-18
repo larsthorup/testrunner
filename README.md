@@ -40,11 +40,13 @@ npm test
 - [x] extensible syntactic sugar .skip, .todo, timeout (fix)
 - [x] external each (standard)
 - [x] external support having tests in production code files (fix)
+- [x] external object mocking (tinyspy)
 
 ## TODO
 
+- [ ] const getServer = useSetup(() => { const server; beforeAll(); afterAll(); return () => server; }
+- [ ] example/tinyspy: useMockLocalStorage
 - [ ] extract examples/src/lib into @larsthorup/testutils package
-- [ ] external object mocking (tinyspy, sinon, testdouble)
 - [ ] external module mocking (import map, esmock (node only))
 - [ ] pass in test context (extensibility)
 - [ ] design: extensible discovery: file glob
@@ -64,6 +66,7 @@ npm test
 - [ ] run in node or browser (standard)
 - [ ] IDE integration
 - [ ] comparison with uvu, node:test, tap, ava, junit
+- [ ] external object mocking (sinon, testdouble)
 - [ ] compose with other module loaders
 - [ ] external snapshot matcher (unexpected-snapshot, chai-jest-snapshot)
 - [ ] external code coverage (c8)
