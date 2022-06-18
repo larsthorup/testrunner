@@ -43,9 +43,10 @@ npm test
 
 ## TODO
 
+- [ ] extract examples/src/lib into @larsthorup/testutils package
+- [ ] external object mocking (tinyspy, sinon, testdouble)
+- [ ] external module mocking (import map, esmock (node only))
 - [ ] pass in test context (extensibility)
-- [ ] external function / class method mocking (sinon, testdouble)
-- [ ] external esm mocking (import map, esmock (node only))
 - [ ] design: extensible discovery: file glob
 - [ ] design: extensible filtering: title pattern, only
 - [ ] design: extensible ordering: concurrent/serial, random/sequential/sorted
