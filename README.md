@@ -44,11 +44,15 @@ npm test
 
 ## TODO
 
+- [ ] useSetup: pass-in beforeAll/beforeEach so implementation in vitest is possible
+- [ ] useSetup: explicit dependencies to guard against concurrent execution
+- [ ] try on https://github.com/kristiandupont/recase
+- [ ] try on https://github.com/kristiandupont/tagged-comment-parser/blob/main/index.test.js
 - [ ] external module mocking (import map, esmock (node only))
 - [ ] pass in test context (extensibility)
 - [ ] design: extensible discovery: file glob
 - [ ] design: extensible filtering: title pattern, only
-- [ ] design: extensible ordering: concurrent/serial, random/sequential/sorted
+- [ ] design: extensible ordering: concurrent/sequential, random/source/sorted
 - [ ] extendable timeouts (fix)
 - [ ] scoped mocks, use mocks in useSetup (node only) (fix)
 - [ ] snapshot (via assertion library?, useLogSnapshot) (standard)

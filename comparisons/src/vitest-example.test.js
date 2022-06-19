@@ -8,6 +8,7 @@ import {
 } from 'vitest';
 
 import { strict as assert } from 'node:assert';
+import { forTimeout } from './lib/forTimeout.js';
 
 describe('outer', () => {
   let order = '';
@@ -66,7 +67,7 @@ describe('async', () => {
   );
 });
 
-describe('hooks run FIFO', () => {
+describe('sync hooks run FIFO', () => {
   let order = '';
   describe('block', () => {
     beforeAll(() => {
@@ -87,6 +88,40 @@ describe('hooks run FIFO', () => {
   });
   afterAll(() => {
     assert.equal(order, 'BDiAC');
+  });
+});
+
+describe('async hooks run concurrently', () => {
+  let order = '';
+  describe('block', () => {
+    beforeAll(async () => {
+      await forTimeout(20);
+      order += '<';
+      await forTimeout(50);
+      order += '(';
+    });
+    beforeAll(async () => {
+      order += '[';
+      await forTimeout(50);
+      order += '{';
+    });
+    afterAll(async () => {
+      await forTimeout(20);
+      order += ')';
+      await forTimeout(50);
+      order += '>';
+    });
+    afterAll(async () => {
+      order += '}';
+      await forTimeout(50);
+      order += ']';
+    });
+    it('should run all hooks', () => {
+      order += 'i';
+    });
+  });
+  afterAll(() => {
+    assert.equal(order, '[<{(i})]>');
   });
 });
 

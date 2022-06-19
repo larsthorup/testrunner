@@ -2,6 +2,7 @@
 
 import { strict as assert } from 'node:assert';
 import FakeTimers from '@sinonjs/fake-timers';
+import { forTimeout } from './lib/forTimeout.js';
 
 describe('outer', () => {
   let order = '';
@@ -53,7 +54,7 @@ describe('async', () => {
   });
 });
 
-describe('hooks run FIFO', () => {
+describe('sync hooks run FIFO', () => {
   let order = '';
   describe('block', () => {
     before(() => {
@@ -74,6 +75,40 @@ describe('hooks run FIFO', () => {
   });
   after(() => {
     assert.equal(order, 'BDiAC');
+  });
+});
+
+describe('async hooks run sequentially', () => {
+  let order = '';
+  describe('block', () => {
+    before(async () => {
+      await forTimeout(20);
+      order += '<';
+      await forTimeout(50);
+      order += '(';
+    });
+    after(async () => {
+      await forTimeout(20);
+      order += ')';
+      await forTimeout(50);
+      order += '>';
+    });
+    before(async () => {
+      order += '[';
+      await forTimeout(50);
+      order += '{';
+    });
+    after(async () => {
+      order += '}';
+      await forTimeout(50);
+      order += ']';
+    });
+    it('should run all hooks', () => {
+      order += 'i';
+    });
+  });
+  after(() => {
+    assert.equal(order, '<([{i)>}]');
   });
 });
 

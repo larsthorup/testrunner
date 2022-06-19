@@ -9,7 +9,7 @@ import {
   skip,
 } from '@larsthorup/testrunner';
 
-import { fails, timeout, useSetup } from '@larsthorup/testutils';
+import { fails, forTimeout, timeout, useSetup } from '@larsthorup/testutils';
 
 describe('outer', () => {
   let order = '';
@@ -90,6 +90,40 @@ describe('hooks run FILO', () => {
   });
   afterAll('verify order', () => {
     assert.equal(order, 'BDiCA');
+  });
+});
+
+describe('async hooks run sequentially', () => {
+  let order = '';
+  describe('block', () => {
+    beforeAll(async () => {
+      await forTimeout(20);
+      order += '<';
+      await forTimeout(50);
+      order += '(';
+    });
+    afterAll(async () => {
+      await forTimeout(20);
+      order += ')';
+      await forTimeout(50);
+      order += '>';
+    });
+    beforeAll(async () => {
+      order += '[';
+      await forTimeout(50);
+      order += '{';
+    });
+    afterAll(async () => {
+      order += '}';
+      await forTimeout(50);
+      order += ']';
+    });
+    it('should run all hooks', () => {
+      order += 'i';
+    });
+  });
+  afterAll(() => {
+    assert.equal(order, '<([{i}])>');
   });
 });
 
