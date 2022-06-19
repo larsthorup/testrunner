@@ -17,6 +17,14 @@ describe('jest matcher', () => {
     expect(list).toBe(list);
   });
 
+  it('should expect().toEqual()', () => {
+    expect(2).toEqual(2);
+    expect('abc').toEqual('abc');
+    expect([1, 2, 3]).not.toEqual([]);
+    const list = [1, 2, 3];
+    expect(list).toEqual(list);
+  });
+
   it('should still provide chai matchers too', () => {
     expect([1, 2, 3]).to.have.length(3);
   });
