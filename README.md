@@ -41,11 +41,10 @@ npm test
 - [x] external each (standard)
 - [x] external support having tests in production code files (fix)
 - [x] external object mocking (tinyspy)
-- [x] jest matcher for chai expect: toHaveLength (standard)
+- [x] jest matcher for chai expect: toHaveLength, toBe, toEqual (standard)
 
 ## TODO
 
-- [ ] jest matcher for chai expect: toBe, toEqual
 - [ ] publish as 0.1
 - [ ] try on https://github.com/kristiandupont/recase
 - [ ] try on https://github.com/kristiandupont/tagged-comment-parser

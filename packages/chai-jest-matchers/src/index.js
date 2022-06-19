@@ -16,6 +16,19 @@ const ChaiJestMatchers = (chai, utils) => {
       return this.have.length(length);
     }
   );
+
+  utils.addMethod(
+    chai.Assertion.prototype,
+    'toBe',
+    /**
+     * @this {Assertion & ChaiExpectReturn}
+     * @param {any} value
+     * @returns
+     */
+    function (value) {
+      return this.to.equal(value);
+    }
+  );
 };
 
 export default ChaiJestMatchers;

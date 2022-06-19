@@ -8,6 +8,7 @@ export type { Assertion } from 'chai';
 declare global {
   export namespace Chai {
     interface Assertion {
+      toBe(value: any): void;
       toHaveLength(length: number): void;
     }
   }
