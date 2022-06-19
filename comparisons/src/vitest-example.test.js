@@ -14,7 +14,7 @@ describe('outer', () => {
   let order = '';
 
   beforeAll(() => {
-    order += 'B';
+    order += '<';
   });
 
   it('outer first', () => {
@@ -24,7 +24,7 @@ describe('outer', () => {
 
   describe('inner', () => {
     beforeEach(() => {
-      order += 'b';
+      order += '(';
     });
 
     it('inner first', () => {
@@ -38,7 +38,7 @@ describe('outer', () => {
     });
 
     afterEach(() => {
-      order += 'a';
+      order += ')';
     });
   });
 
@@ -48,8 +48,8 @@ describe('outer', () => {
   });
 
   afterAll(() => {
-    order += 'A';
-    assert.equal(order, 'B1b2ab3a4A');
+    order += '>';
+    assert.equal(order, '<1(2)(3)4>');
   });
 });
 
@@ -71,23 +71,23 @@ describe('sync hooks run FIFO', () => {
   let order = '';
   describe('block', () => {
     beforeAll(() => {
-      order += 'B';
+      order += '<';
     });
     afterAll(() => {
-      order += 'A';
+      order += '>';
     });
     beforeAll(() => {
-      order += 'D';
+      order += '(';
     });
     afterAll(() => {
-      order += 'C';
+      order += ')';
     });
     it('should run all hooks', () => {
-      order += 'i';
+      order += '1';
     });
   });
   afterAll(() => {
-    assert.equal(order, 'BDiAC');
+    assert.equal(order, '<(1>)');
   });
 });
 
