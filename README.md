@@ -41,18 +41,23 @@ npm test
 - [x] external each (standard)
 - [x] external support having tests in production code files (fix)
 - [x] external object mocking (tinyspy)
+- [x] jest matcher for chai expect: toHaveLength (standard)
 
 ## TODO
 
-- [ ] useSetup: pass-in beforeAll/beforeEach so implementation in vitest is possible
-- [ ] useSetup: explicit dependencies to guard against concurrent execution
+- [ ] jest matcher for chai expect: toBe, toEqual
+- [ ] publish as 0.1
 - [ ] try on https://github.com/kristiandupont/recase
-- [ ] try on https://github.com/kristiandupont/tagged-comment-parser/blob/main/index.test.js
+- [ ] try on https://github.com/kristiandupont/tagged-comment-parser
+- [ ] jest matcher for chai expect: toContain, toMatchObject, toMatchSnapshot
+- [ ] try on https://github.com/kristiandupont/extract-pg-schema
 - [ ] external module mocking (import map, esmock (node only))
 - [ ] pass in test context (extensibility)
 - [ ] design: extensible discovery: file glob
 - [ ] design: extensible filtering: title pattern, only
 - [ ] design: extensible ordering: concurrent/sequential, random/source/sorted
+- [ ] useSetup: pass-in beforeAll/beforeEach (so implementation in vitest is possible) - seems clumsy
+- [ ] useSetup: explicit dependencies to guard against concurrent execution
 - [ ] extendable timeouts (fix)
 - [ ] scoped mocks, use mocks in useSetup (node only) (fix)
 - [ ] snapshot (via assertion library?, useLogSnapshot) (standard)

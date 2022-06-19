@@ -12,6 +12,7 @@
   "workspaces": [
     "packages/testrunner",
     "packages/testutils",
+    "packages/chai-jest-matchers",
     "packages/examples"
   ],
   "devDependencies": {
