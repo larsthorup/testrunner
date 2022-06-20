@@ -45,16 +45,20 @@ npm test
 
 ## TODO
 
+- [ ] withSetup - ala playwright fixture
 - [ ] publish as 0.1
 - [ ] try on https://github.com/kristiandupont/recase
 - [ ] try on https://github.com/kristiandupont/tagged-comment-parser
 - [ ] jest matcher for chai expect: toContain, toMatchObject, toMatchSnapshot
 - [ ] try on https://github.com/kristiandupont/extract-pg-schema
+- [ ] sensible concurrency defaults: inside file: sequential, files: concurrently
+- [ ] comparison with playwright (concurrency api)
 - [ ] external module mocking (import map, esmock (node only))
 - [ ] pass in test context (extensibility)
 - [ ] design: extensible discovery: file glob
 - [ ] design: extensible filtering: title pattern, only
 - [ ] design: extensible ordering: concurrent/sequential, random/source/sorted
+- [ ] design: extensible sharding across multiple machines
 - [ ] useSetup: pass-in beforeAll/beforeEach (so implementation in vitest is possible) - seems clumsy
 - [ ] useSetup: explicit dependencies to guard against concurrent execution
 - [ ] extendable timeouts (fix)

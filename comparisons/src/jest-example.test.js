@@ -184,7 +184,7 @@ describe('useSetup', () => {
   });
 });
 
-// useSetup, composition - have to compose nested describe blocks?
+// useSetup, composition - how to compose nested describe blocks?
 
 describe('mark test expected to fail', () => {
   it.failing('should fail', () => {
