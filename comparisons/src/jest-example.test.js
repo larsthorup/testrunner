@@ -200,3 +200,55 @@ describe('skip', () => {
   });
   // dynamic skip not available in jest
 });
+
+// withSetup - use describe to model a fixture
+const withDb = (block) => {
+  describe('withDb', () => {
+    let db;
+    beforeAll(() => {
+      db = { some: 'db' };
+    });
+    afterAll(() => {
+      db = undefined;
+    });
+    block({
+      beforeAll: (fn) => {
+        beforeAll(() => {
+          fn({ db });
+        });
+      },
+    });
+  });
+};
+const withServer = (ctx, block) => {
+  describe('withServer', () => {
+    let server;
+    ctx.beforeAll(({ db }) => {
+      server = { db };
+    });
+    afterAll(() => {
+      server = undefined;
+    });
+    block({
+      it: (name, fn) => {
+        it(name, () => {
+          fn({ server });
+        });
+      },
+    });
+  });
+};
+const withInfra = (block) => {
+  withDb((ctx) => {
+    withServer(ctx, (ctx) => {
+      block(ctx);
+    });
+  });
+};
+describe('withSetup', () => {
+  withInfra((ctx) => {
+    ctx.it('should have setup', ({ server }) => {
+      assert.deepEqual(server, { db: { some: 'db' } });
+    });
+  });
+});

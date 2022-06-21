@@ -55,7 +55,7 @@ describe('withSetup', () => {
       });
     };
     withInfra((ctx) => {
-      ctx.it('should have setup', ({ server }) => {
+      ctx.it('should have setup', ({ server /* TODO: db */ }) => {
         assert.deepEqual(server, { db: { some: 'db' } });
         order.push('test');
       });
