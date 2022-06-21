@@ -7,7 +7,7 @@ import { afterAll, beforeAll, describe, it } from '@larsthorup/testrunner';
 describe('withSetup', () => {
   let order = [];
   describe('block', () => {
-    const withDb = (block) => {
+    const withDb = (test, block) => {
       describe('withDb', () => {
         let db;
         beforeAll(() => {
@@ -27,10 +27,10 @@ describe('withSetup', () => {
         });
       });
     };
-    const withServer = (ctx, block) => {
+    const withServer = (test, block) => {
       describe('withServer', () => {
         let server;
-        ctx.beforeAll(({ db }) => {
+        test.beforeAll(({ db }) => {
           server = { db };
           order.push('setup server');
         });
@@ -48,14 +48,14 @@ describe('withSetup', () => {
       });
     };
     const withInfra = (block) => {
-      withDb((ctx) => {
-        withServer(ctx, (ctx) => {
-          block(ctx);
+      withDb({}, (test) => {
+        withServer(test, (test) => {
+          block(test);
         });
       });
     };
-    withInfra((ctx) => {
-      ctx.it('should have setup', ({ server /* TODO: db */ }) => {
+    withInfra((test) => {
+      test.it('should have setup', ({ server /* TODO: db */ }) => {
         assert.deepEqual(server, { db: { some: 'db' } });
         order.push('test');
       });
