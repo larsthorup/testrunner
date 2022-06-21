@@ -4,6 +4,21 @@ import { strict as assert } from 'node:assert';
 import * as test from '@larsthorup/testrunner';
 
 // withSetup - use describe to model a fixture
+const use = (test, get, block) => {
+  block({
+    ...test,
+    beforeAll: (fn) => {
+      test.beforeAll(() => {
+        fn({ ...test, ...get() });
+      });
+    },
+    it: (name, fn) => {
+      test.it(name, (test) => {
+        fn({ ...test, ...get() });
+      });
+    },
+  });
+};
 test.describe('withSetup', () => {
   let order = [];
   test.describe('block', () => {
@@ -18,19 +33,7 @@ test.describe('withSetup', () => {
           db = undefined;
           order.push('teardown db');
         });
-        block({
-          ...test,
-          beforeAll: (fn) => {
-            test.beforeAll(() => {
-              fn({ ...test, db });
-            });
-          },
-          it: (name, fn) => {
-            test.it(name, () => {
-              fn({ ...test, db });
-            });
-          },
-        });
+        use(test, () => ({ db }), block);
       });
     };
     const withServer = (test, block) => {
@@ -44,20 +47,13 @@ test.describe('withSetup', () => {
           server = undefined;
           order.push('teardown server');
         });
-        block({
-          ...test,
-          it: (name, fn) => {
-            test.it(name, (test) => {
-              fn({ ...test, server });
-            });
-          },
-        });
+        use(test, () => ({ server }), block);
       });
     };
     const withInfra = (test, block) => {
       withDb(test, (test) => {
         withServer(test, (test) => {
-          block(test);
+          use(test, () => ({}), block);
         });
       });
     };
