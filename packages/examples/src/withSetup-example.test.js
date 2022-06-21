@@ -47,14 +47,19 @@ describe('withSetup', () => {
         });
       });
     };
-    withDb((ctx) =>
-      withServer(ctx, (ctx) => {
-        ctx.it('should have setup', ({ server }) => {
-          assert.deepEqual(server, { db: { some: 'db' } });
-          order.push('test');
+    const withInfra = (block) => {
+      withDb((ctx) => {
+        withServer(ctx, (ctx) => {
+          block(ctx);
         });
-      })
-    );
+      });
+    };
+    withInfra((ctx) => {
+      ctx.it('should have setup', ({ server }) => {
+        assert.deepEqual(server, { db: { some: 'db' } });
+        order.push('test');
+      });
+    });
   });
   afterAll(() => {
     assert.deepEqual(order, [
