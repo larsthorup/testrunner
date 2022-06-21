@@ -217,13 +217,18 @@ const withDb = (block) => {
           fn({ db });
         });
       },
+      it: (name, fn) => {
+        it(name, () => {
+          fn({ db });
+        });
+      },
     });
   });
 };
-const withServer = (ctx, block) => {
+const withServer = (test, block) => {
   describe('withServer', () => {
     let server;
-    ctx.beforeAll(({ db }) => {
+    test.beforeAll(({ db }) => {
       server = { db };
     });
     afterAll(() => {
@@ -231,24 +236,25 @@ const withServer = (ctx, block) => {
     });
     block({
       it: (name, fn) => {
-        it(name, () => {
-          fn({ server });
+        test.it(name, (test) => {
+          fn({ ...test, server });
         });
       },
     });
   });
 };
 const withInfra = (block) => {
-  withDb((ctx) => {
-    withServer(ctx, (ctx) => {
-      block(ctx);
+  withDb((test) => {
+    withServer(test, (test) => {
+      block(test);
     });
   });
 };
 describe('withSetup', () => {
-  withInfra((ctx) => {
-    ctx.it('should have setup', ({ server }) => {
+  withInfra((test) => {
+    test.it('should have setup', ({ db, server }) => {
       assert.deepEqual(server, { db: { some: 'db' } });
+      assert.deepEqual(db, { some: 'db' });
     });
   });
 });

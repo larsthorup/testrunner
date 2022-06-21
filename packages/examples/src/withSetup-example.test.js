@@ -24,6 +24,11 @@ describe('withSetup', () => {
               fn({ db });
             });
           },
+          it: (name, fn) => {
+            it(name, () => {
+              fn({ db });
+            });
+          },
         });
       });
     };
@@ -40,8 +45,8 @@ describe('withSetup', () => {
         });
         block({
           it: (name, fn) => {
-            it(name, () => {
-              fn({ server });
+            test.it(name, (test) => {
+              fn({ ...test, server });
             });
           },
         });
@@ -55,8 +60,9 @@ describe('withSetup', () => {
       });
     };
     withInfra((test) => {
-      test.it('should have setup', ({ server /* TODO: db */ }) => {
+      test.it('should have setup', ({ db, server }) => {
         assert.deepEqual(server, { db: { some: 'db' } });
+        assert.deepEqual(db, { some: 'db' });
         order.push('test');
       });
     });
