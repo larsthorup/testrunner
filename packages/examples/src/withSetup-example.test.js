@@ -1,49 +1,51 @@
 // @ts-nocheck // TODO
 
 import { strict as assert } from 'node:assert';
-import { afterAll, beforeAll, describe, it } from '@larsthorup/testrunner';
+import * as test from '@larsthorup/testrunner';
 
 // withSetup - use describe to model a fixture
-describe('withSetup', () => {
+test.describe('withSetup', () => {
   let order = [];
-  describe('block', () => {
+  test.describe('block', () => {
     const withDb = (test, block) => {
-      describe('withDb', () => {
+      test.describe('withDb', () => {
         let db;
-        beforeAll(() => {
+        test.beforeAll(() => {
           db = { some: 'db' };
           order.push('setup db');
         });
-        afterAll(() => {
+        test.afterAll(() => {
           db = undefined;
           order.push('teardown db');
         });
         block({
+          ...test,
           beforeAll: (fn) => {
-            beforeAll(() => {
-              fn({ db });
+            test.beforeAll(() => {
+              fn({ ...test, db });
             });
           },
           it: (name, fn) => {
-            it(name, () => {
-              fn({ db });
+            test.it(name, () => {
+              fn({ ...test, db });
             });
           },
         });
       });
     };
     const withServer = (test, block) => {
-      describe('withServer', () => {
+      test.describe('withServer', () => {
         let server;
         test.beforeAll(({ db }) => {
           server = { db };
           order.push('setup server');
         });
-        afterAll(() => {
+        test.afterAll(() => {
           server = undefined;
           order.push('teardown server');
         });
         block({
+          ...test,
           it: (name, fn) => {
             test.it(name, (test) => {
               fn({ ...test, server });
@@ -52,14 +54,14 @@ describe('withSetup', () => {
         });
       });
     };
-    const withInfra = (block) => {
-      withDb({}, (test) => {
+    const withInfra = (test, block) => {
+      withDb(test, (test) => {
         withServer(test, (test) => {
           block(test);
         });
       });
     };
-    withInfra((test) => {
+    withInfra(test, (test) => {
       test.it('should have setup', ({ db, server }) => {
         assert.deepEqual(server, { db: { some: 'db' } });
         assert.deepEqual(db, { some: 'db' });
@@ -67,7 +69,7 @@ describe('withSetup', () => {
       });
     });
   });
-  afterAll(() => {
+  test.afterAll(() => {
     assert.deepEqual(order, [
       'setup db',
       'setup server',
