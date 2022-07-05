@@ -9,7 +9,7 @@ npm test
 
 ## Scope
 
-- [x] comparison with jest, mocha, vitest
+- [x] comparison with jest, mocha, vitest, playwright
 - [x] no commonjs support (modernity)
 - [x] no globals (simplicity)
 - [x] no console output capture (fix)
@@ -47,12 +47,13 @@ npm test
 
 - [ ] withSetup - ala playwright fixture
 - [ ] publish as 0.1
+- [ ] API: timeout: test.setTimeout / test.addTimeout: a la playwright
 - [ ] try on https://github.com/kristiandupont/recase
 - [ ] try on https://github.com/kristiandupont/tagged-comment-parser
 - [ ] jest matcher for chai expect: toContain, toMatchObject, toMatchSnapshot
 - [ ] try on https://github.com/kristiandupont/extract-pg-schema
 - [ ] sensible concurrency defaults: inside file: sequential, files: concurrently
-- [ ] comparison with playwright (concurrency api)
+- [ ] concurrency api: a la playwright?
 - [ ] external module mocking (import map, esmock (node only))
 - [ ] pass in test context (extensibility)
 - [ ] design: extensible discovery: file glob
@@ -69,6 +70,7 @@ npm test
 - [ ] black list file with test name pattern and option (eg: `[BUG-123] - fails`) for bug tracker integration for "open" issues
 - [ ] describe({concurrent,serial}) - default serial - inherited (standard)
 - [ ] describe({random, sequential}) - default random - inherited (catch more bugs)
+- [ ] isolation / concurrency via worker threads (node), web workers (browser), browser tabs?
 - [ ] test file order - random/sorted + concurrent/serial
 - [ ] test isolation - default off - opt-in per test (catch more bugs)
 - [ ] external reporters (jest, mocha, vitest)
