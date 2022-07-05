@@ -2,12 +2,12 @@
   "name": "testrunner-packages",
   "private": true,
   "scripts": {
-    "install:comparisons": "cd comparisons && npm install",
+    "install:comparisons": "cd comparisons/esm && npm install && cd ../ts && npm install",
     "postinstall": "npm run install:comparisons",
     "pretest": "prettier . --check && eslint . && tsc && npm run test:comparisons",
     "prettier": "prettier . --write",
     "test": "npm test --workspaces",
-    "test:comparisons": "cd comparisons && npm test"
+    "test:comparisons": "cd comparisons/esm && npm test && cd ../ts && npm test"
   },
   "workspaces": [
     "packages/testrunner",

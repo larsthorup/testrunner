@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
-import { forTimeout } from './lib/forTimeout.js';
+
+const forTimeout = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 test.describe('outer', () => {
   let order = '';
@@ -49,7 +51,8 @@ test.describe('async', () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
     expect(2 + 2).toEqual(4);
   });
-  test.skip('should timeout', async () => {
+  test('should timeout', async () => {
+    test.skip();
     test.setTimeout(50);
     return new Promise(() => {});
   });
@@ -114,7 +117,8 @@ test.describe('async hooks run sequentially', () => {
 });
 
 test.describe('mark test expected to fail', () => {
-  test.fail('should fail', () => {
+  test('should fail', () => {
+    test.fail();
     expect(2 + 2).toEqual(5);
   });
 

@@ -1,0 +1,11 @@
+{
+  "name": "@larsthorup/testrunner-comparisons-ts",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npm run test:playwright",
+    "test:playwright": "playwright test src/playwright-example.test.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.23.1"
+  }
+}

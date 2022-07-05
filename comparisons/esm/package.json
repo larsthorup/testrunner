@@ -1,16 +1,14 @@
 {
-  "name": "mocha-demo",
+  "name": "@larsthorup/testrunner-comparisons-esm",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "test": "npm run test:jest && npm run test:mocha && npm run test:vitest && npm run test:playwright",
+    "test": "npm run test:jest && npm run test:mocha && npm run test:vitest",
     "test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/jest-example.test.js",
     "test:mocha": "mocha src/mocha-example.test.js",
-    "test:playwright": "playwright test src/playwright-example.test.js",
     "test:vitest": "vitest --run --reporter verbose src/vitest-example.test.js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.23.1",
     "@sinonjs/fake-timers": "^9.1.2",
     "@types/mocha": "^9.1.1",
     "chai": "^4.3.6",
