@@ -131,3 +131,25 @@ test.describe('skip', () => {
     expect(2 + 2).toEqual(5);
   });
 });
+
+// fixture
+type Db = { some: string };
+const withDb = test.extend<{ db: Db }>({
+  db: async ({}, use) => {
+    const db = { some: 'db' };
+    use(db);
+  },
+});
+type Server = { db: Db };
+const withServer = withDb.extend<{ server: Server }>({
+  server: async ({ db }, use) => {
+    const server = { db };
+    use(server);
+  },
+});
+test.describe('fixture', () => {
+  withServer('should have setup', ({ db, server }) => {
+    expect(server).toEqual({ db: { some: 'db' } });
+    expect(db).toEqual({ some: 'db' });
+  });
+});
