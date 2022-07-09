@@ -150,11 +150,12 @@ const withDb = test.extend<{}, { name: string; db: Db }>({
   ],
 });
 type Server = { db: Db };
-const withServer = withDb.extend<{ server: Server }>({
-  server: async ({ db }, use) => {
+const withServer = withDb.extend<{ port: number | undefined; server: Server }>({
+  port: 8000,
+  server: async ({ db, port }, use) => {
     console.log('setup server');
     order.push('setup server');
-    const server = { db };
+    const server = { db, port };
     await use(server);
     console.log('teardown server');
     order.push('teardown server');
@@ -162,20 +163,23 @@ const withServer = withDb.extend<{ server: Server }>({
 });
 withDb.use({ name: 'db' });
 test.describe('fixture', () => {
-  withServer('should have setup', ({ db, server }) => {
-    order.push('test');
-    expect(server).toEqual({ db: { name: 'db' } });
-    expect(db).toEqual({ name: 'db' });
+  withServer.describe('explicit server port', () => {
+    withServer.use({ port: 8001 });
+    withServer('should have setup', ({ db, server }) => {
+      order.push('test');
+      expect(server).toEqual({ db: { name: 'db' }, port: 8001 });
+      expect(db).toEqual({ name: 'db' });
+    });
   });
-  withServer.describe('block with server and db', () => {
+  withServer.describe('default server port', () => {
     withServer('should have setup once', ({ db, server }) => {
       order.push('test');
-      expect(server).toEqual({ db: { name: 'db' } });
+      expect(server).toEqual({ db: { name: 'db' }, port: 8000 });
       expect(db).toEqual({ name: 'db' });
     });
     withServer('should have setup twice', ({ db, server }) => {
       order.push('test');
-      expect(server).toEqual({ db: { name: 'db' } });
+      expect(server).toEqual({ db: { name: 'db' }, port: 8000 });
       expect(db).toEqual({ name: 'db' });
     });
   });
