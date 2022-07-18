@@ -1,9 +1,9 @@
-import { promisify } from 'node:util';
+import { promisify } from "node:util";
 
-import glob from 'glob';
+import glob from "glob";
 
-import { runner } from './runner.js';
-import { collector } from './collector.js';
+import { runner } from "./runner.js";
+import { collector } from "./collector.js";
 
 /**
  * @param {string} testFilePattern

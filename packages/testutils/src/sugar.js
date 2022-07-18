@@ -1,6 +1,6 @@
-import { it as test, skip } from '@larsthorup/testrunner';
-import { fails } from './fails.js';
-import { timeout } from './timeout.js';
+import { it as test, skip } from "@larsthorup/testrunner";
+import { fails } from "./fails.js";
+import { timeout } from "./timeout.js";
 
 /** @typedef { import("@larsthorup/testrunner").Fn } Fn */
 

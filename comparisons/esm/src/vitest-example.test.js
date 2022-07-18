@@ -5,61 +5,61 @@ import {
   beforeEach,
   describe,
   it,
-} from 'vitest';
+} from "vitest";
 
-import { strict as assert } from 'node:assert';
-import { forTimeout } from './lib/forTimeout.js';
+import { strict as assert } from "node:assert";
+import { forTimeout } from "./lib/forTimeout.js";
 
-describe('outer', () => {
-  let order = '';
+describe("outer", () => {
+  let order = "";
 
   beforeAll(() => {
-    order += '<';
+    order += "<";
   });
 
-  it('outer first', () => {
+  it("outer first", () => {
     assert.equal(2 + 2, 4);
-    order += '1';
+    order += "1";
   });
 
-  describe('inner', () => {
+  describe("inner", () => {
     beforeEach(() => {
-      order += '(';
+      order += "(";
     });
 
-    it('inner first', () => {
+    it("inner first", () => {
       assert.equal(2 + 2, 4);
-      order += '2';
+      order += "2";
     });
 
-    it('inner last', () => {
+    it("inner last", () => {
       assert.equal(2 + 2, 4);
-      order += '3';
+      order += "3";
     });
 
     afterEach(() => {
-      order += ')';
+      order += ")";
     });
   });
 
-  it('outer last', () => {
+  it("outer last", () => {
     assert.equal(2 + 2, 4);
-    order += '4';
+    order += "4";
   });
 
   afterAll(() => {
-    order += '>';
-    assert.equal(order, '<1(2)(3)4>');
+    order += ">";
+    assert.equal(order, "<1(2)(3)4>");
   });
 });
 
-describe('async', () => {
-  it('should await', async () => {
+describe("async", () => {
+  it("should await", async () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
     assert.equal(2 + 2, 4);
   });
   it.fails(
-    'should timeout',
+    "should timeout",
     () => {
       return new Promise(() => {});
     },
@@ -67,82 +67,82 @@ describe('async', () => {
   );
 });
 
-describe('sync hooks run FIFO', () => {
-  let order = '';
-  describe('block', () => {
+describe("sync hooks run FIFO", () => {
+  let order = "";
+  describe("block", () => {
     beforeAll(() => {
-      order += '<';
+      order += "<";
     });
     afterAll(() => {
-      order += '>';
+      order += ">";
     });
     beforeAll(() => {
-      order += '(';
+      order += "(";
     });
     afterAll(() => {
-      order += ')';
+      order += ")";
     });
-    it('should run all hooks', () => {
-      order += '1';
+    it("should run all hooks", () => {
+      order += "1";
     });
   });
   afterAll(() => {
-    assert.equal(order, '<(1>)');
+    assert.equal(order, "<(1>)");
   });
 });
 
-describe('async hooks run concurrently', () => {
-  let order = '';
-  describe('block', () => {
+describe("async hooks run concurrently", () => {
+  let order = "";
+  describe("block", () => {
     beforeAll(async () => {
       await forTimeout(20);
-      order += '<';
+      order += "<";
       await forTimeout(50);
-      order += '(';
+      order += "(";
     });
     beforeAll(async () => {
-      order += '[';
+      order += "[";
       await forTimeout(50);
-      order += '{';
+      order += "{";
     });
     afterAll(async () => {
       await forTimeout(20);
-      order += ')';
+      order += ")";
       await forTimeout(50);
-      order += '>';
+      order += ">";
     });
     afterAll(async () => {
-      order += '}';
+      order += "}";
       await forTimeout(50);
-      order += ']';
+      order += "]";
     });
-    it('should run all hooks', () => {
-      order += 'i';
+    it("should run all hooks", () => {
+      order += "i";
     });
   });
   afterAll(() => {
-    assert.equal(order, '[<{(i})]>');
+    assert.equal(order, "[<{(i})]>");
   });
 });
 
-describe('mark test expected to fail', () => {
-  it.fails('should fail', () => {
+describe("mark test expected to fail", () => {
+  it.fails("should fail", () => {
     assert.equal(2 + 2, 5);
   });
 
   // mark test expected to fail with specific message - not available in vitest
 });
 
-describe('skip', () => {
-  it.skip('should allow a test to bail out', () => {
+describe("skip", () => {
+  it.skip("should allow a test to bail out", () => {
     assert.equal(2 + 2, 5);
   });
   // dynamic skip not available in vitest
 });
 
-describe('each', () => {
+describe("each", () => {
   // no way to include the iterated value in the test title?
-  it.each([false, 0, '', null, undefined])(
+  it.each([false, 0, "", null, undefined])(
     `should verify falsy-ness`,
     (value) => {
       assert.equal(!!value, false);

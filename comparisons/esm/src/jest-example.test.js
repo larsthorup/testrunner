@@ -1,58 +1,58 @@
 /* global afterAll, afterEach, beforeAll, beforeEach, describe, it */
 
-import { strict as assert } from 'node:assert';
-import { forTimeout } from './lib/forTimeout.js';
+import { strict as assert } from "node:assert";
+import { forTimeout } from "./lib/forTimeout.js";
 
-describe('outer', () => {
-  let order = '';
+describe("outer", () => {
+  let order = "";
 
   beforeAll(() => {
-    order += '<';
+    order += "<";
   });
 
-  it('outer first', () => {
+  it("outer first", () => {
     assert.equal(2 + 2, 4);
-    order += '1';
+    order += "1";
   });
 
-  describe('inner', () => {
+  describe("inner", () => {
     beforeEach(() => {
-      order += '(';
+      order += "(";
     });
 
-    it('inner first', () => {
+    it("inner first", () => {
       assert.equal(2 + 2, 4);
-      order += '2';
+      order += "2";
     });
 
-    it('inner last', () => {
+    it("inner last", () => {
       assert.equal(2 + 2, 4);
-      order += '3';
+      order += "3";
     });
 
     afterEach(() => {
-      order += ')';
+      order += ")";
     });
   });
 
-  it('outer last', () => {
+  it("outer last", () => {
     assert.equal(2 + 2, 4);
-    order += '4';
+    order += "4";
   });
 
   afterAll(() => {
-    order += '>';
-    assert.equal(order, '<1(2)(3)4>');
+    order += ">";
+    assert.equal(order, "<1(2)(3)4>");
   });
 });
 
-describe('async', () => {
-  it('should await', async () => {
+describe("async", () => {
+  it("should await", async () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
     assert.equal(2 + 2, 4);
   });
   it.failing(
-    'should timeout',
+    "should timeout",
     () => {
       return new Promise(() => {});
     },
@@ -60,61 +60,61 @@ describe('async', () => {
   );
 });
 
-describe('sync hooks run FIFO', () => {
-  let order = '';
-  describe('block', () => {
+describe("sync hooks run FIFO", () => {
+  let order = "";
+  describe("block", () => {
     beforeAll(() => {
-      order += '<';
+      order += "<";
     });
     afterAll(() => {
-      order += '>';
+      order += ">";
     });
     beforeAll(() => {
-      order += '(';
+      order += "(";
     });
     afterAll(() => {
-      order += ')';
+      order += ")";
     });
-    it('should run all hooks', () => {
-      order += '1';
+    it("should run all hooks", () => {
+      order += "1";
     });
   });
   afterAll(() => {
-    assert.equal(order, '<(1>)');
+    assert.equal(order, "<(1>)");
   });
 });
 
-describe('async hooks run sequentially', () => {
-  let order = '';
-  describe('block', () => {
+describe("async hooks run sequentially", () => {
+  let order = "";
+  describe("block", () => {
     beforeAll(async () => {
       await forTimeout(20);
-      order += '<';
+      order += "<";
       await forTimeout(50);
-      order += '(';
+      order += "(";
     });
     beforeAll(async () => {
-      order += '[';
+      order += "[";
       await forTimeout(50);
-      order += '{';
+      order += "{";
     });
     afterAll(async () => {
       await forTimeout(20);
-      order += ')';
+      order += ")";
       await forTimeout(50);
-      order += '>';
+      order += ">";
     });
     afterAll(async () => {
-      order += '}';
+      order += "}";
       await forTimeout(50);
-      order += ']';
+      order += "]";
     });
-    it('should run all hooks', () => {
-      order += 'i';
+    it("should run all hooks", () => {
+      order += "i";
     });
   });
   afterAll(() => {
-    assert.equal(order, '<([{i)>}]');
+    assert.equal(order, "<([{i)>}]");
   });
 });
 
@@ -125,77 +125,77 @@ const useSetup = (setup) => {
   afterAll(after);
   return get;
 };
-describe('useSetup', () => {
+describe("useSetup", () => {
   let order = [];
-  describe('block', () => {
+  describe("block", () => {
     const getDb = useSetup(() => {
       let db;
       return {
         before: () => {
-          db = { some: 'db' };
-          order.push('setup db');
+          db = { some: "db" };
+          order.push("setup db");
         },
         after: () => {
           db = undefined;
-          order.push('teardown db');
+          order.push("teardown db");
         },
         get: () => {
-          order.push('get db');
+          order.push("get db");
           return db;
         },
       };
     });
-    describe('nested block', () => {
+    describe("nested block", () => {
       const getServer = useSetup(() => {
         let server;
         return {
           before: () => {
             const db = getDb();
             server = { db };
-            order.push('setup server');
+            order.push("setup server");
           },
           after: () => {
             server = undefined;
-            order.push('teardown server');
+            order.push("teardown server");
           },
           get: () => {
-            order.push('get server');
+            order.push("get server");
             return server;
           },
         };
       });
-      it('should have setup', () => {
+      it("should have setup", () => {
         const server = getServer();
-        assert.deepEqual(server, { db: { some: 'db' } });
-        order.push('test');
+        assert.deepEqual(server, { db: { some: "db" } });
+        order.push("test");
       });
     });
   });
   afterAll(() => {
     assert.deepEqual(order, [
-      'setup db',
-      'get db',
-      'setup server',
-      'get server',
-      'test',
-      'teardown server',
-      'teardown db',
+      "setup db",
+      "get db",
+      "setup server",
+      "get server",
+      "test",
+      "teardown server",
+      "teardown db",
     ]);
   });
 });
 
 // useSetup, composition - how to compose nested describe blocks?
 
-describe('mark test expected to fail', () => {
-  it.failing('should fail', () => {
+describe("mark test expected to fail", () => {
+  it.failing("should fail", () => {
     assert.equal(2 + 2, 5);
   });
 
   // mark test expected to fail with specific message - not available in jest
 });
 
-describe('skip', () => {
-  it.skip('should allow a test to bail out', () => {
+describe("skip", () => {
+  it.skip("should allow a test to bail out", () => {
     assert.equal(2 + 2, 5);
   });
   // dynamic skip not available in jest
@@ -203,10 +203,10 @@ describe('skip', () => {
 
 // withSetup - use describe to model a fixture
 const withDb = (block) => {
-  describe('withDb', () => {
+  describe("withDb", () => {
     let db;
     beforeAll(() => {
-      db = { some: 'db' };
+      db = { some: "db" };
     });
     afterAll(() => {
       db = undefined;
@@ -226,7 +226,7 @@ const withDb = (block) => {
   });
 };
 const withServer = (test, block) => {
-  describe('withServer', () => {
+  describe("withServer", () => {
     let server;
     test.beforeAll(({ db }) => {
       server = { db };
@@ -250,11 +250,11 @@ const withInfra = (block) => {
     });
   });
 };
-describe('withSetup', () => {
+describe("withSetup", () => {
   withInfra((test) => {
-    test.it('should have setup', ({ db, server }) => {
-      assert.deepEqual(server, { db: { some: 'db' } });
-      assert.deepEqual(db, { some: 'db' });
+    test.it("should have setup", ({ db, server }) => {
+      assert.deepEqual(server, { db: { some: "db" } });
+      assert.deepEqual(db, { some: "db" });
     });
   });
 });

@@ -1,4 +1,4 @@
-import { isPromise } from 'node:util/types';
+import { isPromise } from "node:util/types";
 
 /** @typedef {import("./collector.js").AfterAll} AfterAll */
 /** @typedef {import("./collector.js").AfterEach} AfterEach */
@@ -23,7 +23,7 @@ class TestSkipException extends Error {
  * @param {string | undefined} [reason]
  */
 export const skip = (reason) => {
-  throw new TestSkipException(reason || '');
+  throw new TestSkipException(reason || "");
 };
 
 /**
@@ -43,10 +43,10 @@ const runTests = async (test, parentTestList) => {
   // TODO: shuffle tests based on serial / random test order
   // TODO: concurrent or sequential or not
   switch (test.type) {
-    case 'describe':
+    case "describe":
       {
         const beforeAllList = /** @type BeforeAll[] */ (
-          test.testList.filter(({ type }) => type === 'beforeAll')
+          test.testList.filter(({ type }) => type === "beforeAll")
         );
         for (const beforeAll of beforeAllList) {
           const fullTestList = parentTestList.concat([beforeAll]);
@@ -57,7 +57,7 @@ const runTests = async (test, parentTestList) => {
           failureCount += await runTests(childTest, fullTestList);
         }
         const afterAllList = /** @type AfterAll[] */ (
-          test.testList.filter(({ type }) => type === 'afterAll')
+          test.testList.filter(({ type }) => type === "afterAll")
         );
         for (const afterAll of afterAllList.reverse()) {
           const fullTestList = parentTestList.concat([afterAll]);
@@ -65,14 +65,14 @@ const runTests = async (test, parentTestList) => {
         }
       }
       break;
-    case 'it':
+    case "it":
       {
         const describeList = /** @type Describe[] */ (
-          parentTestList.filter(({ type }) => type === 'describe')
+          parentTestList.filter(({ type }) => type === "describe")
         );
         for (const describe of describeList) {
           const beforeEachList = /** @type BeforeEach[] */ (
-            describe.testList.filter(({ type }) => type === 'beforeEach')
+            describe.testList.filter(({ type }) => type === "beforeEach")
           );
           for (const beforeEach of beforeEachList) {
             const fullTestList = parentTestList.concat([beforeEach]);
@@ -82,7 +82,7 @@ const runTests = async (test, parentTestList) => {
         failureCount += await runTest(test, parentTestList);
         for (const describe of describeList.reverse()) {
           const afterEachList = /** @type AfterEach[] */ (
-            describe.testList.filter(({ type }) => type === 'afterEach')
+            describe.testList.filter(({ type }) => type === "afterEach")
           );
           for (const afterEach of afterEachList.reverse()) {
             const fullTestList = parentTestList.concat([afterEach]);
@@ -101,7 +101,7 @@ const runTests = async (test, parentTestList) => {
  */
 const runTest = async (test, parentTestList) => {
   let failureCount = 0;
-  const fullName = parentTestList.map(({ name }) => name).join(' - ');
+  const fullName = parentTestList.map(({ name }) => name).join(" - ");
   const { fn } = test;
   try {
     // TODO: pass in test context
@@ -109,13 +109,13 @@ const runTest = async (test, parentTestList) => {
     if (isPromise(result)) {
       await result;
     }
-    console.log('✔', fullName);
+    console.log("✔", fullName);
   } catch (ex) {
     if (ex instanceof TestSkipException) {
-      console.log('↓', fullName, ' - ', ex.message);
+      console.log("↓", fullName, " - ", ex.message);
     } else {
       // TODO: pluggable reporter
-      console.log('x', fullName, ' - ', ex);
+      console.log("x", fullName, " - ", ex);
       failureCount += 1;
     }
   }

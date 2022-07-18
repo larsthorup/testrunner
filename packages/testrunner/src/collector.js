@@ -1,4 +1,4 @@
-import { pathToFileURL } from 'node:url';
+import { pathToFileURL } from "node:url";
 
 /** @typedef { { type: 'afterAll'; name: string;  fn: Fn} } AfterAll */
 /** @typedef { { type: 'afterEach'; name: string; fn: Fn } } AfterEach */
@@ -16,16 +16,16 @@ let currentDescribe;
  * @param {string | Fn} nameOrFn
  * @param {Fn | undefined} [fnOrUndefined]
  */
-export const afterAll = (nameOrFn = 'afterAll', fnOrUndefined = undefined) => {
-  const name = typeof nameOrFn === 'string' ? nameOrFn : 'afterAll';
+export const afterAll = (nameOrFn = "afterAll", fnOrUndefined = undefined) => {
+  const name = typeof nameOrFn === "string" ? nameOrFn : "afterAll";
   const fn =
-    typeof nameOrFn === 'function'
+    typeof nameOrFn === "function"
       ? nameOrFn
       : fnOrUndefined !== undefined
       ? fnOrUndefined
       : () => {};
   /** @type { AfterAll } */
-  const afterAll = { type: 'afterAll', name, fn };
+  const afterAll = { type: "afterAll", name, fn };
   currentDescribe.testList.push(afterAll);
 };
 
@@ -34,7 +34,7 @@ export const afterAll = (nameOrFn = 'afterAll', fnOrUndefined = undefined) => {
  */
 export const afterEach = (fn) => {
   /** @type { AfterEach } */
-  const afterEach = { type: 'afterEach', name: 'afterEach', fn };
+  const afterEach = { type: "afterEach", name: "afterEach", fn };
   currentDescribe.testList.push(afterEach);
 };
 
@@ -43,7 +43,7 @@ export const afterEach = (fn) => {
  */
 export const beforeAll = (fn) => {
   /** @type { BeforeAll } */
-  const beforeAll = { type: 'beforeAll', name: 'beforeAll', fn };
+  const beforeAll = { type: "beforeAll", name: "beforeAll", fn };
   currentDescribe.testList.push(beforeAll);
 };
 
@@ -52,7 +52,7 @@ export const beforeAll = (fn) => {
  */
 export const beforeEach = (fn) => {
   /** @type { BeforeEach } */
-  const beforeEach = { type: 'beforeEach', name: 'beforeEach', fn };
+  const beforeEach = { type: "beforeEach", name: "beforeEach", fn };
   currentDescribe.testList.push(beforeEach);
 };
 
@@ -62,7 +62,7 @@ export const beforeEach = (fn) => {
  */
 export const describe = (name, fn) => {
   /** @type { Describe} */
-  const describe = { type: 'describe', name, testList: [] };
+  const describe = { type: "describe", name, testList: [] };
   currentDescribe.testList.push(describe);
   if (fn) {
     const previousTest = currentDescribe;
@@ -78,7 +78,7 @@ export const describe = (name, fn) => {
  */
 export const it = (name, fn) => {
   /** @type { It} */
-  const it = { type: 'it', name, fn };
+  const it = { type: "it", name, fn };
   currentDescribe.testList.push(it);
 };
 
@@ -88,7 +88,7 @@ export const it = (name, fn) => {
  */
 export const collector = async (filePaths) => {
   /** @type { Describe } */
-  const root = { type: 'describe', name: '', testList: [] };
+  const root = { type: "describe", name: "", testList: [] };
   currentDescribe = root;
   const fileUrls = filePaths.map((filePath) => pathToFileURL(filePath).href);
   await Promise.all(

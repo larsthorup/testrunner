@@ -10,5 +10,5 @@
     "types": ["node"]
   },
   "exclude": ["comparisons", "node_modules"],
-  "include": ["**/*.js", "**/.ts", "comparisons/src/playwright-example.test.ts"]
+  "include": ["**/*.js", "**/*.ts"]
 }

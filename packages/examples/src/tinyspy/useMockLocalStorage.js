@@ -1,9 +1,9 @@
-import { spyOn } from 'tinyspy';
+import { spyOn } from "tinyspy";
 
-import { afterEach, beforeEach } from '@larsthorup/testrunner';
-import { useSetup } from '@larsthorup/testutils';
+import { afterEach, beforeEach } from "@larsthorup/testrunner";
+import { useSetup } from "@larsthorup/testutils";
 
-import localstorage from './localstorage.js';
+import localstorage from "./localstorage.js";
 
 /**
  * @template A, R
@@ -23,10 +23,10 @@ export const useMockLocalStorage = () => {
       storage = {};
       setSpy = spyOn(
         localstorage,
-        'set',
+        "set",
         (key, value) => (storage[key] = value)
       );
-      getSpy = spyOn(localstorage, 'get', (key) => storage[key]);
+      getSpy = spyOn(localstorage, "get", (key) => storage[key]);
     });
 
     afterEach(() => {

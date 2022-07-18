@@ -1,6 +1,6 @@
-import { describe } from '@larsthorup/testrunner';
+import { describe } from "@larsthorup/testrunner";
 
-describe('sinon', () => {
-  describe('methods');
-  describe('dependency injection');
+describe("sinon", () => {
+  describe("methods");
+  describe("dependency injection");
 });

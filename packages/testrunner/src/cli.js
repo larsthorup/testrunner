@@ -1,25 +1,25 @@
 #!/usr/bin/env node
 
-import process from 'node:process';
+import process from "node:process";
 
-import main from './main.js';
+import main from "./main.js";
 
-process.on('beforeExit', (code) => {
+process.on("beforeExit", (code) => {
   // Note: diagnostic for dead promises: https://github.com/nodejs/node/issues/22088#issuecomment-732451617
-  console.error('Unexpected exit', code);
+  console.error("Unexpected exit", code);
 });
-process.on('uncaughtException', (err, origin) => {
-  console.log('uncaughtException', err, origin);
+process.on("uncaughtException", (err, origin) => {
+  console.log("uncaughtException", err, origin);
 });
-process.on('unhandledRejection', (reason) => {
-  console.log('unhandledRejection', reason);
+process.on("unhandledRejection", (reason) => {
+  console.log("unhandledRejection", reason);
 });
 
 try {
   const testFilePattern = process.argv[2];
   const failureCount = await main(testFilePattern);
   if (failureCount === 0) {
-    console.log('✔ testrunner: all tests passed');
+    console.log("✔ testrunner: all tests passed");
   } else {
     console.error(`x testrunner: ${failureCount} failing tests`);
   }

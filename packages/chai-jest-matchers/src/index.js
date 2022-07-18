@@ -6,7 +6,7 @@
 const ChaiJestMatchers = (chai, utils) => {
   utils.addMethod(
     chai.Assertion.prototype,
-    'toHaveLength',
+    "toHaveLength",
     /**
      * @this {Assertion & ChaiExpectReturn}
      * @param {number} length
@@ -19,7 +19,7 @@ const ChaiJestMatchers = (chai, utils) => {
 
   utils.addMethod(
     chai.Assertion.prototype,
-    'toBe',
+    "toBe",
     /**
      * @this {Assertion & ChaiExpectReturn}
      * @param {any} value
@@ -32,7 +32,7 @@ const ChaiJestMatchers = (chai, utils) => {
 
   utils.addMethod(
     chai.Assertion.prototype,
-    'toEqual',
+    "toEqual",
     /**
      * @this {Assertion & ChaiExpectReturn}
      * @param {any} value

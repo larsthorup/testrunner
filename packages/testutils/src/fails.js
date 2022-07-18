@@ -1,4 +1,4 @@
-import { isPromise } from 'node:util/types';
+import { isPromise } from "node:util/types";
 
 /** @typedef { import("@larsthorup/testrunner").Fn } Fn */
 
@@ -8,9 +8,9 @@ import { isPromise } from 'node:util/types';
  */
 export const fails = (expectedOrFn, fnOrUndefined) => async () => {
   const expected =
-    typeof expectedOrFn !== 'function' ? expectedOrFn : undefined;
+    typeof expectedOrFn !== "function" ? expectedOrFn : undefined;
   const fn =
-    typeof expectedOrFn === 'function'
+    typeof expectedOrFn === "function"
       ? expectedOrFn
       : fnOrUndefined !== undefined
       ? fnOrUndefined

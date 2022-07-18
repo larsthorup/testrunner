@@ -1,5 +1,5 @@
-export { fails } from './fails.js';
-export { it } from './sugar.js';
-export { timeout } from './timeout.js';
-export { useSetup } from './useSetup.js';
-export { forTimeout } from './forTimeout.js';
+export { fails } from "./fails.js";
+export { it } from "./sugar.js";
+export { timeout } from "./timeout.js";
+export { useSetup } from "./useSetup.js";
+export { forTimeout } from "./forTimeout.js";

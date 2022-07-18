@@ -9,11 +9,12 @@
     "@types/chai": "^4.3.1",
     "@types/sinonjs__fake-timers": "^8.1.2",
     "chai": "^4.3.6",
+    "esmock": "^1.8.0",
     "tinyspy": "^1.0.0"
   },
   "scripts": {
-    "pretest": "node src/in-source/main",
-    "test": "bash -c \"IS_TEST=1 testrunner 'src/**/*.js'\""
+    "pretest": "node src/in-source/main && node src/esmock/main",
+    "test": "bash -c \"IS_TEST=1 NODE_OPTIONS=--loader=esmock testrunner 'src/**/*.js'\""
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/larsthorup/testrunner/issues"
   },
-  "homepage": "https://github.com/larsthorup/testrunner#readme"
+  "homepage": "https://github.com/larsthorup/testrunner#readme",
+  "dependencies": {
+    "node-fetch": "^3.2.8"
+  }
 }

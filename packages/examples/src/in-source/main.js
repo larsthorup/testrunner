@@ -1,5 +1,5 @@
-import process from 'node:process';
-import { add } from './lib.js';
+import process from "node:process";
+import { add } from "./lib.js";
 
 const a = 2;
 const b = 2;

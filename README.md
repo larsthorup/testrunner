@@ -45,16 +45,12 @@ npm test
 
 ## TODO
 
-- [ ] withSetup - ala playwright fixture
-- [ ] publish as 0.1
+- [ ] external module mocking (import map, esmock (node only))
+- [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot
+- [ ] suite scoped fixtures (per describe block)
 - [ ] API: timeout: test.setTimeout / test.addTimeout: a la playwright
-- [ ] try on https://github.com/kristiandupont/recase
-- [ ] try on https://github.com/kristiandupont/tagged-comment-parser
-- [ ] jest matcher for chai expect: toContain, toMatchObject, toMatchSnapshot
-- [ ] try on https://github.com/kristiandupont/extract-pg-schema
 - [ ] sensible concurrency defaults: inside file: sequential, files: concurrently
 - [ ] concurrency api: a la playwright?
-- [ ] external module mocking (import map, esmock (node only))
 - [ ] pass in test context (extensibility)
 - [ ] design: extensible discovery: file glob
 - [ ] design: extensible filtering: title pattern, only
