@@ -14,6 +14,6 @@ describe("esmock", () => {
           Promise.resolve({ title: `some mocked title for post ${id}` }),
       },
     });
-    expect(await getPostTitle(2)).toEqual("some mocked title for post 2");
+    expect(await getPostTitle(2)).toEqual("Some mocked title for post 2");
   });
 });

@@ -6,5 +6,5 @@ import { fetchPosts } from "./service.js";
  */
 export const getPostTitle = async (id) => {
   const { title } = await fetchPosts(id);
-  return title;
+  return title[0].toUpperCase() + title.substring(1);
 };
