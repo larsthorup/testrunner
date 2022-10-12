@@ -13,8 +13,9 @@
     "tinyspy": "^1.0.0"
   },
   "scripts": {
-    "pretest": "node src/in-source/main && node src/esmock/main",
-    "test": "bash -c \"IS_TEST=1 NODE_OPTIONS=--loader=esmock testrunner 'src/**/*.js'\""
+    "pretest": "rm -f log.log && node src/in-source/main && node src/esmock/main",
+    "test": "",
+    "posttest": "bash -c \"IS_TEST=1 NODE_OPTIONS=--loader=esmock testrunner 'src/**/*.js'\""
   },
   "repository": {
     "type": "git",

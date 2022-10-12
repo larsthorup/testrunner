@@ -42,10 +42,15 @@ npm test
 - [x] external support having tests in production code files (fix)
 - [x] external object mocking (tinyspy)
 - [x] jest matcher for chai expect: toHaveLength, toBe, toEqual (standard)
+- [x] external module mocking (esmock (node only)) (standard)
+- [x] esmock: how to share mocks between tests (not inlined)
+- [x] esmock: how to mock deeper deps
 
 ## TODO
 
-- [ ] external module mocking (import map, esmock (node only))
+- [ ] run tests in parallel - have a test that repeats runnning all tests in parallel 100 times
+- [ ] verify that esmock is concurrency safe
+- [ ] external watch tool (using node esm loader to track deps)
 - [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot
 - [ ] suite scoped fixtures (per describe block)
 - [ ] API: timeout: test.setTimeout / test.addTimeout: a la playwright
@@ -75,16 +80,20 @@ npm test
 - [ ] comparison with uvu, node:test, tap, ava, junit
 - [ ] external object mocking (sinon, testdouble)
 - [ ] compose with other module loaders
-- [ ] external snapshot matcher (unexpected-snapshot, chai-jest-snapshot)
 - [ ] external code coverage (c8)
+- [ ] external module mocking (import map (browser))
+- [ ] external snapshot matcher (unexpected-snapshot, chai-jest-snapshot)
 - [ ] external differential code coverage (https://github.com/romeovs/lcov-reporter-action#lcov-base-optional)
 - [ ] external timing spike alert / trend chart generator
-- [ ] external watch tool (based on same --loader as the esm mocking??)
 - [ ] external continuous testing (wallaby)
 - [ ] external bundler (vite),
 - [ ] external transpiler (typescript, jsx)
 - [ ] external DOM (browser, jsdom, happy-dom)
 - [ ] external sequence diagram generation tool (bestbrains/projects/commons-dotnet-bestbrains/System/SequenceDiagram.cs)
+
+## Inspiration
+
+- [ ] https://www.npmjs.com/package/sxy-test-runner (uses babel for parsing dependencies)
 
 ## Syntax for options (ideas)
 
@@ -110,3 +119,14 @@ npm test
 ## ESM module mocking in browser
 
 - https://javascript.plainenglish.io/testing-and-mocking-javascript-modules-in-browser-ae9fc333ee5d
+
+## watch mode using esm loader to track dependencies
+
+- collect all test files
+- run all tests
+- generate full dependency tree
+- watch file system for changes, including new test files
+- select tests impacted by changes via dependency tree
+- run selected tests
+- update dependency tree
+- loop back to watch

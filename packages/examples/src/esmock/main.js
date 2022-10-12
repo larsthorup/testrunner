@@ -1,3 +1,5 @@
 import { getPostTitle } from "./lib.js";
 
-getPostTitle(2).then(console.log).catch(console.error);
+if (!process.env.IS_TEST) {
+  getPostTitle(2).then(console.log).catch(console.error);
+}
