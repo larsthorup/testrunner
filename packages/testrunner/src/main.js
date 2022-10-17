@@ -28,13 +28,16 @@ export default async function main(testFilePattern, concurrent) {
       isolateWorkers: false, // TODO: configure
     });
     concurrency = pool.threads.length;
-    const failureCounts = await Promise.all(
+    const testResults = await Promise.all(
       testFilePaths.map((testFilePath) => pool.run([testFilePath]))
     );
-    failureCount = failureCounts.reduce((sum, value) => sum + value, 0);
+    failureCount = testResults.reduce(
+      (sum, { failureCount }) => sum + failureCount,
+      0
+    );
   } else {
     concurrency = 1;
-    failureCount = await worker(testFilePaths);
+    ({ failureCount } = await worker(testFilePaths));
   }
   const msDuration = Date.now() - msStart;
 

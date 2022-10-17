@@ -13,6 +13,7 @@
     "packages/testrunner",
     "packages/testutils",
     "packages/chai-jest-matchers",
+    "packages/esm-tracer",
     "packages/examples",
     "packages/performance"
   ],

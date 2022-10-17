@@ -1,12 +1,10 @@
 {
-  "name": "@larsthorup/testrunner-performance",
+  "name": "@larsthorup/esm-tracer",
   "version": "0.1.0",
   "type": "module",
-  "description": "",
-  "main": "index.js",
-  "devDependencies": {},
+  "main": "src/index.js",
   "scripts": {
-    "test": "testrunner src/**/*.js --concurrent"
+    "test": "exit 0"
   },
   "repository": {
     "type": "git",
@@ -18,6 +16,5 @@
   "bugs": {
     "url": "https://github.com/larsthorup/testrunner/issues"
   },
-  "homepage": "https://github.com/larsthorup/testrunner#readme",
-  "dependencies": {}
+  "homepage": "https://github.com/larsthorup/testrunner#readme"
 }

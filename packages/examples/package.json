@@ -15,7 +15,7 @@
   "scripts": {
     "pretest": "rm -f log.log && node src/in-source/main && node src/esmock/main",
     "test": "",
-    "posttest": "bash -c \"IS_TEST=1 NODE_OPTIONS=--loader=esmock testrunner 'src/**/*.js' --concurrent\""
+    "posttest": "bash -c \"IS_TEST=1 NODE_OPTIONS='--loader=esmock --loader=@larsthorup/esm-tracer' testrunner 'src/**/*.js' --concurrent\""
   },
   "repository": {
     "type": "git",

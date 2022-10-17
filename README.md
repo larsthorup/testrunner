@@ -1,6 +1,6 @@
 # @larsthorup/testrunner
 
-A better test runner.
+How to build a test runner.
 
 ```bash
 npm install
@@ -49,10 +49,10 @@ npm test
 
 ## TODO
 
+- [ ] external watch tool (using node esm loader to track deps)
 - [ ] have a test that repeats runnning all tests in parallel 100 times
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] verify that esmock is concurrency safe
-- [ ] external watch tool (using node esm loader to track deps)
 - [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot
 - [ ] suite scoped fixtures (per describe block)
 - [ ] API: timeout: test.setTimeout / test.addTimeout: a la playwright
@@ -124,11 +124,19 @@ npm test
 
 ## watch mode using esm loader to track dependencies
 
+- do not write a file - keep in memory - pass deps from worker
 - collect all test files
 - run all tests
-- generate full dependency tree
+- [x] generate deps per test
 - watch file system for changes, including new test files
 - select tests impacted by changes via dependency tree
+  - B.isLoadedBy = []
+  - A.isLoading.each(B => B.isLoadedBy.push(A))
+  - isLoadedBy visitor, collect leaf nodes
 - run selected tests
 - update dependency tree
+  - A calls B
+  - A is loaded - A.isLoading = []
+  - B is loaded by A - A.isLoading.push(B)
 - loop back to watch
+- [x] deps loader should run AFTER esmock, so that mocked dependencies are used instead of real dependencies
