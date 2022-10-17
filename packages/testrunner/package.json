@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "dependencies": {
-    "glob": "^8.0.3"
+    "glob": "^8.0.3",
+    "tinypool": "^0.3.0"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0"

@@ -17,7 +17,12 @@ process.on("unhandledRejection", (reason) => {
 
 try {
   const testFilePattern = process.argv[2];
-  const failureCount = await main(testFilePattern);
+  const concurrent = process.argv[3] === "--concurrent";
+  const { failureCount, concurrency, msDuration } = await main(
+    testFilePattern,
+    concurrent
+  );
+  console.log(`Completed in ${msDuration} ms with concurrency ${concurrency}`);
   if (failureCount === 0) {
     console.log("✔ testrunner: all tests passed");
   } else {

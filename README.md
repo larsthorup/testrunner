@@ -28,6 +28,7 @@ npm test
 - [x] dynamic skip, todo (IgnoreError) (fix)
 - [x] exit code: number of failing tests (standard)
 - [x] configurable test file set (standard)
+- [x] run test files concurrently - with tinypool
 
 ### User-land features
 
@@ -48,7 +49,8 @@ npm test
 
 ## TODO
 
-- [ ] run tests in parallel - have a test that repeats runnning all tests in parallel 100 times
+- [ ] have a test that repeats runnning all tests in parallel 100 times
+- [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] verify that esmock is concurrency safe
 - [ ] external watch tool (using node esm loader to track deps)
 - [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot
@@ -58,7 +60,7 @@ npm test
 - [ ] concurrency api: a la playwright?
 - [ ] pass in test context (extensibility)
 - [ ] design: extensible discovery: file glob
-- [ ] design: extensible filtering: title pattern, only
+- [ ] design: extensible filtering: title pattern, only, impacted by change
 - [ ] design: extensible ordering: concurrent/sequential, random/source/sorted
 - [ ] design: extensible sharding across multiple machines
 - [ ] useSetup: pass-in beforeAll/beforeEach (so implementation in vitest is possible) - seems clumsy
@@ -74,10 +76,10 @@ npm test
 - [ ] isolation / concurrency via worker threads (node), web workers (browser), browser tabs?
 - [ ] test file order - random/sorted + concurrent/serial
 - [ ] test isolation - default off - opt-in per test (catch more bugs)
-- [ ] external reporters (jest, mocha, vitest)
+- [ ] external reporters (jest, mocha, vitest, IDE)
 - [ ] run in node or browser (standard)
 - [ ] IDE integration
-- [ ] comparison with uvu, node:test, tap, ava, junit
+- [ ] comparison with uvu, node:test, tap, ava, junit, nunit
 - [ ] external object mocking (sinon, testdouble)
 - [ ] compose with other module loaders
 - [ ] external code coverage (c8)

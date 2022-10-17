@@ -1,0 +1,13 @@
+{
+  "name": "@larsthorup/testrunner-performance",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "testrunner src/**/*.js --concurrent"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}

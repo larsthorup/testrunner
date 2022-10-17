@@ -40,7 +40,7 @@ export const runner = async (root) => {
 const runTests = async (test, parentTestList) => {
   let failureCount = 0;
   // TODO: filter tests based on explicit criteria, watch filter, explicit test order
-  // TODO: shuffle tests based on serial / random test order
+  // TODO: shuffle tests based on serial / random / sorted test order
   // TODO: concurrent or sequential or not
   switch (test.type) {
     case "describe":
