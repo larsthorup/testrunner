@@ -15,8 +15,8 @@ describe("esmock", () => {
         "fs/promises": fsMock,
       }
     );
-    expect(await getPostTitle(2)).toEqual("Some mocked title for post 2");
-    expect(fsMock.appendFile.calls).toEqual([
+    expect(await getPostTitle(2)).to.equal("Some mocked title for post 2");
+    expect(fsMock.appendFile.calls).to.deep.equal([
       ["log.log", "LOG getPostTitle\n"],
     ]);
   });
