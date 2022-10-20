@@ -6,7 +6,7 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "test": "bash -c \"testrunner $(ls src/*.test.js)\""
+    "test": "bash -c \"testrunner $(find src -name *.test.js -print)\""
   },
   "repository": {
     "type": "git",
