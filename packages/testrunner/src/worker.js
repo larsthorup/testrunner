@@ -21,7 +21,7 @@ export default async (testFilePaths) => {
     globalWithTrace.__esmTrace__ &&
     Object.keys(
       globalWithTrace.__esmTrace__.reduce(
-        (deps, { parent }) => ({ ...deps, [parent]: true }),
+        (deps, { url }) => ({ ...deps, [url]: true }),
         {}
       )
     );

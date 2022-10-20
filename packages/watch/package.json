@@ -6,7 +6,12 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "test": "rm -f .testfinder src/*.deps && npm run testrunner && sleep 1 && touch src/dep.js && npm run testrunner",
+    "clean": "rm -f .testfinder src/*.deps",
+    "correct-dot-testfinder": "npm run testrunner",
+    "generate-deps": "npm run testrunner",
+    "debug": "cat .testfinder && stat src/dep.js && testfinder \"src/*.test.js\" --skip-unaffected",
+    "pretest": "npm run clean && npm run generate-deps && npm run correct-dot-testfinder",
+    "test": "sleep 1 && touch src/dep.js && npm run testrunner",
     "testrunner": "testfinder \"src/*.test.js\" --skip-unaffected | bash -c \"NODE_OPTIONS='--loader=@larsthorup/esm-tracer' xargs testrunner\""
   },
   "repository": {

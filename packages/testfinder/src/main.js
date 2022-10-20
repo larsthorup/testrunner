@@ -120,6 +120,12 @@ function findAffectedTests(
       deps.some((dep) => modificationTimePerFile[dep] > lastModificationTime) // Note: affected if any deps was changed since last time
     );
   });
+  console.warn({
+    depsPerTest,
+    modificationTimePerFile,
+    lastModificationTime,
+    affectedTests,
+  });
   return affectedTests;
 }
 
