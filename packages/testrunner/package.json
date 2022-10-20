@@ -22,8 +22,5 @@
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "dependencies": {
     "tinypool": "^0.3.0"
-  },
-  "devDependencies": {
-    "@types/glob": "^7.2.0"
   }
 }

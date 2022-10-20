@@ -1,12 +1,13 @@
 {
-  "name": "@larsthorup/testrunner-performance",
+  "name": "@larsthorup/testfinder",
   "version": "0.1.0",
   "type": "module",
-  "description": "",
-  "main": "index.js",
-  "devDependencies": {},
+  "main": "src/index.js",
+  "bin": {
+    "testfinder": "src/cli.js"
+  },
   "scripts": {
-    "test": "testfinder src/*.test.js | xargs testrunner"
+    "test": "exit 0"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,11 @@
     "url": "https://github.com/larsthorup/testrunner/issues"
   },
   "homepage": "https://github.com/larsthorup/testrunner#readme",
-  "dependencies": {}
+  "dependencies": {
+    "glob": "^8.0.3",
+    "tinypool": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0"
+  }
 }

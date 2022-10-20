@@ -10,6 +10,7 @@
     "test:comparisons": "cd comparisons/esm && npm test && cd ../ts && npm test"
   },
   "workspaces": [
+    "packages/testfinder",
     "packages/testrunner",
     "packages/testutils",
     "packages/chai-jest-matchers",

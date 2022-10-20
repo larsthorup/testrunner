@@ -156,8 +156,8 @@ npm test
 - [x] deps tracer should run AFTER esmock, so that mocked dependencies are used instead of real dependencies
 - [x] save deps per test file
 - [ ] discover impacted files since last check
+  - [x] discover test files
   - [ ] read last file change time
-  - [ ] discover test files
   - [ ] read deps for test files
   - [ ] test file change time of deps
   - [ ] filter test files impacted by changed deps
