@@ -6,7 +6,7 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "test": "testrunner src/**/*.js --concurrent"
+    "test": "bash -c \"testrunner $(ls src/*.test.js)\""
   },
   "repository": {
     "type": "git",

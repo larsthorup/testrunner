@@ -16,10 +16,10 @@ process.on("unhandledRejection", (reason) => {
 });
 
 try {
-  const testFilePattern = process.argv[2];
-  const concurrent = process.argv[3] === "--concurrent";
+  const testFilePaths = process.argv.slice(2);
+  const concurrent = true; // TODO: configure
   const { failureCount, concurrency, msDuration } = await main(
-    testFilePattern,
+    testFilePaths,
     concurrent
   );
   console.log(`Completed in ${msDuration} ms with concurrency ${concurrency}`);

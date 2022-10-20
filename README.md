@@ -2,6 +2,11 @@
 
 How to build a test runner.
 
+Requirements:
+
+- Node.js
+- Bash
+
 ```bash
 npm install
 npm test
@@ -27,7 +32,7 @@ npm test
 - [x] named hooks (fix)
 - [x] dynamic skip, todo (IgnoreError) (fix)
 - [x] exit code: number of failing tests (standard)
-- [x] configurable test file set (standard)
+- [x] configurable test file list (standard)
 - [x] run test files concurrently - with tinypool
 
 ### User-land features
@@ -42,15 +47,35 @@ npm test
 - [x] external each (standard)
 - [x] external support having tests in production code files (fix)
 - [x] external object mocking (tinyspy)
-- [x] jest matcher for chai expect: toHaveLength, toBe, toEqual (standard)
-- [x] external module mocking (esmock (node only)) (standard)
-- [x] esmock: how to share mocks between tests (not inlined)
-- [x] esmock: how to mock deeper deps
+- [x] external jest compatibility matchers for chai expect: toHaveLength, toBe, toEqual (standard)
+- [x] external sharable module mocks: (esmock)
+- [x] external test file discovery (bash)
+
+### Hopefully user-land features
+
+- [ ] watch
+- [ ] transpile / instrument / bundle
+- [ ] coverage: instrumentation + reporter
+- [ ] shard
+- [ ] reporter
+- [ ] node or browser
+
+## Pipeline for watch and transpile
+
+- [ ] source files are changed (by user, by git pull)
+- [ ] transpilation watcher transpiles files
+- [ ] coverage instrumentation watcher instruments files
+- [ ] watcher searches for new instrumented files
+- [ ] dependency impact test file discovery selects test files impacted by updated dependencies
+- [ ] test runner is invoked and given the selected test files
+- [ ] coverage report is saved from the run
+- [ ] dependency impact is updated from the run
 
 ## TODO
 
 - [ ] external watch tool (using node esm loader to track deps)
 - [ ] have a test that repeats runnning all tests in parallel 100 times
+- [ ] testing library
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] verify that esmock is concurrency safe
 - [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot
@@ -59,7 +84,6 @@ npm test
 - [ ] sensible concurrency defaults: inside file: sequential, files: concurrently
 - [ ] concurrency api: a la playwright?
 - [ ] pass in test context (extensibility)
-- [ ] design: extensible discovery: file glob
 - [ ] design: extensible filtering: title pattern, only, impacted by change
 - [ ] design: extensible ordering: concurrent/sequential, random/source/sorted
 - [ ] design: extensible sharding across multiple machines
@@ -83,10 +107,11 @@ npm test
 - [ ] external object mocking (sinon, testdouble)
 - [ ] compose with other module loaders
 - [ ] external code coverage (c8)
+  - might not work with worker threads: https://nodejs.org/dist/latest-v10.x/docs/api/cli.html#cli_node_v8_coverage_dir
 - [ ] external module mocking (import map (browser))
 - [ ] external snapshot matcher (unexpected-snapshot, chai-jest-snapshot)
 - [ ] external differential code coverage (https://github.com/romeovs/lcov-reporter-action#lcov-base-optional)
-- [ ] external timing spike alert / trend chart generator
+- [ ] external timing spike alert / trend chart generator (reporter)
 - [ ] external continuous testing (wallaby)
 - [ ] external bundler (vite),
 - [ ] external transpiler (typescript, jsx)
@@ -124,10 +149,11 @@ npm test
 
 ## watch mode using esm loader to track dependencies
 
-- do not write a file - keep in memory - pass deps from worker
-- collect all test files
-- run all tests
-- [x] generate deps per test
+- [x] do not write a file - keep in memory - pass deps from worker
+- [x] collect all test files
+- [x] run all tests
+- [x] trace deps per test
+- [x] deps tracer should run AFTER esmock, so that mocked dependencies are used instead of real dependencies
 - watch file system for changes, including new test files
 - select tests impacted by changes via dependency tree
   - B.isLoadedBy = []
@@ -139,4 +165,3 @@ npm test
   - A is loaded - A.isLoading = []
   - B is loaded by A - A.isLoading.push(B)
 - loop back to watch
-- [x] deps loader should run AFTER esmock, so that mocked dependencies are used instead of real dependencies

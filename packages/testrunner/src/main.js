@@ -1,22 +1,17 @@
-import { promisify } from "node:util";
-
-import glob from "glob";
 import Tinypool from "tinypool";
 
 import worker from "./worker.js";
 
 /**
- * @param {string} testFilePattern
+ * @param {string[]} testFilePaths
  * @param {boolean} concurrent
  */
-export default async function main(testFilePattern, concurrent) {
-  const testFilePaths = await promisify(glob)(testFilePattern);
-
-  // TODO: use dependency watcher to filter only tests impacted by changed files
-  // TODO: instrument for coverage
+export default async function main(testFilePaths, concurrent) {
+  // TODO: external dependency watcher to filter only tests impacted by changed files
+  // TODO: external coverage instrumentation
   // TODO: run in browser or node
   // TODO: tab / process / worker isolation or not
-  // TODO: distribute shards for multiple processes / machines
+  // TODO: external sharding for multiple processes / machines
 
   // Note: shard test files for multiple threads
   let failureCount = 0;
