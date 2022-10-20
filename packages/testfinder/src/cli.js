@@ -17,7 +17,8 @@ process.on("unhandledRejection", (reason) => {
 
 try {
   const testFilePattern = process.argv[2];
-  const testFilePaths = await main(testFilePattern);
+  const skipUnaffected = process.argv[3] === "--skip-unaffected";
+  const testFilePaths = await main(testFilePattern, skipUnaffected);
   testFilePaths.forEach((path) => console.log(path));
   process.exit(0);
 } catch (ex) {

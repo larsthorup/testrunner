@@ -16,7 +16,8 @@
     "packages/chai-jest-matchers",
     "packages/esm-tracer",
     "packages/examples",
-    "packages/performance"
+    "packages/performance",
+    "packages/watch"
   ],
   "devDependencies": {
     "@types/node": "^17.0.40",
