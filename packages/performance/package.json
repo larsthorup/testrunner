@@ -6,7 +6,7 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "test": "testfinder src/*.test.js && testfinder src/*.test.js | xargs echo && testfinder src/*.test.js | xargs testrunner"
+    "test": "testfinder \"src/*.test.js\" && testfinder \"src/*.test.js\" | xargs echo && testfinder \"src/*.test.js\" | xargs testrunner"
   },
   "repository": {
     "type": "git",

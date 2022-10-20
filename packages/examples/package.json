@@ -15,7 +15,7 @@
   "scripts": {
     "pretest": "rm -f log.log && node src/in-source/main && node src/esmock/main",
     "test": "",
-    "posttest": "testfinder src/**/*.js | bash -c \"IS_TEST=1 NODE_OPTIONS='--loader=esmock --loader=@larsthorup/esm-tracer' xargs testrunner\""
+    "posttest": "testfinder \"src/**/*.js\" | bash -c \"IS_TEST=1 NODE_OPTIONS='--loader=esmock --loader=@larsthorup/esm-tracer' xargs testrunner\""
   },
   "repository": {
     "type": "git",

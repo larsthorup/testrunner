@@ -7,6 +7,6 @@ import glob from "glob";
  */
 export default async function main(testFilePattern) {
   const testFilePaths = await promisify(glob)(testFilePattern);
-  console.warn(testFilePaths);
+  console.warn(testFilePattern, testFilePaths);
   return testFilePaths;
 }
