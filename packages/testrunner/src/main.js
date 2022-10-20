@@ -21,7 +21,7 @@ export default async function main(testFilePaths, concurrent) {
   if (concurrent) {
     const pool = new Tinypool({
       filename: new URL("./worker.js", import.meta.url).href,
-      isolateWorkers: false, // TODO: configure
+      isolateWorkers: true, // Note: required for esm-tracer(!)
     });
     concurrency = pool.threads.length;
     const testResults = await Promise.all(
