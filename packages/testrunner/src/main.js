@@ -1,3 +1,4 @@
+import { writeFile } from "fs/promises";
 import Tinypool from "tinypool";
 
 import worker from "./worker.js";
@@ -24,7 +25,17 @@ export default async function main(testFilePaths, concurrent) {
     });
     concurrency = pool.threads.length;
     const testResults = await Promise.all(
-      testFilePaths.map((testFilePath) => pool.run([testFilePath]))
+      testFilePaths.map(async (testFilePath) => {
+        const testResult = await pool.run([testFilePath]);
+        const { deps } = testResult;
+        if (deps) {
+          // TODO: consider excluding tinypool and testrunner from deps
+          // TODO: consider keeping .deps file in a .deps directory to keep source dir tidy
+          const depFilePath = `${testFilePath}.deps`;
+          await writeFile(depFilePath, deps.join("\n"));
+        }
+        return testResult;
+      })
     );
     failureCount = testResults.reduce(
       (sum, { failureCount }) => sum + failureCount,

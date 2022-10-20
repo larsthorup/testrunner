@@ -16,13 +16,15 @@ export default async (testFilePaths) => {
   // Note: run tests
   const failureCount = await runner(root);
 
-  // TODO: extract to function in esm-tracer
-  const deps = Object.keys(
-    (globalWithTrace.__esmTrace__ || []).reduce(
-      (deps, { parent }) => ({ ...deps, [parent]: true }),
-      {}
-    )
-  );
+  // TODO: extract to function in esm-tracer(?)
+  const deps =
+    globalWithTrace.__esmTrace__ &&
+    Object.keys(
+      globalWithTrace.__esmTrace__.reduce(
+        (deps, { parent }) => ({ ...deps, [parent]: true }),
+        {}
+      )
+    );
 
   return { deps, failureCount };
 };

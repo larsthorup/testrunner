@@ -151,17 +151,16 @@ npm test
 
 - [x] do not write a file - keep in memory - pass deps from worker
 - [x] collect all test files
-- [x] run all tests
+- [x] run selected tests
 - [x] trace deps per test
 - [x] deps tracer should run AFTER esmock, so that mocked dependencies are used instead of real dependencies
-- watch file system for changes, including new test files
-- select tests impacted by changes via dependency tree
-  - B.isLoadedBy = []
-  - A.isLoading.each(B => B.isLoadedBy.push(A))
-  - isLoadedBy visitor, collect leaf nodes
-- run selected tests
-- update dependency tree
-  - A calls B
-  - A is loaded - A.isLoading = []
-  - B is loaded by A - A.isLoading.push(B)
-- loop back to watch
+- [x] save deps per test file
+- [ ] discover impacted files since last check
+  - [ ] read last file change time
+  - [ ] discover test files
+  - [ ] read deps for test files
+  - [ ] test file change time of deps
+  - [ ] filter test files impacted by changed deps
+  - [ ] record last file change time
+  - [ ] use watcher event to avoid testing every file change time
+- [ ] loop back to run selected tests
