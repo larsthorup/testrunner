@@ -5,7 +5,7 @@ import glob from "glob";
 /**
  * @param {string} testFilePattern
  */
-export default function main(testFilePattern) {
-  const testFilePaths = promisify(glob)(testFilePattern);
+export default async function main(testFilePattern) {
+  const testFilePaths = await promisify(glob)(testFilePattern);
   return testFilePaths;
 }
