@@ -9,9 +9,11 @@
     "clean": "rm -f .testfinder src/*.deps",
     "correct-dot-testfinder": "npm run testrunner",
     "generate-deps": "npm run testrunner",
+    "// workaround-tinypool": "echo avoid issue with tinypool/dist/esm/chunk-QYFJIXNO.js being newest making all affected",
+    "workaround-tinypool": "touch src/*.js",
     "debug": "cat .testfinder && stat src/dep.js && testfinder \"src/*.test.js\" --skip-unaffected",
-    "pretest": "npm run clean && npm run generate-deps && npm run correct-dot-testfinder",
-    "test": "sleep 1 && touch src/dep.js && npm run testrunner",
+    "pretest": "npm run clean && npm run generate-deps && npm run workaround-tinypool && npm run correct-dot-testfinder",
+    "test": "touch src/dep.js && npm run testrunner",
     "testrunner": "testfinder \"src/*.test.js\" --skip-unaffected | bash -c \"NODE_OPTIONS='--loader=@larsthorup/esm-tracer' xargs testrunner\""
   },
   "repository": {

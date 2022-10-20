@@ -94,7 +94,8 @@ async function readModificationTime(files) {
       files.map(async (file) => {
         const path = file.startsWith("file://") ? new URL(file) : file;
         const { mtimeMs } = await stat(path);
-        return [file, mtimeMs];
+        const mtimeMsInt = Math.trunc(mtimeMs); // Note otherwise decimals will always mark files affected
+        return [file, mtimeMsInt];
       })
     )
   );
@@ -114,17 +115,26 @@ function findAffectedTests(
 ) {
   const affectedTests = Object.keys(depsPerTest).filter((test) => {
     const deps = depsPerTest[test];
-    return (
-      lastModificationTime === undefined || // Note: assume affected, until we we know when we ran tests the last time
-      deps === undefined || // Note: assume affected, until we have deps recorded
-      deps.some((dep) => modificationTimePerFile[dep] > lastModificationTime) // Note: affected if any deps was changed since last time
+    if (lastModificationTime === undefined) {
+      // Note: assume affected, until we we know when we ran tests the last time
+      return true;
+    }
+    if (deps === undefined) {
+      // Note: assume affected, until we have deps recorded
+      return true;
+    }
+    const affectedBy = deps.filter(
+      (dep) => modificationTimePerFile[dep] > lastModificationTime
     );
-  });
-  console.warn({
-    depsPerTest,
-    modificationTimePerFile,
-    lastModificationTime,
-    affectedTests,
+    if (affectedBy.length > 0) {
+      // Note: affected if any deps was changed since last time
+      const affectedByText = affectedBy.join(", ");
+      console.warn(
+        `Test "${test}" included because these deps have changed: [${affectedByText}]`
+      );
+      return true;
+    }
+    return false;
   });
   return affectedTests;
 }
