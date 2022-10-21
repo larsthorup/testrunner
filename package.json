@@ -7,7 +7,8 @@
     "pretest": "prettier . --check && eslint . && tsc && npm run test:comparisons",
     "prettier": "prettier . --write",
     "test": "npm test --workspaces",
-    "test:comparisons": "cd comparisons/esm && npm test && cd ../ts && npm test"
+    "test:comparisons": "cd comparisons/esm && npm test && cd ../ts && npm test",
+    "tsc": "tsc"
   },
   "workspaces": [
     "packages/testfinder",
@@ -18,7 +19,8 @@
     "packages/examples",
     "packages/performance",
     "packages/watch",
-    "packages/coverage"
+    "packages/coverage",
+    "packages/transpiling"
   ],
   "devDependencies": {
     "@types/node": "^17.0.40",

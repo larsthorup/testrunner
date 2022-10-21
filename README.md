@@ -52,10 +52,10 @@ npm test
 - [x] external test file discovery (bash)
 - [x] external watch for re-testing
 - [x] external coverage (c8)
+- [x] external transpiler (tsc)
 
 ### Hopefully user-land features
 
-- [ ] transpile / instrument / bundle
 - [ ] reporter
 - [ ] node or browser
 - [ ] shard
@@ -114,7 +114,6 @@ npm test
 - [ ] external timing spike alert / trend chart generator (reporter)
 - [ ] external continuous testing (wallaby)
 - [ ] external bundler (vite),
-- [ ] external transpiler (typescript, jsx)
 - [ ] external DOM (browser, jsdom, happy-dom)
 - [ ] external sequence diagram generation tool (bestbrains/projects/commons-dotnet-bestbrains/System/SequenceDiagram.cs)
 
