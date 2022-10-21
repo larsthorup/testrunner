@@ -73,9 +73,9 @@ npm test
 
 ## TODO
 
-- [ ] refactor into "demo": examples, performance, watch, coverage, transpiling
 - [ ] have a test that repeats runnning all tests in parallel 100 times
 - [ ] testing library
+- [ ] exported types (avoid ts-ignore in transpiling demo)
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] verify that esmock is concurrency safe
 - [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot

@@ -16,11 +16,11 @@
     "packages/testutils",
     "packages/chai-jest-matchers",
     "packages/esm-tracer",
-    "packages/examples",
-    "packages/performance",
-    "packages/watch",
-    "packages/coverage",
-    "packages/transpiling"
+    "packages/demo/examples",
+    "packages/demo/performance",
+    "packages/demo/watch",
+    "packages/demo/coverage",
+    "packages/demo/transpiling"
   ],
   "devDependencies": {
     "@types/node": "^17.0.40",
