@@ -17,7 +17,8 @@
     "packages/esm-tracer",
     "packages/examples",
     "packages/performance",
-    "packages/watch"
+    "packages/watch",
+    "packages/coverage"
   ],
   "devDependencies": {
     "@types/node": "^17.0.40",

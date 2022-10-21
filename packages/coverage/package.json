@@ -1,0 +1,24 @@
+{
+  "name": "@larsthorup/testrunner-demo-coverage",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "c8": "^7.12.0"
+  },
+  "scripts": {
+    "test": "c8 testrunner src/coverage.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larsthorup/testrunner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/larsthorup/testrunner/issues"
+  },
+  "homepage": "https://github.com/larsthorup/testrunner#readme"
+}

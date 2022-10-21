@@ -50,15 +50,15 @@ npm test
 - [x] external jest compatibility matchers for chai expect: toHaveLength, toBe, toEqual (standard)
 - [x] external sharable module mocks: (esmock)
 - [x] external test file discovery (bash)
+- [x] external watch for re-testing
+- [x] external coverage (c8)
 
 ### Hopefully user-land features
 
-- [ ] watch
 - [ ] transpile / instrument / bundle
-- [ ] coverage: instrumentation + reporter
-- [ ] shard
 - [ ] reporter
 - [ ] node or browser
+- [ ] shard
 
 ## Pipeline for watch and transpile
 
@@ -73,7 +73,7 @@ npm test
 
 ## TODO
 
-- [ ] external watch tool (using node esm loader to track deps)
+- [ ] refactor into "demo": examples, performance, watch, coverage, transpiling
 - [ ] have a test that repeats runnning all tests in parallel 100 times
 - [ ] testing library
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
