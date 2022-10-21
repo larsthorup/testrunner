@@ -1,6 +1,5 @@
 import { strict as assert } from "node:assert";
 
-// @ts-ignore
 import { describe, it } from "@larsthorup/testrunner";
 
 describe("transpiling", () => {
