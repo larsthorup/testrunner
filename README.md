@@ -33,7 +33,7 @@ npm test
 - [x] dynamic skip, todo (IgnoreError) (fix)
 - [x] exit code: number of failing tests (standard)
 - [x] configurable test file list (standard)
-- [x] run test files concurrently - with tinypool
+- [x] run test files concurrently - with worker_threads (standard)
 
 ### User-land features
 
@@ -73,8 +73,18 @@ npm test
 
 ## TODO
 
+- [ ] better worker pool for progress events
+  - https://www.npmjs.com/package/threads
+  - https://www.npmjs.com/package/generic-pool
+  - https://nodejs.org/api/async_context.html#using-asyncresource-for-a-worker-thread-pool
+  - https://github.com/PortBlueSky/thread-puddle
+  - not tinypool - no callbacks
+  - not workerpool - no ESM
+  - https://blog.logrocket.com/node-js-multithreading-worker-threads-why-they-matter/
+- [ ] fix typing for worker pool
+- [ ] external reporters (jest, mocha, vitest, IDE)
+- [ ] dom mocking for testing library
 - [ ] have a test that repeats runnning all tests in parallel 100 times
-- [ ] testing library
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] verify that esmock is concurrency safe
 - [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot
@@ -99,14 +109,11 @@ npm test
 - [ ] isolation / concurrency via worker threads (node), web workers (browser), browser tabs?
 - [ ] test file order - random/sorted + concurrent/serial
 - [ ] test isolation - default off - opt-in per test (catch more bugs)
-- [ ] external reporters (jest, mocha, vitest, IDE)
 - [ ] run in node or browser (standard)
 - [ ] IDE integration
 - [ ] comparison with uvu, node:test, tap, ava, junit, nunit
 - [ ] external object mocking (sinon, testdouble)
 - [ ] compose with other module loaders
-- [ ] external code coverage (c8)
-  - might not work with worker threads: https://nodejs.org/dist/latest-v10.x/docs/api/cli.html#cli_node_v8_coverage_dir
 - [ ] external module mocking (import map (browser))
 - [ ] external snapshot matcher (unexpected-snapshot, chai-jest-snapshot)
 - [ ] external differential code coverage (https://github.com/romeovs/lcov-reporter-action#lcov-base-optional)

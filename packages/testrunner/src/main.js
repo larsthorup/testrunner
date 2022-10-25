@@ -1,5 +1,7 @@
-import { writeFile } from "fs/promises";
-import Tinypool from "tinypool";
+import { writeFile } from "node:fs/promises";
+import * as os from "node:os";
+
+import { Pool, spawn, Worker } from "threads";
 
 import worker from "./worker.js";
 
@@ -19,14 +21,13 @@ export default async function main(testFilePaths, concurrent) {
   let concurrency = 0;
   const msStart = Date.now();
   if (concurrent) {
-    const pool = new Tinypool({
-      filename: new URL("./worker.js", import.meta.url).href,
-      isolateWorkers: true, // Note: required for esm-tracer(!)
-    });
-    concurrency = pool.threads.length;
+    concurrency = os.cpus().length;
+    const pool = Pool(() => spawn(new Worker("./exposer.js")), concurrency);
     const testResults = await Promise.all(
       testFilePaths.map(async (testFilePath) => {
-        const testResult = await pool.run([testFilePath]);
+        // @ts-ignore
+        const task = async (worker) => worker([testFilePath]);
+        const testResult = await pool.queue(task);
         const { deps } = testResult;
         if (deps) {
           // TODO: consider excluding tinypool and testrunner from deps
@@ -37,6 +38,7 @@ export default async function main(testFilePaths, concurrent) {
         return testResult;
       })
     );
+    await pool.terminate();
     failureCount = testResults.reduce(
       (sum, { failureCount }) => sum + failureCount,
       0

@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "dependencies": {
-    "tinypool": "^0.3.0"
+    "threads": "^1.7.0"
   }
 }
