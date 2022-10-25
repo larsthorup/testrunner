@@ -12,7 +12,7 @@ import { Pool, spawn, Worker } from "threads";
 export default async function (testFilePaths, report) {
   const concurrency = os.cpus().length;
   const pool = Pool(() => spawn(new Worker("./worker.js")), concurrency);
-  const testResults = await Promise.all(
+  await Promise.all(
     testFilePaths.map(async (testFilePath) => {
       // @ts-ignore
       const task = async (worker) => {
@@ -31,21 +31,15 @@ export default async function (testFilePaths, report) {
           observable.subscribe(onEvent);
         });
       };
-      const testResult = await pool.queue(task);
-      const { deps } = testResult;
+      const { deps } = await pool.queue(task);
       if (deps) {
         // TODO: consider excluding tinypool and testrunner from deps
         // TODO: consider keeping .deps file in a .deps directory to keep source dir tidy
         const depFilePath = `${testFilePath}.deps`;
         await writeFile(depFilePath, deps.join("\n"));
       }
-      return testResult;
     })
   );
   await pool.terminate();
-  const failureCount = testResults.reduce(
-    (sum, { failureCount }) => sum + failureCount,
-    0
-  );
-  return { concurrency, failureCount };
+  return { concurrency };
 }

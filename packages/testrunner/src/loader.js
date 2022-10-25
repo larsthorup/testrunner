@@ -17,7 +17,7 @@ export default async (testFilePaths, report) => {
   const root = await collector(testFilePaths);
 
   // Note: run tests
-  const failureCount = await runner(root, report);
+  await runner(root, report);
 
   // TODO: extract to function in esm-tracer(?)
   const deps =
@@ -28,6 +28,9 @@ export default async (testFilePaths, report) => {
         {}
       )
     );
-
-  return { deps, failureCount };
+  report({
+    scope: "file",
+    type: "done",
+    data: { deps },
+  });
 };

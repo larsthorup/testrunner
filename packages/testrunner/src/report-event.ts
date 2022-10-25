@@ -3,7 +3,6 @@ export type FileDone = {
   type: "done";
   data: {
     deps?: string[];
-    failureCount: number;
   };
 };
 
