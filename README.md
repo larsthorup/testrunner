@@ -53,10 +53,10 @@ npm test
 - [x] external watch for re-testing
 - [x] external coverage (c8)
 - [x] external transpiler (tsc)
+- [x] external reporter (standard)
 
 ### Hopefully user-land features
 
-- [ ] reporter
 - [ ] node or browser
 - [ ] shard
 
@@ -73,23 +73,16 @@ npm test
 
 ## TODO
 
-- [ ] better worker pool for progress events
-  - https://www.npmjs.com/package/threads
-  - https://www.npmjs.com/package/generic-pool
-  - https://nodejs.org/api/async_context.html#using-asyncresource-for-a-worker-thread-pool
-  - https://github.com/PortBlueSky/thread-puddle
-  - not tinypool - no callbacks
-  - not workerpool - no ESM
-  - https://blog.logrocket.com/node-js-multithreading-worker-threads-why-they-matter/
 - [ ] fix typing for worker pool
-- [ ] external reporters (jest, mocha, vitest, IDE)
 - [ ] dom mocking for testing library
 - [ ] have a test that repeats runnning all tests in parallel 100 times
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
+- [ ] chores: unit tests, clean code, remove TODOs
 - [ ] verify that esmock is concurrency safe
 - [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot
 - [ ] suite scoped fixtures (per describe block)
 - [ ] API: timeout: test.setTimeout / test.addTimeout: a la playwright
+- [ ] external reporters (jest, mocha, vitest, IDE)
 - [ ] sensible concurrency defaults: inside file: sequential, files: concurrently
 - [ ] concurrency api: a la playwright?
 - [ ] pass in test context (extensibility)

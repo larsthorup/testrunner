@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "dependencies": {
+    "observable-fns": "^0.6.1",
     "threads": "^1.7.0"
   }
 }

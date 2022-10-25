@@ -1,30 +1,25 @@
-import { runner } from "./runner.js";
-import { collector } from "./collector.js";
+import { expose } from "threads/worker";
+import { Observable } from "observable-fns";
 
-const globalWithTrace =
-  /** @type {{__esmTrace__: {url: string; parent: string}[] | undefined}} */ (
-    /** @type {unknown} */ (global)
-  );
+import loader from "./loader.js";
 
 /**
  * @param {string[]} testFilePaths
  */
-export default async (testFilePaths) => {
-  // Note: collect all tests by loading all test files and running global side effects
-  const root = await collector(testFilePaths);
-
-  // Note: run tests
-  const failureCount = await runner(root);
-
-  // TODO: extract to function in esm-tracer(?)
-  const deps =
-    globalWithTrace.__esmTrace__ &&
-    Object.keys(
-      globalWithTrace.__esmTrace__.reduce(
-        (deps, { url }) => ({ ...deps, [url]: true }),
-        {}
-      )
+const observableLoader = (testFilePaths) => {
+  // @ts-ignore // TODO: fix
+  return new Observable(async (observer) => {
+    const { deps, failureCount } = await loader(
+      testFilePaths,
+      observer.next.bind(observer)
     );
-
-  return { deps, failureCount };
+    observer.next({
+      scope: "file",
+      type: "done",
+      data: { deps, failureCount },
+    });
+    observer.complete();
+  });
 };
+
+expose(observableLoader);
