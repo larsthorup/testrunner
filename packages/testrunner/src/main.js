@@ -33,7 +33,6 @@ export default async function main(testFilePaths, concurrent) {
   }
   const msDuration = Date.now() - msStart;
 
-  // TODO: report test results
   // TODO: report delta coverage compared to base branch
   // TODO: report timing to aggregate with previous runs
   return { concurrency, failureCount, msDuration };

@@ -54,11 +54,12 @@ npm test
 - [x] external coverage (c8)
 - [x] external transpiler (tsc)
 - [x] external reporter (standard)
+- [x] `debugger;` support: `ndb node packages/testrunner/src/cli.js packages/demo/examples/src/example.test.js`
 
 ### Hopefully user-land features
 
 - [ ] node or browser
-- [ ] shard
+- [ ] shard across multiple machines
 
 ## Pipeline for watch and transpile
 
@@ -73,13 +74,11 @@ npm test
 
 ## TODO
 
-- [ ] `debugger;` support
-- [ ] dom preview like vitest-preview
-- [ ] fix typing for worker pool
 - [ ] dom mocking for testing library
-- [ ] have a test that repeats runnning all tests in parallel 100 times
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] chores: unit tests, clean code, remove TODOs
+- [ ] dom preview like vitest-preview
+- [ ] have a test that repeats runnning all tests in parallel 100 times
 - [ ] verify that esmock is concurrency safe
 - [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot
 - [ ] suite scoped fixtures (per describe block)
