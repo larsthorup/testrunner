@@ -55,6 +55,7 @@ npm test
 - [x] external transpiler (tsc)
 - [x] external reporter (standard)
 - [x] `debugger;` support: `ndb node packages/testrunner/src/cli.js packages/demo/examples/src/example.test.js`
+- [x] external dom mocking (happy-dom)
 
 ### Hopefully user-land features
 
@@ -74,7 +75,6 @@ npm test
 
 ## TODO
 
-- [ ] dom mocking for testing library
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] chores: unit tests, clean code, remove TODOs
 - [ ] dom preview like vitest-preview

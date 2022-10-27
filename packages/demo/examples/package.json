@@ -5,11 +5,15 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "@happy-dom/global-registrator": "^7.6.6",
     "@sinonjs/fake-timers": "^9.1.2",
     "@types/chai": "^4.3.1",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
     "@types/sinonjs__fake-timers": "^8.1.2",
     "chai": "^4.3.6",
     "esmock": "^1.8.0",
+    "happy-dom": "^7.6.6",
     "tinyspy": "^1.0.0"
   },
   "scripts": {
@@ -29,6 +33,8 @@
   },
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "dependencies": {
-    "node-fetch": "^3.2.8"
+    "node-fetch": "^3.2.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
