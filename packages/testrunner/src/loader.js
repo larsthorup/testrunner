@@ -1,7 +1,7 @@
 import * as fs from "node:fs/promises";
 import * as os from "node:os";
 
-import { collector } from "./collector.js";
+import { fileCollector } from "./collector.js";
 import { combineReporters } from "./multi-reporter.js";
 import { createQueue, runWorker } from "./queue.js";
 import { runner } from "./runner.js";
@@ -19,7 +19,7 @@ const globalWithTrace =
  */
 export async function loader(testFilePaths, report) {
   // Note: collect all tests by loading all test files and running global side effects
-  const root = await collector(testFilePaths);
+  const root = await fileCollector(testFilePaths);
 
   // Note: run tests
   await runner(root, report);

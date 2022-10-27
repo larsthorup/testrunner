@@ -8,7 +8,7 @@
     "testrunner": "src/cli.js"
   },
   "scripts": {
-    "test": "exit 0"
+    "test": "testfinder \"src/**/*.test.js\" | xargs testrunner"
   },
   "repository": {
     "type": "git",

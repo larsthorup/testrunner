@@ -19,38 +19,44 @@ npm test
 - [x] no globals (simplicity)
 - [x] no console output capture (fix)
 
-### Built-in features
+### Built-in standard features
 
-- [x] run on windows and posix (standard)
-- [x] nested describe, it (standard)
-- [x] run mixed its and describes in defined order (fix)
+- [x] cross-platform: run on windows and posix (standard)
+- [x] suites: nested describe, it (standard)
 - [x] sync and async (standard)
 - [x] typed (modernity)
-- [x] hooks - before/after all/each (standard)
-- [x] closures - local state (standard)
-- [x] hooks order is FILO (fix)
-- [x] named hooks (fix)
-- [x] dynamic skip (IgnoreError) (fix)
+- [x] hooks: before/after all/each (standard)
+- [x] closures for local state (standard)
 - [x] exit code: number of failing tests (standard)
 - [x] configurable test file list (standard)
 - [x] run test files concurrently - with worker_threads (standard)
 
-### User-land features
+### Built-in fixes
 
-- [x] external assertion library (node:assert, chai)
+- [x] run mixed its and describes in defined order (fix)
+- [x] hooks order is FILO (fix)
+- [x] named hooks (fix)
+- [x] dynamic skip (IgnoreError) (fix)
+
+### User-land fixes
+
 - [x] external useSetup hook (fix)
 - [x] external useSetup composition (fix)
-- [x] external timer mocking (@sinonjs/fake-timers)
 - [x] external fails handling (fix)
 - [x] external timeout handling (fix)
 - [x] extensible syntactic sugar .skip, timeout (fix)
+
+### User-land features
+
+- [x] external assertion library (node:assert, chai)
+- [x] external timer mocking (@sinonjs/fake-timers)
 - [x] external each (standard)
 - [x] external support having tests in production code files (fix)
 - [x] external object mocking (tinyspy)
 - [x] external jest compatibility matchers for chai expect: toHaveLength, toBe, toEqual (standard)
 - [x] external sharable module mocks: (esmock)
-- [x] external test file discovery (bash)
-- [x] external watch for re-testing
+- [x] external test file discovery (glob)
+- [x] external watch for re-testing (esm-tracer)
 - [x] external coverage (c8)
 - [x] external transpiler (tsc)
 - [x] external reporter (standard)
@@ -75,8 +81,8 @@ npm test
 
 ## TODO
 
-- [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] chores: unit tests, clean code, remove TODOs
+- [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] dom preview like vitest-preview
 - [ ] have a test that repeats runnning all tests in parallel 100 times
 - [ ] verify that esmock is concurrency safe

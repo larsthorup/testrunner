@@ -86,16 +86,26 @@ export const it = (name, fn) => {
  * @param {string[]} filePaths
  * @returns {Promise<Describe>}
  */
-export const collector = async (filePaths) => {
+export const fileCollector = async (filePaths) => {
+  // /** @type { Describe } */
+  return scopeCollector(async () => {
+    const fileUrls = filePaths.map((filePath) => pathToFileURL(filePath).href);
+    await Promise.all(
+      fileUrls.map(async (fileUrl) => {
+        await import(fileUrl);
+      })
+    );
+  });
+};
+
+/**
+ * @param {() => void | Promise<void>} block
+ * @returns {Promise<Describe>}
+ */
+export const scopeCollector = async (block) => {
   /** @type { Describe } */
   const root = { type: "describe", name: "", testList: [] };
   currentDescribe = root;
-  const fileUrls = filePaths.map((filePath) => pathToFileURL(filePath).href);
-  await Promise.all(
-    fileUrls.map(async (fileUrl) => {
-      await import(fileUrl);
-      // console.log('loaded', testFileUrl);
-    })
-  );
+  await Promise.resolve(block());
   return root;
 };
