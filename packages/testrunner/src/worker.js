@@ -1,15 +1,9 @@
-import { expose } from "threads/worker";
-import { Observable } from "observable-fns";
+import { workerData, parentPort } from "node:worker_threads";
 
-import loader from "./loader.js";
+import { loader } from "./loader.js";
 
-/**
- * @param {string[]} testFilePaths
- */
-const observableLoader = (testFilePaths) => {
-  return new Observable((observer) => {
-    loader(testFilePaths, observer.next.bind(observer));
-  });
-};
+const testFilePaths = workerData;
 
-expose(observableLoader);
+await loader(testFilePaths, (reportEvent) =>
+  parentPort?.postMessage(reportEvent)
+);

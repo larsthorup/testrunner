@@ -1,6 +1,6 @@
 export type FileDone = {
   scope: "file";
-  type: "done";
+  type: "deps";
   data: {
     deps?: string[];
   };

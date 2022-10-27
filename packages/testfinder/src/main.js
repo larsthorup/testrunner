@@ -55,7 +55,8 @@ async function loadDeps(testFilePaths) {
   const promises = testFilePaths.map(async (testFilePath) => {
     const depFilePath = `${testFilePath}.deps`; // TODO: share
     if (existsSync(depFilePath)) {
-      const deps = (await readFile(depFilePath, "utf-8")).split("\n");
+      const file = await readFile(depFilePath, "utf-8");
+      const deps = file ? file.split("\n") : [];
       return [testFilePath, deps];
     } else {
       return [testFilePath, undefined];

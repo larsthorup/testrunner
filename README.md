@@ -73,6 +73,8 @@ npm test
 
 ## TODO
 
+- [ ] `debugger;` support
+- [ ] dom preview like vitest-preview
 - [ ] fix typing for worker pool
 - [ ] dom mocking for testing library
 - [ ] have a test that repeats runnning all tests in parallel 100 times
