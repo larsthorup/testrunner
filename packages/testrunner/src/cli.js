@@ -24,9 +24,17 @@ try {
   );
   console.log(`Completed in ${msDuration} ms with concurrency ${concurrency}`);
   if (failureCount === 0) {
-    console.log(`✔ testrunner: all ${testFilePaths.length} tests passed`);
+    const metricText =
+      testFilePaths.length > 1
+        ? `all ${testFilePaths.length} test files succeeded`
+        : `${testFilePaths.length} test file succeeded`;
+    console.log(`✔ testrunner: ${metricText}`);
   } else {
-    console.error(`x testrunner: ${failureCount} failing tests`);
+    const metricText =
+      failureCount > 1
+        ? `${failureCount} failing tests`
+        : `${failureCount} failing test`;
+    console.error(`x testrunner: ${metricText}`);
   }
   process.exit(failureCount);
 } catch (ex) {

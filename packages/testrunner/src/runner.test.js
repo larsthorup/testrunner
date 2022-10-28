@@ -1,7 +1,15 @@
 import * as assert from "node:assert/strict";
 
 import { scopeCollector } from "./collector.js";
-import { afterAll, beforeAll, describe, it, skip } from "./index.js";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  it,
+  skip,
+} from "./index.js";
 import { runner } from "./runner.js";
 
 /** @typedef {import("./report-event.js").ReportEvent} ReportEvent*/
@@ -78,6 +86,43 @@ describe("runner", () => {
         { scope: "test", type: "success", data: { names: ["should last"] } },
       ]);
     });
+  });
+
+  it("should run hooks", async () => {
+    const events = await runScope(() => {
+      beforeAll(() => {});
+      afterAll(() => {});
+      beforeEach(() => {});
+      afterEach(() => {});
+      it("should test", () => {});
+      it("should verify", () => {});
+    });
+    assert.deepEqual(events, [
+      { scope: "test", type: "success", data: { names: ["beforeAll"] } },
+      {
+        scope: "test",
+        type: "success",
+        data: { names: ["should test", "beforeEach"] },
+      },
+      { scope: "test", type: "success", data: { names: ["should test"] } },
+      {
+        scope: "test",
+        type: "success",
+        data: { names: ["should test", "afterEach"] },
+      },
+      {
+        scope: "test",
+        type: "success",
+        data: { names: ["should verify", "beforeEach"] },
+      },
+      { scope: "test", type: "success", data: { names: ["should verify"] } },
+      {
+        scope: "test",
+        type: "success",
+        data: { names: ["should verify", "afterEach"] },
+      },
+      { scope: "test", type: "success", data: { names: ["afterAll"] } },
+    ]);
   });
 
   it("should run hooks in first-in-last-out order", async () => {

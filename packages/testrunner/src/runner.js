@@ -35,7 +35,7 @@ export const skip = (reason) => {
  * @param { (event: ReportEvent) => void } report
  */
 export const runner = async (root, report) => {
-  return runTests(root, report, []);
+  return runTests(root, report, [root]);
 };
 
 /**
@@ -106,7 +106,8 @@ const runTests = async (test, report, parentTestList) => {
  */
 const runTest = async (test, report, parentTestList) => {
   const scope = "test";
-  const names = parentTestList.map(({ name }) => name);
+  const parentTestListExceptRoot = parentTestList.slice(1);
+  const names = parentTestListExceptRoot.map(({ name }) => name);
   const { fn } = test;
   try {
     // TODO: pass in test context

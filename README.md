@@ -81,6 +81,7 @@ npm test
 
 ## TODO
 
+- [ ] .only
 - [ ] chores: unit tests, clean code, remove TODOs
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] dom preview like vitest-preview
