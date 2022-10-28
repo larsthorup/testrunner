@@ -1,7 +1,7 @@
 import * as assert from "node:assert/strict";
 
 import { scopeCollector } from "./collector.js";
-import { describe, it } from "./index.js";
+import { afterAll, beforeAll, describe, it, skip } from "./index.js";
 import { runner } from "./runner.js";
 
 /** @typedef {import("./report-event.js").ReportEvent} ReportEvent*/
@@ -29,6 +29,24 @@ describe("runner", () => {
     ]);
   });
 
+  it("should report failing test", async () => {
+    const events = await runScope(() => {
+      it("should add", () => {
+        assert.equal(2 + 2, 5);
+      });
+    });
+    assert.deepEqual(events, [
+      {
+        scope: "test",
+        type: "failure",
+        data: {
+          names: ["should add"],
+          message: "Expected values to be strictly equal:\n\n4 !== 5\n",
+        },
+      },
+    ]);
+  });
+
   it("should run async test", async () => {
     const events = await runScope(() => {
       it("should add", async () => {
@@ -38,6 +56,59 @@ describe("runner", () => {
     });
     assert.deepEqual(events, [
       { scope: "test", type: "success", data: { names: ["should add"] } },
+    ]);
+  });
+
+  it("should run mixed it and describe in order", async () => {
+    it("should run sync test", async () => {
+      const events = await runScope(() => {
+        it("should run first", () => {});
+        describe("nested", () => {
+          it("should run in between", () => {});
+        });
+        it("should run last", () => {});
+      });
+      assert.deepEqual(events, [
+        { scope: "test", type: "success", data: { names: ["should first"] } },
+        {
+          scope: "test",
+          type: "success",
+          data: { names: ["nested", "should run in between"] },
+        },
+        { scope: "test", type: "success", data: { names: ["should last"] } },
+      ]);
+    });
+  });
+
+  it("should run hooks in first-in-last-out order", async () => {
+    const events = await runScope(() => {
+      beforeAll("setup db", () => {});
+      afterAll("teardown db", () => {});
+      beforeAll("setup server", () => {});
+      afterAll("teardown server", () => {});
+      it("should test", () => {});
+    });
+    assert.deepEqual(events, [
+      { scope: "test", type: "success", data: { names: ["setup db"] } },
+      { scope: "test", type: "success", data: { names: ["setup server"] } },
+      { scope: "test", type: "success", data: { names: ["should test"] } },
+      { scope: "test", type: "success", data: { names: ["teardown server"] } },
+      { scope: "test", type: "success", data: { names: ["teardown db"] } },
+    ]);
+  });
+
+  it("should dynamically skip a test", async () => {
+    const events = await runScope(() => {
+      it("should skip", () => {
+        skip("for reasons");
+      });
+    });
+    assert.deepEqual(events, [
+      {
+        scope: "test",
+        type: "skip",
+        data: { names: ["should skip"], message: "for reasons" },
+      },
     ]);
   });
 });

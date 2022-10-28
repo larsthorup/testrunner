@@ -126,7 +126,7 @@ const runTest = async (test, report, parentTestList) => {
       report({
         scope,
         type: "failure",
-        data: { names, message: ex.toString() },
+        data: { names, message: ex.message },
       });
     } else {
       report({

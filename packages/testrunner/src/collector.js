@@ -39,11 +39,22 @@ export const afterEach = (fn) => {
 };
 
 /**
- * @param {Fn} fn
+ * @param {string | Fn} nameOrFn
+ * @param {Fn | undefined} [fnOrUndefined]
  */
-export const beforeAll = (fn) => {
+export const beforeAll = (
+  nameOrFn = "beforeAll",
+  fnOrUndefined = undefined
+) => {
+  const name = typeof nameOrFn === "string" ? nameOrFn : "beforeAll";
+  const fn =
+    typeof nameOrFn === "function"
+      ? nameOrFn
+      : fnOrUndefined !== undefined
+      ? fnOrUndefined
+      : () => {};
   /** @type { BeforeAll } */
-  const beforeAll = { type: "beforeAll", name: "beforeAll", fn };
+  const beforeAll = { type: "beforeAll", name, fn };
   currentDescribe.testList.push(beforeAll);
 };
 
