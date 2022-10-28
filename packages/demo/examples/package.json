@@ -7,6 +7,7 @@
   "devDependencies": {
     "@happy-dom/global-registrator": "^7.6.6",
     "@sinonjs/fake-timers": "^9.1.2",
+    "@testing-library/react": "^13.3.0",
     "@types/chai": "^4.3.1",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",

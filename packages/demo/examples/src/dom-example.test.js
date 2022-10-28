@@ -18,7 +18,7 @@ describe("DOM", () => {
     GlobalRegistrator.unregister();
   });
 
-  it("should render a React component", async () => {
+  it("should render some HTML", async () => {
     const appElement = document.createElement("app");
     document.body.appendChild(appElement);
     const root = createRoot(appElement);
