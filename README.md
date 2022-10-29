@@ -81,7 +81,7 @@ npm test
 
 ## TODO
 
-- [ ] .only: { only: true }, only-plugin: onCollect
+- [ ] { only: true }, exclude from report, only-plugin: onCollect
 - [ ] extract change-impact-plugin
 - [ ] chores: unit tests, clean code, remove TODOs
 - [ ] pass in test context: {name, signal} (extensibility, standard)

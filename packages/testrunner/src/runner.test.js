@@ -156,4 +156,58 @@ describe("runner", () => {
       },
     ]);
   });
+
+  it("should statically skip a test", async () => {
+    const events = await runScope(() => {
+      it("should skip", { skip: true }, () => {});
+      it("should test", () => {});
+    });
+    assert.deepEqual(events, [
+      {
+        scope: "test",
+        type: "skip",
+        data: { names: ["should skip"], message: "" },
+      },
+      {
+        scope: "test",
+        type: "success",
+        data: { names: ["should test"] },
+      },
+    ]);
+  });
+
+  it("should statically skip nested tests", async () => {
+    const events = await runScope(() => {
+      describe("skipped", { skip: true }, () => {
+        it("should skip", () => {});
+      });
+      it("should test", () => {});
+    });
+    assert.deepEqual(events, [
+      {
+        scope: "test",
+        type: "skip",
+        data: { names: ["skipped", "should skip"], message: "" },
+      },
+      {
+        scope: "test",
+        type: "success",
+        data: { names: ["should test"] },
+      },
+    ]);
+  });
+
+  it("should statically exclude other tests", { skip: true }, async () => {
+    const events = await runScope(() => {
+      it("should skip", () => {});
+      it("should test", { only: true }, () => {});
+    });
+    assert.deepEqual(events, [
+      {
+        scope: "test",
+        type: "success",
+        data: { names: ["should test"] },
+      },
+    ]);
+  });
 });

@@ -1,7 +1,7 @@
 import { AssertionError } from "node:assert";
 import { isPromise } from "node:util/types";
 import { inspect } from "node:util";
-import { TestSkipException } from "./collector.js";
+import { skip, TestSkipException } from "./collector.js";
 
 /** @typedef {import("./collector.js").AfterAll} AfterAll */
 /** @typedef {import("./collector.js").AfterEach} AfterEach */
@@ -17,7 +17,88 @@ import { TestSkipException } from "./collector.js";
  * @param { (event: ReportEvent) => void } report
  */
 export const runner = async (root, report) => {
+  skipPlugin(root);
+  onlyPlugin(root); // TODO: traverse({})
   return runTests(root, report, [root]);
+};
+
+/**
+ * @param {Test} root
+ */
+const skipPlugin = (root) => {
+  traverse(
+    root,
+    function beforeChildren(test) {
+      switch (test.type) {
+        case "describe":
+          if (test.options.skip) {
+            for (const subTest of test.testList) {
+              if (subTest.type === "describe" || subTest.type === "it") {
+                subTest.options.skip = true;
+              }
+            }
+          }
+          break;
+        case "it":
+          if (test.options.skip) {
+            test.fn = skip;
+          }
+          break;
+      }
+    },
+    function afterChildren() {
+      // TODO: skip hooks if all tests are skipped?
+    }
+  );
+};
+
+/**
+ * @param {Test} root
+ */
+const onlyPlugin = (root) => {
+  let hasOnly = false;
+  traverse(
+    root,
+    function beforeChildren(test) {
+      if (test.type === "it" && test.options.only) hasOnly = true;
+    },
+    function afterChildren() {}
+  );
+  if (hasOnly) {
+    traverse(
+      root,
+      function beforeChildren() {},
+      function afterChildren(test) {
+        switch (test.type) {
+          case "describe":
+            if (!test.options.only) {
+              test.testList = [];
+            }
+            break;
+          case "it":
+            if (!test.options.only) {
+              test.fn = skip;
+            }
+            break;
+        }
+        // TODO: children of describe: if some has "only" - delete the rest + mark describe with "only"
+      }
+    );
+  }
+};
+
+/**
+ * @param {Test} test
+ * @param {(test: Test) => void} beforeChildren
+ * @param {(test: Test) => void} afterChildren
+ */
+const traverse = (test, beforeChildren, afterChildren) => {
+  beforeChildren(test);
+  if (test.type === "describe") {
+    for (const subTest of test.testList)
+      traverse(subTest, beforeChildren, afterChildren);
+  }
+  afterChildren(test);
 };
 
 /**

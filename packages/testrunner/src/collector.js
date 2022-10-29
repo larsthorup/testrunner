@@ -4,7 +4,7 @@ import { pathToFileURL } from "node:url";
 /** @typedef { { type: 'afterEach'; name: string; fn: Fn } } AfterEach */
 /** @typedef { { type: 'beforeAll'; name: string;  fn: Fn} } BeforeAll */
 /** @typedef { { type: 'beforeEach'; name: string;  fn: Fn} } BeforeEach */
-/** @typedef { { type: 'describe'; name: string; testList: Test[] } } Describe */
+/** @typedef { { type: 'describe'; name: string; options: Record<string, unknown>; testList: Test[] } } Describe */
 /** @typedef { () => Promise<any> | void  } Fn */
 /** @typedef { { type: 'it'; name: string; fn: Fn, options: Record<string, unknown> } } It */
 /** @typedef { AfterAll | AfterEach | BeforeAll | BeforeEach | Describe | It } Test */
@@ -69,18 +69,22 @@ export const beforeEach = (fn) => {
 
 /**
  * @param {string} name
- * @param {() => void | undefined} [fn]
+ * @param {Record<string, unknown> | Fn | undefined} [optionsOrFn]
+ * @param {() => void | undefined} [fnOrUndefined]
  */
-export const describe = (name, fn) => {
+export const describe = (name, optionsOrFn, fnOrUndefined) => {
+  const options = typeof optionsOrFn === "object" ? optionsOrFn : {};
+  const fn =
+    typeof optionsOrFn === "function"
+      ? optionsOrFn
+      : fnOrUndefined || (() => {});
   /** @type { Describe} */
-  const describe = { type: "describe", name, testList: [] };
+  const describe = { type: "describe", name, options, testList: [] };
   currentDescribe.testList.push(describe);
-  if (fn) {
-    const previousTest = currentDescribe;
-    currentDescribe = describe;
-    fn();
-    currentDescribe = previousTest;
-  }
+  const previousTest = currentDescribe;
+  currentDescribe = describe;
+  fn();
+  currentDescribe = previousTest;
 };
 
 /**
@@ -121,10 +125,9 @@ export const fileCollector = async (filePaths) => {
  */
 export const scopeCollector = async (block) => {
   /** @type { Describe } */
-  const root = { type: "describe", name: "", testList: [] };
+  const root = { type: "describe", name: "", options: {}, testList: [] };
   currentDescribe = root;
   await Promise.resolve(block());
-  onlyPlugin(root); // TODO: report({})
   return root;
 };
 
@@ -144,30 +147,4 @@ export class TestSkipException extends Error {
  */
 export const skip = (reason) => {
   throw new TestSkipException(reason || "");
-};
-
-/**
- * @param {Describe} root
- */
-const onlyPlugin = (root) => {
-  let hasOnly = false;
-  traverse(root, (test) => {
-    if (test.type === "it" && test.options.only) hasOnly = true;
-  });
-  if (hasOnly) {
-    traverse(root, (test) => {
-      if (test.type === "it" && !test.options.only) test.fn = skip;
-    });
-  }
-};
-
-/**
- * @param {Test} test
- * @param {(test: Test) => void} testHandler
- */
-const traverse = (test, testHandler) => {
-  testHandler(test);
-  if (test.type === "describe") {
-    for (const subTest of test.testList) traverse(subTest, testHandler);
-  }
 };
