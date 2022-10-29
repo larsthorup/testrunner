@@ -18,24 +18,7 @@ process.on("unhandledRejection", (reason) => {
 try {
   const testFilePaths = process.argv.slice(2);
   const concurrent = true; // TODO: configure
-  const { failureCount, concurrency, msDuration } = await main(
-    testFilePaths,
-    concurrent
-  );
-  console.log(`Completed in ${msDuration} ms with concurrency ${concurrency}`);
-  if (failureCount === 0) {
-    const metricText =
-      testFilePaths.length > 1
-        ? `all ${testFilePaths.length} test files succeeded`
-        : `${testFilePaths.length} test file succeeded`;
-    console.log(`✔ testrunner: ${metricText}`);
-  } else {
-    const metricText =
-      failureCount > 1
-        ? `${failureCount} failing tests`
-        : `${failureCount} failing test`;
-    console.error(`x testrunner: ${metricText}`);
-  }
+  const failureCount = await main(testFilePaths, concurrent);
   process.exit(failureCount);
 } catch (ex) {
   console.error(ex);

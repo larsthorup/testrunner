@@ -1,3 +1,5 @@
+import * as os from "node:os";
+
 import defaultReporter from "./console-reporter.js";
 
 import { loader, concurrentLoader } from "./loader.js";
@@ -14,7 +16,6 @@ export default async function main(testFilePaths, concurrent) {
   // TODO: tab / process / worker isolation or not
   // TODO: external sharding for multiple processes / machines
 
-  // Note: shard test files for multiple threads
   let failureCount = 0;
   /**
    * @param {ReportEvent} event
@@ -23,17 +24,19 @@ export default async function main(testFilePaths, concurrent) {
     if (scope === "test" && type === "failure") ++failureCount;
   };
   const reporters = combineReporters([failureAggregator, defaultReporter]);
-  let concurrency = 0;
+  const concurrency = concurrent ? os.cpus().length : 1;
+  const fileCount = testFilePaths.length;
+  reporters({ scope: "run", type: "begin", data: { concurrency, fileCount } });
   const msStart = Date.now();
   if (concurrent) {
-    ({ concurrency } = await concurrentLoader(testFilePaths, reporters));
+    await concurrentLoader(concurrency, testFilePaths, reporters);
   } else {
-    concurrency = 1;
     await loader(testFilePaths, reporters);
   }
-  const msDuration = Date.now() - msStart;
+  const duration = Date.now() - msStart;
+  reporters({ scope: "run", type: "done", data: { duration, failureCount } });
 
   // TODO: report delta coverage compared to base branch
   // TODO: report timing to aggregate with previous runs
-  return { concurrency, failureCount, msDuration };
+  return failureCount;
 }

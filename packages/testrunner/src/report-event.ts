@@ -6,6 +6,18 @@ export type FileDone = {
   };
 };
 
+export type RunBegin = {
+  scope: "run";
+  type: "begin";
+  data: { concurrency: number; fileCount: number };
+};
+
+export type RunDone = {
+  scope: "run";
+  type: "done";
+  data: { duration: number; failureCount: number };
+};
+
 export type TestError = {
   scope: "test";
   type: "error";
@@ -37,6 +49,8 @@ export type TestSucceess = {
 
 export type ReportEvent =
   | FileDone
+  | RunBegin
+  | RunDone
   | TestError
   | TestFailure
   | TestSkip

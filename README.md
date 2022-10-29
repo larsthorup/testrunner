@@ -81,8 +81,11 @@ npm test
 
 ## TODO
 
-- [ ] .only
+- [ ] extract console-reporter-plugin
+- [ ] .only: { only: true }, only-plugin: onCollect
+- [ ] extract change-impact-plugin
 - [ ] chores: unit tests, clean code, remove TODOs
+- [ ] pass in test context: {name, signal} (extensibility, standard)
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] dom preview like vitest-preview
 - [ ] have a test that repeats runnning all tests in parallel 100 times
@@ -93,7 +96,6 @@ npm test
 - [ ] external reporters (jest, mocha, vitest, IDE)
 - [ ] sensible concurrency defaults: inside file: sequential, files: concurrently
 - [ ] concurrency api: a la playwright?
-- [ ] pass in test context (extensibility)
 - [ ] design: extensible filtering: title pattern, only, impacted by change
 - [ ] design: extensible ordering: concurrent/sequential, random/source/sorted
 - [ ] design: extensible sharding across multiple machines

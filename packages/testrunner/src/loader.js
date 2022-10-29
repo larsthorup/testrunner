@@ -1,5 +1,4 @@
 import * as fs from "node:fs/promises";
-import * as os from "node:os";
 
 import { fileCollector } from "./collector.js";
 import { combineReporters } from "./multi-reporter.js";
@@ -41,11 +40,11 @@ export async function loader(testFilePaths, report) {
 }
 
 /**
+ * @param {number} concurrency
  * @param {string[]} testFilePaths
  * @param {(event: ReportEvent) => void} report
  */
-export async function concurrentLoader(testFilePaths, report) {
-  const concurrency = os.cpus().length;
+export async function concurrentLoader(concurrency, testFilePaths, report) {
   const queue = createQueue(concurrency);
   await Promise.all(
     testFilePaths.map(async (testFilePath) => {
