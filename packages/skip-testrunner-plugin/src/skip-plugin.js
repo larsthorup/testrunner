@@ -1,6 +1,6 @@
-import { skip } from "./index.js";
+import { skip } from "@larsthorup/testrunner";
 
-/** @typedef { import('./index.js').Test } Test */
+/** @typedef { import('@larsthorup/testrunner').Test } Test */
 
 export default () => ({
   /**

@@ -14,6 +14,8 @@
     "packages/testfinder",
     "packages/testrunner",
     "packages/console-reporter-plugin",
+    "packages/only-testrunner-plugin",
+    "packages/skip-testrunner-plugin",
     "packages/testutils",
     "packages/chai-jest-matchers",
     "packages/esm-tracer",

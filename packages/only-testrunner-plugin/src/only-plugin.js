@@ -1,4 +1,4 @@
-/** @typedef { import('./index.js').Test } Test */
+/** @typedef { import('@larsthorup/testrunner').Test } Test */
 
 export default () => {
   let hasOnly = false;

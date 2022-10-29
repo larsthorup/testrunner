@@ -1,9 +1,11 @@
 import { AssertionError } from "node:assert";
 import { isPromise } from "node:util/types";
 import { inspect } from "node:util";
+
+import skipPlugin from "@larsthorup/skip-testrunner-plugin";
+import onlyPlugin from "@larsthorup/only-testrunner-plugin";
+
 import { TestSkipException } from "./collector.js";
-import skipPlugin from "./skip-plugin.js";
-import onlyPlugin from "./only-plugin.js";
 
 /** @typedef {import("./collector.js").AfterAll} AfterAll */
 /** @typedef {import("./collector.js").AfterEach} AfterEach */
