@@ -26,7 +26,7 @@ const runScope = async (block) => {
 };
 
 describe("runner", () => {
-  it("should run sync test", { only: false }, async () => {
+  it("should run sync test", async () => {
     const events = await runScope(() => {
       it("should add", () => {
         assert.equal(2 + 2, 4);

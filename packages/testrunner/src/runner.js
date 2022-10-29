@@ -18,7 +18,7 @@ import { skip, TestSkipException } from "./collector.js";
  */
 export const runner = async (root, report) => {
   skipPlugin(root);
-  onlyPlugin(root); // TODO: traverse({})
+  onlyPlugin(root);
   return runTests(root, report, [root]);
 };
 
@@ -52,6 +52,8 @@ const skipPlugin = (root) => {
   );
 };
 
+// TODO: onPreVisit, onVisitBeforeChildren, onVisitAfterChildren
+
 /**
  * @param {Test} root
  */
@@ -60,31 +62,30 @@ const onlyPlugin = (root) => {
   traverse(
     root,
     function beforeChildren(test) {
-      switch (test.type) {
-        case "describe":
-          {
-            if (test.options.only) hasOnly = true;
-            // Note: "only" on a parent automatically applies to all children
-            if (test.options.only) {
-              for (const subTest of test.testList) {
-                if (subTest.type === "describe" || subTest.type === "it") {
-                  subTest.options.only = true;
-                }
-              }
-            }
-          }
-          break;
-        case "it":
-          if (test.options.only) hasOnly = true;
-          break;
-      }
+      if ((test.type === "describe" || test.type === "it") && test.options.only)
+        hasOnly = true;
     },
     function afterChildren() {}
   );
   if (hasOnly) {
     traverse(
       root,
-      function beforeChildren() {},
+      function beforeChildren(test) {
+        switch (test.type) {
+          case "describe":
+            {
+              // Note: "only" on a parent automatically applies to all children
+              if (test.options.only) {
+                for (const subTest of test.testList) {
+                  if (subTest.type === "describe" || subTest.type === "it") {
+                    subTest.options.only = true;
+                  }
+                }
+              }
+            }
+            break;
+        }
+      },
       function afterChildren(test) {
         switch (test.type) {
           case "describe":
