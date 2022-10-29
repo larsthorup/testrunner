@@ -1,4 +1,4 @@
-/** @typedef {import('./report-event.js').ReportEvent} ReportEvent */
+/** @typedef {import('@larsthorup/testrunner').ReportEvent} ReportEvent */
 
 /**
  * @param {ReportEvent} event

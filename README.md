@@ -81,7 +81,6 @@ npm test
 
 ## TODO
 
-- [ ] extract console-reporter-plugin
 - [ ] .only: { only: true }, only-plugin: onCollect
 - [ ] extract change-impact-plugin
 - [ ] chores: unit tests, clean code, remove TODOs

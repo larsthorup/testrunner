@@ -13,6 +13,7 @@
   "workspaces": [
     "packages/testfinder",
     "packages/testrunner",
+    "packages/console-reporter-plugin",
     "packages/testutils",
     "packages/chai-jest-matchers",
     "packages/esm-tracer",

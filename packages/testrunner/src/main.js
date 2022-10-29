@@ -1,6 +1,6 @@
 import * as os from "node:os";
 
-import defaultReporter from "./console-reporter.js";
+import consoleReporter from "@larsthorup/console-reporter-plugin";
 
 import { loader, concurrentLoader } from "./loader.js";
 import { combineReporters } from "./multi-reporter.js";
@@ -23,7 +23,7 @@ export default async function main(testFilePaths, concurrent) {
   const failureAggregator = ({ scope, type }) => {
     if (scope === "test" && type === "failure") ++failureCount;
   };
-  const reporters = combineReporters([failureAggregator, defaultReporter]);
+  const reporters = combineReporters([failureAggregator, consoleReporter]);
   const concurrency = concurrent ? os.cpus().length : 1;
   const fileCount = testFilePaths.length;
   reporters({ scope: "run", type: "begin", data: { concurrency, fileCount } });
