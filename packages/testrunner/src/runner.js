@@ -1,7 +1,7 @@
 import { AssertionError } from "node:assert";
 import { isPromise } from "node:util/types";
 import { inspect } from "node:util";
-("node:util");
+import { TestSkipException } from "./collector.js";
 
 /** @typedef {import("./collector.js").AfterAll} AfterAll */
 /** @typedef {import("./collector.js").AfterEach} AfterEach */
@@ -11,24 +11,6 @@ import { inspect } from "node:util";
 /** @typedef {import("./collector.js").It} It */
 /** @typedef {import("./collector.js").Test} Test */
 /** @typedef {import('./report-event.js').ReportEvent} ReportEvent */
-
-class TestSkipException extends Error {
-  /**
-   *
-   * @param {string} reason
-   */
-  constructor(reason) {
-    super(reason);
-  }
-}
-
-/**
- *
- * @param {string | undefined} [reason]
- */
-export const skip = (reason) => {
-  throw new TestSkipException(reason || "");
-};
 
 /**
  * @param { Test } root

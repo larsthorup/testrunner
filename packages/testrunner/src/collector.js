@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 /** @typedef { { type: 'beforeEach'; name: string;  fn: Fn} } BeforeEach */
 /** @typedef { { type: 'describe'; name: string; testList: Test[] } } Describe */
 /** @typedef { () => Promise<any> | void  } Fn */
-/** @typedef { { type: 'it'; name: string; fn: Fn } } It */
+/** @typedef { { type: 'it'; name: string; fn: Fn, options: Record<string, unknown> } } It */
 /** @typedef { AfterAll | AfterEach | BeforeAll | BeforeEach | Describe | It } Test */
 
 /** @type { Describe } */
@@ -85,11 +85,17 @@ export const describe = (name, fn) => {
 
 /**
  * @param {string} name
- * @param {Fn} fn
+ * @param {Record<string, unknown> | Fn} optionsOrFn
+ * @param {Fn | undefined} fnOrUndefined
  */
-export const it = (name, fn) => {
+export const it = (name, optionsOrFn, fnOrUndefined) => {
+  const options = typeof optionsOrFn === "object" ? optionsOrFn : {};
+  const fn =
+    typeof optionsOrFn === "function"
+      ? optionsOrFn
+      : fnOrUndefined || (() => {});
   /** @type { It} */
-  const it = { type: "it", name, fn };
+  const it = { type: "it", name, fn, options };
   currentDescribe.testList.push(it);
 };
 
@@ -118,5 +124,50 @@ export const scopeCollector = async (block) => {
   const root = { type: "describe", name: "", testList: [] };
   currentDescribe = root;
   await Promise.resolve(block());
+  onlyPlugin(root); // TODO: report({})
   return root;
+};
+
+export class TestSkipException extends Error {
+  /**
+   *
+   * @param {string} reason
+   */
+  constructor(reason) {
+    super(reason);
+  }
+}
+
+/**
+ *
+ * @param {string | undefined} [reason]
+ */
+export const skip = (reason) => {
+  throw new TestSkipException(reason || "");
+};
+
+/**
+ * @param {Describe} root
+ */
+const onlyPlugin = (root) => {
+  let hasOnly = false;
+  traverse(root, (test) => {
+    if (test.type === "it" && test.options.only) hasOnly = true;
+  });
+  if (hasOnly) {
+    traverse(root, (test) => {
+      if (test.type === "it" && !test.options.only) test.fn = skip;
+    });
+  }
+};
+
+/**
+ * @param {Test} test
+ * @param {(test: Test) => void} testHandler
+ */
+const traverse = (test, testHandler) => {
+  testHandler(test);
+  if (test.type === "describe") {
+    for (const subTest of test.testList) traverse(subTest, testHandler);
+  }
 };

@@ -7,6 +7,5 @@ export {
   beforeEach,
   describe,
   it,
+  skip,
 } from "./collector.js";
-
-export { skip } from "./runner.js";
