@@ -197,7 +197,7 @@ describe("runner", () => {
     ]);
   });
 
-  it("should statically exclude other tests", { skip: true }, async () => {
+  it("should statically exclude other tests", async () => {
     const events = await runScope(() => {
       it("should skip", () => {});
       it("should test", { only: true }, () => {});
@@ -207,6 +207,22 @@ describe("runner", () => {
         scope: "test",
         type: "success",
         data: { names: ["should test"] },
+      },
+    ]);
+  });
+
+  it("should statically exclude other describes", async () => {
+    const events = await runScope(() => {
+      it("should skip", () => {});
+      describe("included", { only: true }, () => {
+        it("should test", () => {});
+      });
+    });
+    assert.deepEqual(events, [
+      {
+        scope: "test",
+        type: "success",
+        data: { names: ["included", "should test"] },
       },
     ]);
   });

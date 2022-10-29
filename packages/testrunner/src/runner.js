@@ -60,7 +60,24 @@ const onlyPlugin = (root) => {
   traverse(
     root,
     function beforeChildren(test) {
-      if (test.type === "it" && test.options.only) hasOnly = true;
+      switch (test.type) {
+        case "describe":
+          {
+            if (test.options.only) hasOnly = true;
+            // Note: "only" on a parent automatically applies to all children
+            if (test.options.only) {
+              for (const subTest of test.testList) {
+                if (subTest.type === "describe" || subTest.type === "it") {
+                  subTest.options.only = true;
+                }
+              }
+            }
+          }
+          break;
+        case "it":
+          if (test.options.only) hasOnly = true;
+          break;
+      }
     },
     function afterChildren() {}
   );
@@ -71,17 +88,20 @@ const onlyPlugin = (root) => {
       function afterChildren(test) {
         switch (test.type) {
           case "describe":
-            if (!test.options.only) {
-              test.testList = [];
-            }
-            break;
-          case "it":
-            if (!test.options.only) {
-              test.fn = skip;
+            {
+              // Note: siblings without "only" are removed (not skipped, to avoid the noise)
+              test.testList = test.testList.filter(
+                (test) =>
+                  (test.type === "describe" || test.type === "it") &&
+                  test.options.only
+              );
+              // Note: "only" on a child automatically applies to all parents
+              if (test.testList.length > 0) {
+                test.options.only = true;
+              }
             }
             break;
         }
-        // TODO: children of describe: if some has "only" - delete the rest + mark describe with "only"
       }
     );
   }
