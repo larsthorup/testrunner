@@ -16,3 +16,5 @@ export function it(
 export function skip(reason?: string): void;
 import { ReportEvent as ReportEventType } from "./report-event.js";
 export type ReportEvent = ReportEventType;
+import { Test as TestType } from "./collector.js";
+export type Test = TestType;

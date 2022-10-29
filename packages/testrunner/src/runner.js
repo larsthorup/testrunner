@@ -1,7 +1,9 @@
 import { AssertionError } from "node:assert";
 import { isPromise } from "node:util/types";
 import { inspect } from "node:util";
-import { skip, TestSkipException } from "./collector.js";
+import { TestSkipException } from "./collector.js";
+import skipPlugin from "./skip-plugin.js";
+import onlyPlugin from "./only-plugin.js";
 
 /** @typedef {import("./collector.js").AfterAll} AfterAll */
 /** @typedef {import("./collector.js").AfterEach} AfterEach */
@@ -11,101 +13,37 @@ import { skip, TestSkipException } from "./collector.js";
 /** @typedef {import("./collector.js").It} It */
 /** @typedef {import("./collector.js").Test} Test */
 /** @typedef {import('./report-event.js').ReportEvent} ReportEvent */
+/** @typedef {(test: Test) => void} Visit */
+/** @typedef {{preVisit?: Visit, visitBeforeChildren?: Visit, visitAfterChildren?: Visit}} Plugin */
 
 /**
  * @param { Test } root
  * @param { (event: ReportEvent) => void } report
  */
 export const runner = async (root, report) => {
-  skipPlugin(root);
-  onlyPlugin(root);
+  const plugins = [skipPlugin(), onlyPlugin()]; // TODO: configure and import dynamically
+  for (const plugin of plugins) preVisit(root, plugin);
+  for (const plugin of plugins) visit(root, plugin);
   return runTests(root, report, [root]);
 };
 
 /**
  * @param {Test} root
+ * @param {Plugin} plugin
  */
-const skipPlugin = (root) => {
-  traverse(
-    root,
-    function beforeChildren(test) {
-      switch (test.type) {
-        case "describe":
-          if (test.options.skip) {
-            for (const subTest of test.testList) {
-              if (subTest.type === "describe" || subTest.type === "it") {
-                subTest.options.skip = true;
-              }
-            }
-          }
-          break;
-        case "it":
-          if (test.options.skip) {
-            test.fn = skip;
-          }
-          break;
-      }
-    },
-    function afterChildren() {
-      // TODO: skip hooks if all tests are skipped?
-    }
-  );
+const preVisit = (root, plugin) => {
+  const { preVisit: visitBeforeChildren = () => {} } = plugin;
+  traverse(root, visitBeforeChildren, () => {});
 };
-
-// TODO: onPreVisit, onVisitBeforeChildren, onVisitAfterChildren
 
 /**
  * @param {Test} root
+ * @param {Plugin} plugin
  */
-const onlyPlugin = (root) => {
-  let hasOnly = false;
-  traverse(
-    root,
-    function beforeChildren(test) {
-      if ((test.type === "describe" || test.type === "it") && test.options.only)
-        hasOnly = true;
-    },
-    function afterChildren() {}
-  );
-  if (hasOnly) {
-    traverse(
-      root,
-      function beforeChildren(test) {
-        switch (test.type) {
-          case "describe":
-            {
-              // Note: "only" on a parent automatically applies to all children
-              if (test.options.only) {
-                for (const subTest of test.testList) {
-                  if (subTest.type === "describe" || subTest.type === "it") {
-                    subTest.options.only = true;
-                  }
-                }
-              }
-            }
-            break;
-        }
-      },
-      function afterChildren(test) {
-        switch (test.type) {
-          case "describe":
-            {
-              // Note: siblings without "only" are removed (not skipped, to avoid the noise)
-              test.testList = test.testList.filter(
-                (test) =>
-                  (test.type === "describe" || test.type === "it") &&
-                  test.options.only
-              );
-              // Note: "only" on a child automatically applies to all parents
-              if (test.testList.length > 0) {
-                test.options.only = true;
-              }
-            }
-            break;
-        }
-      }
-    );
-  }
+const visit = (root, plugin) => {
+  const { visitBeforeChildren = () => {} } = plugin;
+  const { visitAfterChildren = () => {} } = plugin;
+  traverse(root, visitBeforeChildren, visitAfterChildren);
 };
 
 /**

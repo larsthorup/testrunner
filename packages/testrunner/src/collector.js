@@ -1,13 +1,13 @@
 import { pathToFileURL } from "node:url";
 
-/** @typedef { { type: 'afterAll'; name: string;  fn: Fn} } AfterAll */
-/** @typedef { { type: 'afterEach'; name: string; fn: Fn } } AfterEach */
-/** @typedef { { type: 'beforeAll'; name: string;  fn: Fn} } BeforeAll */
-/** @typedef { { type: 'beforeEach'; name: string;  fn: Fn} } BeforeEach */
-/** @typedef { { type: 'describe'; name: string; options: Record<string, unknown>; testList: Test[] } } Describe */
-/** @typedef { () => Promise<any> | void  } Fn */
-/** @typedef { { type: 'it'; name: string; fn: Fn, options: Record<string, unknown> } } It */
-/** @typedef { AfterAll | AfterEach | BeforeAll | BeforeEach | Describe | It } Test */
+/** @typedef { import('./collector.js').AfterAll } AfterAll */
+/** @typedef { import('./collector.js').AfterEach } AfterEach */
+/** @typedef { import('./collector.js').BeforeAll } BeforeAll */
+/** @typedef { import('./collector.js').BeforeEach } BeforeEach */
+/** @typedef { import('./collector.js').Describe } Describe */
+/** @typedef { import('./collector.js').Fn  } Fn */
+/** @typedef { import('./collector.js').It } It */
+/** @typedef { import('./collector.js').Test } Test */
 
 /** @type { Describe } */
 let currentDescribe;

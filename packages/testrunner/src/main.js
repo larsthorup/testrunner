@@ -23,7 +23,8 @@ export default async function main(testFilePaths, concurrent) {
   const failureAggregator = ({ scope, type }) => {
     if (scope === "test" && type === "failure") ++failureCount;
   };
-  const reporters = combineReporters([failureAggregator, consoleReporter]);
+  const configuredReporter = consoleReporter; // TODO: configure and import dynamically
+  const reporters = combineReporters([failureAggregator, configuredReporter]);
   const concurrency = concurrent ? os.cpus().length : 1;
   const fileCount = testFilePaths.length;
   reporters({ scope: "run", type: "begin", data: { concurrency, fileCount } });

@@ -82,7 +82,7 @@ npm test
 ## TODO
 
 - [ ] only-plugin
-- [ ] types for options from plugin
+- [ ] types for options from plugin: https://pqina.nl/blog/typescript-interface-merging-and-extending-modules/
 - [ ] extract change-impact-plugin
 - [ ] chores: unit tests, clean code, remove TODOs
 - [ ] pass in test context: {name, signal} (extensibility, standard)
