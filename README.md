@@ -62,6 +62,7 @@ npm test
 - [x] external reporter (standard)
 - [x] `debugger;` support: `ndb node packages/testrunner/src/cli.js packages/demo/examples/src/example.test.js`
 - [x] external dom mocking (happy-dom)
+- [x] external skip and only handling with plugins (standard)
 
 ### Hopefully user-land features
 
@@ -81,11 +82,13 @@ npm test
 
 ## TODO
 
-- [ ] types for options from plugin: https://pqina.nl/blog/typescript-interface-merging-and-extending-modules/
+- [ ] types for options from plugin:
+  - https://pqina.nl/blog/typescript-interface-merging-and-extending-modules/
+  - define as a symbol so "only" and "skip" will have to be imported, if needed
+- [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] extract change-impact-plugin
 - [ ] chores: unit tests, clean code, remove TODOs
 - [ ] pass in test context: {name, signal} (extensibility, standard)
-- [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] dom preview like vitest-preview
 - [ ] have a test that repeats runnning all tests in parallel 100 times
 - [ ] verify that esmock is concurrency safe
