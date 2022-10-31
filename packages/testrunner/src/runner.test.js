@@ -12,7 +12,7 @@ import {
   describe,
   it,
   skip as raiseSkip,
-} from "./index.js";
+} from "./testrunner.js";
 import { runner } from "./runner.js";
 
 /** @typedef {import("./report-event.js").ReportEvent} ReportEvent*/

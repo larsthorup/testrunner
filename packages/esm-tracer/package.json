@@ -2,7 +2,7 @@
   "name": "@larsthorup/esm-tracer",
   "version": "0.1.0",
   "type": "module",
-  "main": "src/index.js",
+  "main": "src/esm-tracer.js",
   "scripts": {
     "test": "exit 0"
   },

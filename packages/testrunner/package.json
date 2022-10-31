@@ -2,8 +2,8 @@
   "name": "@larsthorup/testrunner",
   "version": "0.1.0",
   "type": "module",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "src/testrunner.js",
+  "types": "src/testrunner.d.ts",
   "bin": {
     "testrunner": "src/cli.js"
   },
