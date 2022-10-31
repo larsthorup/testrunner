@@ -5,8 +5,10 @@ import { pathToFileURL } from "node:url";
 /** @typedef { import('./collector.js').BeforeAll } BeforeAll */
 /** @typedef { import('./collector.js').BeforeEach } BeforeEach */
 /** @typedef { import('./collector.js').Describe } Describe */
+/** @typedef { import('./collector.js').DescribeOptions } DescribeOptions */
 /** @typedef { import('./collector.js').Fn  } Fn */
 /** @typedef { import('./collector.js').It } It */
+/** @typedef { import('./collector.js').ItOptions } ItOptions */
 /** @typedef { import('./collector.js').Test } Test */
 
 /** @type { Describe } */
@@ -69,7 +71,7 @@ export const beforeEach = (fn) => {
 
 /**
  * @param {string} name
- * @param {Record<string, unknown> | Fn | undefined} [optionsOrFn]
+ * @param {DescribeOptions | Fn | undefined} [optionsOrFn]
  * @param {() => void | undefined} [fnOrUndefined]
  */
 export const describe = (name, optionsOrFn, fnOrUndefined) => {
@@ -89,7 +91,7 @@ export const describe = (name, optionsOrFn, fnOrUndefined) => {
 
 /**
  * @param {string} name
- * @param {Record<string, unknown> | Fn} optionsOrFn
+ * @param {ItOptions | Fn} optionsOrFn
  * @param {Fn | undefined} fnOrUndefined
  */
 export const it = (name, optionsOrFn, fnOrUndefined) => {
