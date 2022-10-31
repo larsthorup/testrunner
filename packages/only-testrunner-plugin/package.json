@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "main": "src/only-plugin.js",
+  "types": "src/only-plugin.d.ts",
   "scripts": {
     "test": "exit 0"
   },

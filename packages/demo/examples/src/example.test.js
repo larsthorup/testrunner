@@ -8,7 +8,8 @@ import {
   it,
   skipIf,
 } from "@larsthorup/testrunner";
-
+import { skip } from "@larsthorup/skip-testrunner-plugin";
+import { only } from "@larsthorup/only-testrunner-plugin";
 import { fails, forTimeout, timeout, useSetup } from "@larsthorup/testutils";
 
 describe("outer", () => {
@@ -261,9 +262,23 @@ describe("mark test expected to fail", () => {
 });
 
 describe("skip", () => {
-  it("should allow a test to bail out", () => {
+  it("should allow a test to bail out dynamically", () => {
     skipIf(true, "for reasons");
     assert.equal(2 + 2, 5);
+  });
+
+  it("should allow a test to bail out statically", { skip }, () => {
+    assert.equal(2 + 2, 5);
+  });
+});
+
+describe("only", () => {
+  it("should skip", () => {
+    assert.equal(2 + 2, 5);
+  });
+
+  it("should allow a test to bail out other tests", { only }, () => {
+    assert.equal(2 + 2, 4);
   });
 });
 

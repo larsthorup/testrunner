@@ -57,4 +57,4 @@ export const plugin = () => {
   };
 };
 
-export const only = Symbol("only");
+export const only = true;

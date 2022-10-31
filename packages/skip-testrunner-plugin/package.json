@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "main": "src/skip-plugin.js",
+  "types": "src/skip-plugin.d.ts",
   "scripts": {
     "test": "exit 0"
   },

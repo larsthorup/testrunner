@@ -15,8 +15,8 @@ import { TestSkipException } from "./collector.js";
 /** @typedef {import("./collector.js").It} It */
 /** @typedef {import("./collector.js").Test} Test */
 /** @typedef {import('./report-event.js').ReportEvent} ReportEvent */
-/** @typedef {(test: Test) => void} Visit */
-/** @typedef {{preVisit?: Visit, visitBeforeChildren?: Visit, visitAfterChildren?: Visit}} Plugin */
+/** @typedef {import('./runner.js').Visit} Visit */
+/** @typedef {import('./runner.js').Plugin} Plugin */
 
 /**
  * @param { Test } root
@@ -26,7 +26,7 @@ export const runner = async (root, report) => {
   const plugins = [skipPlugin(), onlyPlugin()]; // TODO: configure and import dynamically
   for (const plugin of plugins) preVisit(root, plugin);
   for (const plugin of plugins) visit(root, plugin);
-  return runTests(root, report, [root]);
+  await runTests(root, report, [root]);
 };
 
 /**

@@ -29,4 +29,4 @@ export const plugin = () => ({
   },
 });
 
-export const skip = Symbol("skip");
+export const skip = true;
