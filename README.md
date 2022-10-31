@@ -63,6 +63,7 @@ npm test
 - [x] `debugger;` support: `ndb node packages/testrunner/src/cli.js packages/demo/examples/src/example.test.js`
 - [x] external dom mocking (happy-dom)
 - [x] external skip and only handling with plugins (standard)
+- [x] external type matchers (@humeris/espresso-shot)
 
 ### Hopefully user-land features
 
@@ -85,11 +86,10 @@ npm test
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] extract change-impact-plugin
 - [ ] chores: unit tests, clean code, remove TODOs
-- [ ] pass in test context: {name, signal} (extensibility, standard)
+- [ ] pass in test context: {name, signal, timeout} (extensibility, standard)
 - [ ] dom preview like vitest-preview
 - [ ] have a test that repeats runnning all tests in parallel 100 times
 - [ ] verify that esmock is concurrency safe
-- [ ] typed matchers https://www.npmjs.com/package/@humeris/espresso-shot
 - [ ] suite scoped fixtures (per describe block)
 - [ ] API: timeout: test.setTimeout / test.addTimeout: a la playwright
 - [ ] external reporters (jest, mocha, vitest, IDE)

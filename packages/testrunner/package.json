@@ -23,5 +23,8 @@
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "dependencies": {
     "p-queue": "^7.3.0"
+  },
+  "devDependencies": {
+    "@humeris/espresso-shot": "^4.0.0"
   }
 }
