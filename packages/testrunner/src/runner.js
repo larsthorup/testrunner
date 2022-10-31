@@ -2,8 +2,8 @@ import { AssertionError } from "node:assert";
 import { isPromise } from "node:util/types";
 import { inspect } from "node:util";
 
-import skipPlugin from "@larsthorup/skip-testrunner-plugin";
-import onlyPlugin from "@larsthorup/only-testrunner-plugin";
+import { plugin as skipPlugin } from "@larsthorup/skip-testrunner-plugin";
+import { plugin as onlyPlugin } from "@larsthorup/only-testrunner-plugin";
 
 import { TestSkipException } from "./collector.js";
 

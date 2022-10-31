@@ -1,5 +1,8 @@
 import * as assert from "node:assert/strict";
 
+import { skip } from "@larsthorup/skip-testrunner-plugin";
+import { only } from "@larsthorup/only-testrunner-plugin";
+
 import { scopeCollector } from "./collector.js";
 import {
   afterAll,
@@ -8,7 +11,7 @@ import {
   beforeEach,
   describe,
   it,
-  skip,
+  skip as raiseSkip,
 } from "./index.js";
 import { runner } from "./runner.js";
 
@@ -145,7 +148,7 @@ describe("runner", () => {
   it("should dynamically skip a test", async () => {
     const events = await runScope(() => {
       it("should skip", () => {
-        skip("for reasons");
+        raiseSkip("for reasons");
       });
     });
     assert.deepEqual(events, [
@@ -159,7 +162,7 @@ describe("runner", () => {
 
   it("should statically skip a test", async () => {
     const events = await runScope(() => {
-      it("should skip", { skip: true }, () => {});
+      it("should skip", { skip }, () => {});
       it("should test", () => {});
     });
     assert.deepEqual(events, [
@@ -178,7 +181,7 @@ describe("runner", () => {
 
   it("should statically skip nested tests", async () => {
     const events = await runScope(() => {
-      describe("skipped", { skip: true }, () => {
+      describe("skipped", { skip }, () => {
         it("should skip", () => {});
       });
       it("should test", () => {});
@@ -200,7 +203,7 @@ describe("runner", () => {
   it("should statically exclude other tests", async () => {
     const events = await runScope(() => {
       it("should skip", () => {});
-      it("should test", { only: true }, () => {});
+      it("should test", { only }, () => {});
     });
     assert.deepEqual(events, [
       {
@@ -214,7 +217,7 @@ describe("runner", () => {
   it("should statically exclude other describes", async () => {
     const events = await runScope(() => {
       it("should skip", () => {});
-      describe("included", { only: true }, () => {
+      describe("included", { only }, () => {
         it("should test", () => {});
       });
     });

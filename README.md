@@ -84,7 +84,6 @@ npm test
 
 - [ ] types for options from plugin:
   - https://pqina.nl/blog/typescript-interface-merging-and-extending-modules/
-  - define as a symbol so "only" and "skip" will have to be imported, if needed
 - [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
 - [ ] extract change-impact-plugin
 - [ ] chores: unit tests, clean code, remove TODOs

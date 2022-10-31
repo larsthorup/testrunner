@@ -1,8 +1,8 @@
-import { skip } from "@larsthorup/testrunner";
+import { skip as raiseSkip } from "@larsthorup/testrunner";
 
 /** @typedef { import('@larsthorup/testrunner').Test } Test */
 
-export default () => ({
+export const plugin = () => ({
   /**
    * @param { Test } test
    */
@@ -19,7 +19,7 @@ export default () => ({
         break;
       case "it":
         if (test.options.skip) {
-          test.fn = skip;
+          test.fn = raiseSkip;
         }
         break;
     }
@@ -28,3 +28,5 @@ export default () => ({
     // TODO: skip hooks if all tests are skipped?
   },
 });
+
+export const skip = Symbol("skip");

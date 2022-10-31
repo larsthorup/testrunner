@@ -1,6 +1,6 @@
 /** @typedef { import('@larsthorup/testrunner').Test } Test */
 
-export default () => {
+export const plugin = () => {
   let hasOnly = false;
   return {
     /**
@@ -56,3 +56,5 @@ export default () => {
     },
   };
 };
+
+export const only = Symbol("only");
