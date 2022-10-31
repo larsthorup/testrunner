@@ -145,8 +145,9 @@ export class TestSkipException extends Error {
 
 /**
  *
+ * @param {boolean} condition
  * @param {string | undefined} [reason]
  */
-export const skip = (reason) => {
-  throw new TestSkipException(reason || "");
+export const skipIf = (condition, reason) => {
+  if (condition) throw new TestSkipException(reason || "");
 };

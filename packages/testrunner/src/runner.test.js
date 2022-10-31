@@ -11,7 +11,7 @@ import {
   beforeEach,
   describe,
   it,
-  skip as raiseSkip,
+  skipIf,
 } from "./testrunner.js";
 import { runner } from "./runner.js";
 
@@ -148,7 +148,7 @@ describe("runner", () => {
   it("should dynamically skip a test", async () => {
     const events = await runScope(() => {
       it("should skip", () => {
-        raiseSkip("for reasons");
+        skipIf(true, "for reasons");
       });
     });
     assert.deepEqual(events, [

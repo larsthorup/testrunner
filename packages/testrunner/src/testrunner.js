@@ -7,5 +7,5 @@ export {
   beforeEach,
   describe,
   it,
-  skip,
+  skipIf,
 } from "./collector.js";

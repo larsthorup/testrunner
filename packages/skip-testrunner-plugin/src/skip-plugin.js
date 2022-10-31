@@ -1,4 +1,4 @@
-import { skip as raiseSkip } from "@larsthorup/testrunner";
+import { skipIf } from "@larsthorup/testrunner";
 
 /** @typedef { import('@larsthorup/testrunner').Test } Test */
 
@@ -19,7 +19,7 @@ export const plugin = () => ({
         break;
       case "it":
         if (test.options.skip) {
-          test.fn = raiseSkip;
+          test.fn = () => skipIf(true);
         }
         break;
     }

@@ -6,7 +6,7 @@ import {
   beforeEach,
   describe,
   it,
-  skip,
+  skipIf,
 } from "@larsthorup/testrunner";
 
 import { fails, forTimeout, timeout, useSetup } from "@larsthorup/testutils";
@@ -262,7 +262,7 @@ describe("mark test expected to fail", () => {
 
 describe("skip", () => {
   it("should allow a test to bail out", () => {
-    skip("for reasons");
+    skipIf(true, "for reasons");
     assert.equal(2 + 2, 5);
   });
 });

@@ -1,4 +1,4 @@
-import { it as test, skip } from "@larsthorup/testrunner";
+import { it as test, skipIf } from "@larsthorup/testrunner";
 import { fails } from "./fails.js";
 import { timeout } from "./timeout.js";
 
@@ -43,5 +43,5 @@ it.failing = (name, fn, ms) => {
 /* eslint-disable no-unused-vars */
 it.skip = (name, fn, ms) => {
   /* eslint-enable*/
-  test(name, skip);
+  test(name, () => skipIf(true));
 };

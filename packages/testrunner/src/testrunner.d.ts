@@ -21,4 +21,4 @@ export function it(
   optionsOrFn: ItOptions | Fn,
   fnOrUndefined?: Fn
 ): void;
-export function skip(reason?: string): void;
+export function skipIf(condition: boolean, reason?: string): void;
