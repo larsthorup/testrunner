@@ -11,5 +11,6 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react"
-  }
+  },
+  "include": ["src/*.ts", "src/Alert/*", "src/Avatar/*"]
 }

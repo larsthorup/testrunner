@@ -1,25 +1,11 @@
-import { expect, use } from "chai";
-import { GlobalRegistrator } from "@happy-dom/global-registrator";
-import ChaiJestMatchers from "chai-jest-matchers";
-import {
-  afterAll,
-  afterEach,
-  beforeAll,
-  describe,
-  it,
-} from "@larsthorup/testrunner";
+import { expect } from "chai";
+import { describe, it } from "@larsthorup/testrunner";
+import setupTest from "../setup.test.js";
 import Alert from "./index.js";
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
-beforeAll(() => {
-  use(ChaiJestMatchers);
-  GlobalRegistrator.register();
-});
-afterAll(() => {
-  GlobalRegistrator.unregister();
-});
-afterEach(cleanup);
+setupTest();
 
 describe("<Alert />", () => {
   it("should render the given message", () => {
