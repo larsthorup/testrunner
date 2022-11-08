@@ -1,6 +1,6 @@
 # @larsthorup/testrunner
 
-How to build a test runner.
+How to build a minimalistic test runner.
 
 Requirements:
 
@@ -45,16 +45,16 @@ npm test
 - [x] external fails handling (fix)
 - [x] external timeout handling (fix)
 - [x] extensible syntactic sugar .skip, timeout (fix)
+- [x] external support having tests in production code files (fix)
 
 ### User-land features
 
 - [x] external assertion library (node:assert, chai)
 - [x] external timer mocking (@sinonjs/fake-timers)
 - [x] external each (standard)
-- [x] external support having tests in production code files (fix)
 - [x] external object mocking (tinyspy)
 - [x] external jest compatibility matchers for chai expect: toHaveLength, toBe, toEqual (standard)
-- [x] external sharable module mocks: (esmock)
+- [x] external shareable module mocks: (esmock)
 - [x] external test file discovery (glob)
 - [x] external watch for re-testing (esm-tracer)
 - [x] external coverage (c8)
