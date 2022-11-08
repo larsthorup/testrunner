@@ -1,3 +1,4 @@
 packages/demo/coverage/coverage/
+packages/demo/evhaus-test-runner-benchmarks/dist
 packages/demo/transpiling/dist/
 packages/testrunner/coverage/

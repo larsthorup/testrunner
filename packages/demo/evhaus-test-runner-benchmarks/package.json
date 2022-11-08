@@ -23,6 +23,7 @@
     "clsx": "^1.2.1"
   },
   "devDependencies": {
-    "chai-jest-matchers": "0.1.0"
+    "chai-jest-matchers": "0.1.0",
+    "identity-obj-proxy": "^3.0.0"
   }
 }

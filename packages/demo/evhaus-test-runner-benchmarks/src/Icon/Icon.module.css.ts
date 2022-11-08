@@ -1,4 +1,2 @@
+export { default } from "identity-obj-proxy";
 // .main { fill: currentColor }
-const main = { fill: "black" };
-
-export default { main };
