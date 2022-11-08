@@ -9,8 +9,15 @@ declare global {
   export namespace Chai {
     interface Assertion {
       toBe(value: any): void;
+      toBeDefined(): void;
       toEqual(value: any): void;
       toHaveLength(length: number): void;
     }
   }
 }
+
+declare const ChaiJestMatchers: (
+  plugin: Chai.ChaiStatic,
+  utils: Chai.ChaiUtils
+) => void;
+export default ChaiJestMatchers;

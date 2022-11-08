@@ -1,11 +1,11 @@
 {
-  "name": "chai-jest-matchers",
+  "name": "@larsthorup/testrunner-evhaus-benchmarks",
   "version": "0.1.0",
   "type": "module",
-  "main": "src/chai-jest-matchers.js",
-  "types": "src/chai.d.ts",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "exit 0"
+    "test": "tsc && testrunner dist/Alert/Alert.test.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +18,11 @@
     "url": "https://github.com/larsthorup/testrunner/issues"
   },
   "homepage": "https://github.com/larsthorup/testrunner#readme",
-  "devDependencies": {
-    "@types/chai": "^4.3.1"
-  },
   "dependencies": {
-    "chai": "^4.3.6"
+    "@blueprintjs/icons": "^4.10.1",
+    "clsx": "^1.2.1"
+  },
+  "devDependencies": {
+    "chai-jest-matchers": "0.1.0"
   }
 }

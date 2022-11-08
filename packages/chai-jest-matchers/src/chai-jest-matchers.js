@@ -42,6 +42,18 @@ const ChaiJestMatchers = (chai, utils) => {
       return this.to.deep.equal(value);
     }
   );
+
+  utils.addMethod(
+    chai.Assertion.prototype,
+    "toBeDefined",
+    /**
+     * @this {Assertion & ChaiExpectReturn}
+     * @returns
+     */
+    function () {
+      return this.to.not.be.undefined;
+    }
+  );
 };
 
 export default ChaiJestMatchers;

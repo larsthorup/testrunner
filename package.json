@@ -24,7 +24,8 @@
     "packages/demo/watch",
     "packages/demo/coverage",
     "packages/demo/transpiling",
-    "packages/demo/only"
+    "packages/demo/only",
+    "packages/demo/evhaus-test-runner-benchmarks"
   ],
   "devDependencies": {
     "@types/node": "^17.0.40",
