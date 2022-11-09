@@ -1,4 +1,4 @@
-import Badge from "../Badge";
+import Badge from "../Badge/index.js";
 import React from "react";
 
 type PropsType = {

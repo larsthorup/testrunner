@@ -21,7 +21,7 @@ export default async function main(testFilePaths, concurrent) {
    * @param {ReportEvent} event
    */
   const failureAggregator = ({ scope, type }) => {
-    if (scope === "test" && type === "failure") ++failureCount;
+    if (scope === "test" && ["failure", "error"].includes(type)) ++failureCount;
   };
   const configuredReporter = consoleReporter; // TODO: configure and import dynamically
   const reporters = combineReporters([failureAggregator, configuredReporter]);

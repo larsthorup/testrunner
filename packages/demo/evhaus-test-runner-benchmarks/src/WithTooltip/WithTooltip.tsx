@@ -17,7 +17,7 @@ import {
 import type { Coords, Placement } from "@floating-ui/react-dom-interactions";
 import React, { cloneElement, forwardRef, useRef, useState } from "react";
 import clsx from "clsx";
-import styles from "./WithTooltip.module.css";
+import styles from "./WithTooltip.module.css.js";
 
 type PropsType = {
   children: JSX.Element;

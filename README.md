@@ -18,6 +18,7 @@ npm test
 - [x] no commonjs support (modernity)
 - [x] no globals (simplicity)
 - [x] no console output capture (fix)
+- [x] performance, verify with https://github.com/EvHaus/test-runner-benchmarks
 
 ### Built-in standard features
 
@@ -83,7 +84,8 @@ npm test
 
 ## TODO
 
-- [ ] performance, verify with tinybench and https://github.com/EvHaus/test-runner-benchmarks
+- [ ] fix: make "only" work across multiple files
+- [ ] fix: make "only" run all hooks (Collapsible test)
 - [ ] extract change-impact-plugin
 - [ ] chores: unit tests, clean code, remove TODOs
 - [ ] pass in test context: {name, signal, timeout} (extensibility, standard)

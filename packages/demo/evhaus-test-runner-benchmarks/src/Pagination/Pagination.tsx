@@ -1,7 +1,7 @@
-import Button from "../Button";
+import Button from "../Button/index.js";
 import clsx from "clsx";
 import React from "react";
-import styles from "./Pagination.module.css";
+import styles from "./Pagination.module.css.js";
 
 type PropsType = {
   className?: string | null;

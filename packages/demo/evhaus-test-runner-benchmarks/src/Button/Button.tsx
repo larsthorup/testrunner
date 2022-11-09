@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import Icon from "../Icon";
+import Icon from "../Icon/index.js";
 import { type IconName } from "@blueprintjs/icons";
 import React from "react";
-import Spinner from "../Spinner";
-import styles from "./Button.module.css";
+import Spinner from "../Spinner/index.js";
+import styles from "./Button.module.css.js";
 
 export type PropsType = {
   appearance?: "default" | "minimal" | "primary";

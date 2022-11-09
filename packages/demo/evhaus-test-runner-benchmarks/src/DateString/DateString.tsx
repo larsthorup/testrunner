@@ -1,11 +1,11 @@
 // @ts-expect-error Importing an internal lib
-import buildFormatLongFn from "date-fns/locale/_lib/buildFormatLongFn";
+import buildFormatLongFn from "date-fns/locale/_lib/buildFormatLongFn/index.js";
 // @ts-expect-error Importing an internal lib
 import type { FormatLong } from "date-fns/locale/types";
 import { formatRelative } from "date-fns";
 import React from "react";
-import styles from "./DateString.module.css";
-import usLocale from "date-fns/locale/en-US";
+import styles from "./DateString.module.css.js";
+import usLocale from "date-fns/locale/en-US/index.js";
 
 type PropsType = {
   children?: Date | string | null;

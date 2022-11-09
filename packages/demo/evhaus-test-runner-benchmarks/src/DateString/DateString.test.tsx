@@ -1,7 +1,11 @@
-import { describe, expect, it } from "vitest";
-import DateString from ".";
+import { expect } from "chai";
+import { describe, it } from "@larsthorup/testrunner";
+import setupTest from "../setup.test.js";
+import DateString from "./index.js";
 import React from "react";
 import { render } from "@testing-library/react";
+
+setupTest();
 
 describe("<DateString />", () => {
   it("should render nothing if nothing is given", () => {

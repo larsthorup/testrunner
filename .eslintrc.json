@@ -9,5 +9,6 @@
     "es6": true,
     "shared-node-browser": true,
     "node": true
-  }
+  },
+  "ignorePatterns": ["**/dist/**/*.js"]
 }

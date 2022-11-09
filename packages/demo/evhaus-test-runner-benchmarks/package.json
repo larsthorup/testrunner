@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && testrunner dist/Alert/Alert.test.js dist/Avatar/Avatar.test.js"
+    "test": "tsc && testfinder \"dist/*/*.test.js\" | xargs testrunner"
   },
   "repository": {
     "type": "git",
@@ -20,10 +20,15 @@
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "dependencies": {
     "@blueprintjs/icons": "^4.10.1",
-    "clsx": "^1.2.1"
+    "@floating-ui/react-dom-interactions": "^0.10.3",
+    "clsx": "^1.2.1",
+    "date-fns": "^2.29.3",
+    "framer-motion": "^7.6.5"
   },
   "devDependencies": {
+    "@testing-library/user-event": "^14.4.3",
     "chai-jest-matchers": "0.1.0",
-    "identity-obj-proxy": "^3.0.0"
+    "identity-obj-proxy": "^3.0.0",
+    "tinyspy": "^1.0.2"
   }
 }

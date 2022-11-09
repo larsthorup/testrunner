@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React from "react";
-import styles from "./Card.module.css";
+import styles from "./Card.module.css.js";
 
 type PropsType = {
   className?: string | null;

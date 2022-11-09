@@ -5,12 +5,12 @@ import { afterAll, afterEach, beforeAll } from "@larsthorup/testrunner";
 import { cleanup } from "@testing-library/react";
 
 export default () => {
-  beforeAll(() => {
+  beforeAll("setup happy-dom", () => {
     use(ChaiJestMatchers);
     GlobalRegistrator.register();
   });
-  afterAll(() => {
+  afterAll("cleanup happy-dom", () => {
     GlobalRegistrator.unregister();
   });
-  afterEach(cleanup);
+  afterEach("reset DOM", cleanup);
 };

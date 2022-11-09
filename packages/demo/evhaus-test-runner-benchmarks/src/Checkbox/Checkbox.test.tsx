@@ -1,7 +1,11 @@
-import { describe, expect, it } from "vitest";
-import Checkbox from ".";
+import { expect } from "chai";
+import { describe, it } from "@larsthorup/testrunner";
+import setupTest from "../setup.test.js";
+import Checkbox from "./index.js";
 import React from "react";
 import { render } from "@testing-library/react";
+
+setupTest();
 
 describe("<Checkbox />", () => {
   it("should render the checkbox", () => {

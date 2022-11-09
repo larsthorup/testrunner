@@ -1,8 +1,13 @@
-import { describe, expect, it, vi } from "vitest";
-import Pagination from ".";
+import { expect } from "chai";
+import { spy } from "tinyspy";
+import { describe, it } from "@larsthorup/testrunner";
+import setupTest from "../setup.test.js";
+import Pagination from "./index.js";
 import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+
+setupTest();
 
 describe("<Pagination />", () => {
   const DEFAULT_PROPS = {
@@ -44,8 +49,8 @@ describe("<Pagination />", () => {
   });
 
   it("should navigate to the page when clicking on that specific page", async () => {
-    const onPageChange = vi.fn();
-    const user = userEvent.setup();
+    const onPageChange = spy();
+    // const user = userEvent.setup();
     const { getByText } = render(
       <Pagination
         {...DEFAULT_PROPS}
@@ -54,7 +59,7 @@ describe("<Pagination />", () => {
         totalPages={5}
       />
     );
-    await user.click(getByText(2));
-    expect(onPageChange).toHaveBeenCalledWith(2);
+    await userEvent.click(getByText(2));
+    expect(onPageChange.calls).toEqual([[2]]);
   });
 });

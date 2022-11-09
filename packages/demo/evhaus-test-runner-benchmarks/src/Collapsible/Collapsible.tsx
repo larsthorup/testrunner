@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import clsx from "clsx";
-import Icon from "../Icon";
-import styles from "./Collapsible.module.css";
+import Icon from "../Icon/index.js";
+import styles from "./Collapsible.module.css.js";
 
 type PropsType = {
   className?: string | null;

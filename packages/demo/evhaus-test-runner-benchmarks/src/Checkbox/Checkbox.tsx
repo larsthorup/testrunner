@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import Icon from "../Icon";
+import Icon from "../Icon/index.js";
 import React from "react";
-import styles from "./Checkbox.module.css";
+import styles from "./Checkbox.module.css.js";
 
 type PropsType = {
   checked?: boolean;
