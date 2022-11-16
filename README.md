@@ -62,7 +62,7 @@ npm test
 - [x] external transpiler (tsc)
 - [x] external reporter (standard)
 - [x] `debugger;` support: `ndb node packages/testrunner/src/cli.js packages/demo/examples/src/example.test.js`
-- [x] external dom mocking (happy-dom)
+- [x] external DOM stubbing (happy-dom)
 - [x] external skip and only handling with plugins (standard)
 - [x] external type matchers (@humeris/espresso-shot)
 
@@ -84,8 +84,9 @@ npm test
 
 ## TODO
 
-- [ ] fix: make "only" work across multiple files
+- [ ] test isolation - default off - opt-in per test (catch more bugs)
 - [ ] fix: make "only" run all hooks (Collapsible test)
+- [ ] fix: make "only" work across multiple files
 - [ ] extract change-impact-plugin
 - [ ] chores: unit tests, clean code, remove TODOs
 - [ ] pass in test context: {name, signal, timeout} (extensibility, standard)
@@ -112,7 +113,6 @@ npm test
 - [ ] describe({random, sequential}) - default random - inherited (catch more bugs)
 - [ ] isolation / concurrency via worker threads (node), web workers (browser), browser tabs?
 - [ ] test file order - random/sorted + concurrent/serial
-- [ ] test isolation - default off - opt-in per test (catch more bugs)
 - [ ] run in node or browser (standard)
 - [ ] IDE integration
 - [ ] comparison with uvu, node:test, tap, ava, junit, nunit
@@ -130,6 +130,7 @@ npm test
 ## Inspiration
 
 - [ ] https://www.npmjs.com/package/sxy-test-runner (uses babel for parsing dependencies)
+- [ ] https://cpojer.net/posts/building-a-javascript-testing-framework
 
 ## Syntax for options (ideas)
 
