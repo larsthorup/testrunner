@@ -6,7 +6,7 @@
   "main": "report-failures.js",
   "devDependencies": {},
   "scripts": {
-    "test": "bash -c \"node report-failures.js; [ $? -eq 1 ]\""
+    "test": "bash -c \"node report-failures.js; echo exit code is $?\""
   },
   "repository": {
     "type": "git",
