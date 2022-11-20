@@ -1,0 +1,23 @@
+{
+  "name": "@larsthorup/testrunner-blog-1.1-tests",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "",
+  "main": "run-tests.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node run-tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larsthorup/testrunner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/larsthorup/testrunner/issues"
+  },
+  "homepage": "https://github.com/larsthorup/testrunner#readme",
+  "dependencies": {}
+}

@@ -1,12 +1,12 @@
 {
-  "name": "@larsthorup/testrunner-blog-baby-test-runner",
+  "name": "@larsthorup/testrunner-blog-1.2-failures",
   "version": "0.1.0",
   "type": "module",
   "description": "",
-  "main": "index.js",
+  "main": "report-failures.js",
   "devDependencies": {},
   "scripts": {
-    "test": "node baby-test-runner.js"
+    "test": "bash -c \"node report-failures.js; test $? -eq 1\""
   },
   "repository": {
     "type": "git",

@@ -39,7 +39,7 @@ export type TestSkip = {
   };
 };
 
-export type TestSucceess = {
+export type TestSuccess = {
   scope: "test";
   type: "success";
   data: {
@@ -54,4 +54,4 @@ export type ReportEvent =
   | TestError
   | TestFailure
   | TestSkip
-  | TestSucceess;
+  | TestSuccess;
