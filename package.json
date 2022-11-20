@@ -27,7 +27,8 @@
     "packages/demo/only",
     "packages/demo/evhaus-test-runner-benchmarks",
     "packages/blog/1.1-tests",
-    "packages/blog/1.2-failures"
+    "packages/blog/1.2-failures",
+    "packages/blog/1.3-async"
   ],
   "devDependencies": {
     "@types/node": "^17.0.40",

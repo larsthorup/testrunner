@@ -1,6 +1,8 @@
 import { AssertionError } from "node:assert";
-import assert from "node:assert/strict";
+// import assert from "node:assert/strict";
+import EventEmitter from "node:events";
 import { inspect } from "node:util";
+import { isPromise } from "node:util/types";
 
 // (1) reporters
 
@@ -49,11 +51,14 @@ function it(name, fn) {
 /**
  * @param { Reporter } reporter
  */
-function run(reporter) {
+async function run(reporter) {
   for (const test of testList) {
     const { name, fn } = test;
     try {
-      fn();
+      const result = fn();
+      if (isPromise(result)) {
+        await result;
+      }
       reporter({ type: "success", name });
     } catch (ex) {
       if (ex instanceof AssertionError) {
@@ -69,22 +74,20 @@ function run(reporter) {
 // (3) code under test
 
 /**
- * @param { number } a
- * @param { number } b
- * @returns { number }
+ * @param { number } ms
+ * @returns { EventEmitter }
  */
-function add(a, b) {
-  return a + b;
+function createTimer(ms) {
+  const timer = new EventEmitter();
+  setTimeout(() => timer.emit("ring"), ms);
+  return timer;
 }
 
 // (4) test code
 
-it("should fail", () => {
-  assert.equal(add(2, 2), 5);
-});
-
-it("should calculate the sum", () => {
-  assert.equal(add(2, 2), 4);
+it("should eventually ring", async () => {
+  const timer = createTimer(50);
+  await new Promise((resolve) => timer.on("ring", resolve));
 });
 
 // (5) invoking the test runner
@@ -95,5 +98,5 @@ const failureAggregator = ({ type }) => {
   if (["failure", "error"].includes(type)) ++failureCount;
 };
 const reporter = combineReporters([consoleReporter, failureAggregator]);
-run(reporter);
+await run(reporter);
 process.exit(failureCount);

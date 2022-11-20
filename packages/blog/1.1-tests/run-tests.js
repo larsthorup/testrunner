@@ -14,7 +14,7 @@ function it(name, fn) {
 }
 
 function run() {
-  testList.forEach((test) => test.fn());
+  for (const test of testList) test.fn();
 }
 
 // (2) code under test
