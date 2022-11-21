@@ -1,12 +1,12 @@
 {
-  "name": "@larsthorup/testrunner-blog-1.3-async",
+  "name": "@larsthorup/testrunner-blog-1.4-suites",
   "version": "0.1.0",
   "type": "module",
   "description": "",
-  "main": "await-async.js",
+  "main": "group-suites.js",
   "devDependencies": {},
   "scripts": {
-    "test": "node await-async.js"
+    "test": "node group-suites.js"
   },
   "repository": {
     "type": "git",
