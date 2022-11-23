@@ -84,7 +84,7 @@ npm test
 
 ## TODO
 
-- [ ] test isolation - default off - opt-in per test (catch more bugs)
+- [ ] test isolation - default off - opt-in per test (catch more bugs): node.vm? isolates?
 - [ ] fix: make "only" run all hooks (Collapsible test)
 - [ ] fix: make "only" work across multiple files
 - [ ] extract change-impact-plugin

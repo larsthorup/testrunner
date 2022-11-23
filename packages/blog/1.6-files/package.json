@@ -1,0 +1,23 @@
+{
+  "name": "@larsthorup/testrunner-blog-1.6-files",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "",
+  "main": "load-files.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node load-files.js calc.test.js timer.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larsthorup/testrunner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/larsthorup/testrunner/issues"
+  },
+  "homepage": "https://github.com/larsthorup/testrunner#readme",
+  "dependencies": {}
+}
