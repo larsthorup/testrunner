@@ -6,7 +6,8 @@
   "main": "await-async.js",
   "devDependencies": {},
   "scripts": {
-    "test": "node await-async.js"
+    "test": "node await-async.js",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

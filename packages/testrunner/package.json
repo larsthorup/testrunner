@@ -8,7 +8,8 @@
     "testrunner": "src/cli.js"
   },
   "scripts": {
-    "test": "testfinder \"src/**/*.test.js\" | xargs c8 testrunner"
+    "test": "testfinder \"src/**/*.test.js\" | xargs c8 testrunner",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

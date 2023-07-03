@@ -6,7 +6,8 @@
   "main": "run-concurrently.js",
   "devDependencies": {},
   "scripts": {
-    "test": "bash -c \"time ls -1 tests/*.test.js | xargs node run-concurrently.js\""
+    "test": "bash -c \"time ls -1 tests/*.test.js | xargs node run-concurrently.js\"",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

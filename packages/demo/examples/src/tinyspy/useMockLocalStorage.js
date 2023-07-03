@@ -6,7 +6,8 @@ import { useSetup } from "@larsthorup/testutils";
 import localstorage from "./localstorage.js";
 
 /**
- * @template A, R
+ * @template {any[]} A
+ * @template R
  * @typedef { import('tinyspy').SpyImpl<A, R> } SpyImpl<A, R>
  */
 

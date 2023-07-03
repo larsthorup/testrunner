@@ -6,7 +6,8 @@
   "main": "load-files.js",
   "devDependencies": {},
   "scripts": {
-    "test": "node load-files.js calc.test.js timer.test.js"
+    "test": "node load-files.js calc.test.js timer.test.js",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

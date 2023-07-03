@@ -4,7 +4,8 @@
   "type": "module",
   "main": "src/esm-tracer.js",
   "scripts": {
-    "test": "exit 0"
+    "test": "exit 0",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

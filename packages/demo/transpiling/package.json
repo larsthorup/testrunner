@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && testfinder \"dist/*.test.js\" | xargs testrunner"
+    "test": "testfinder \"dist/*.test.js\" | xargs testrunner",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -19,10 +20,10 @@
   },
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "devDependencies": {
-    "@happy-dom/global-registrator": "^7.6.6",
-    "@testing-library/react": "^13.4.0",
+    "@happy-dom/global-registrator": "^9.20.3",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.24",
     "react": "^18.2.0",
-    "typescript": "^4.8.4"
+    "typescript": "^5.1.6"
   }
 }

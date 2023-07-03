@@ -1,8 +1,7 @@
-import { promisify } from "node:util";
 import { readFile, stat, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 
-import glob from "glob";
+import { glob } from "glob";
 
 const lastModificationTimeFileName = ".testfinder";
 
@@ -12,7 +11,7 @@ const lastModificationTimeFileName = ".testfinder";
  * @returns {Promise<string[]>}
  */
 export default async function main(testFilePattern, skipUnaffected) {
-  const testFilePaths = await promisify(glob)(testFilePattern);
+  const testFilePaths = await glob(testFilePattern, { posix: true });
   if (skipUnaffected) {
     const lastModificationTime = await loadLastModificationTime();
     const depsPerTest = await loadDeps(testFilePaths);

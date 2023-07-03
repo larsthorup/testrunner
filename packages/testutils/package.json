@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "type": "module",
   "main": "src/testutils.js",
+  "types": "src/testutils.d.ts",
   "scripts": {
-    "test": "exit 0"
+    "test": "exit 0",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

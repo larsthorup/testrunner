@@ -7,7 +7,8 @@
     "testfinder": "src/cli.js"
   },
   "scripts": {
-    "test": "exit 0"
+    "test": "exit 0",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
   },
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "dependencies": {
-    "glob": "^8.0.3"
+    "glob": "^10.3.1"
   },
   "devDependencies": {
     "@types/glob": "^8.0.0"

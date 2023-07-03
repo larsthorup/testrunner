@@ -8,7 +8,7 @@ type PropsType = {
   title?: string | null;
 };
 
-type SupportedColorsType = typeof SUPPORTED_COLORS[number];
+type SupportedColorsType = (typeof SUPPORTED_COLORS)[number];
 
 const SUPPORTED_COLORS = ["N", "B", "G", "Y", "R", "V", "T", "P", "O"] as const;
 

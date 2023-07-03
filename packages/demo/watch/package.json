@@ -14,7 +14,8 @@
     "debug": "cat .testfinder && stat src/dep.js && testfinder \"src/*.test.js\" --skip-unaffected",
     "pretest": "npm run clean && npm run generate-deps && npm run workaround-tinypool && npm run correct-dot-testfinder",
     "test": "touch src/dep.js && npm run testrunner",
-    "testrunner": "testfinder \"src/*.test.js\" --skip-unaffected | bash -c \"NODE_OPTIONS='--loader=@larsthorup/esm-tracer' xargs testrunner\""
+    "testrunner": "testfinder \"src/*.test.js\" --skip-unaffected | bash -c \"NODE_OPTIONS='--loader=@larsthorup/esm-tracer' xargs testrunner\"",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

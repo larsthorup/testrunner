@@ -1,9 +1,4 @@
-import {
-  type IconName,
-  iconNameToPathsRecordKey,
-  IconSvgPaths16,
-  IconSvgPaths20,
-} from "@blueprintjs/icons";
+import { type IconName, getIconPaths } from "@blueprintjs/icons";
 import clsx from "clsx";
 import React from "react";
 import styles from "./Icon.module.css.js";
@@ -17,8 +12,7 @@ type PropsType = {
 type RefType = SVGSVGElement;
 
 const renderSvgPaths = (pixelGridSize: 16 | 20, name: IconName) => {
-  const svgPathsRecord = pixelGridSize === 16 ? IconSvgPaths16 : IconSvgPaths20;
-  const paths = svgPathsRecord[iconNameToPathsRecordKey(name)];
+  const paths = getIconPaths(name, pixelGridSize);
   return paths.map((path, i) => <path d={path} fillRule="evenodd" key={i} />);
 };
 

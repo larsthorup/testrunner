@@ -6,7 +6,8 @@
   "main": "group-suites.js",
   "devDependencies": {},
   "scripts": {
-    "test": "node group-suites.js"
+    "test": "node group-suites.js",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

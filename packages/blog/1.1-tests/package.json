@@ -6,7 +6,8 @@
   "main": "run-tests.js",
   "devDependencies": {},
   "scripts": {
-    "test": "node run-tests.js"
+    "test": "node run-tests.js",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

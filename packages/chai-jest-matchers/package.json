@@ -5,7 +5,8 @@
   "main": "src/chai-jest-matchers.js",
   "types": "src/chai.d.ts",
   "scripts": {
-    "test": "exit 0"
+    "test": "exit 0",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

@@ -5,7 +5,8 @@
   "main": "src/only-plugin.js",
   "types": "src/only-plugin.d.ts",
   "scripts": {
-    "test": "exit 0"
+    "test": "exit 0",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

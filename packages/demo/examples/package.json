@@ -5,22 +5,23 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
-    "@happy-dom/global-registrator": "^7.6.6",
-    "@sinonjs/fake-timers": "^9.1.2",
-    "@testing-library/react": "^13.3.0",
+    "@happy-dom/global-registrator": "^9.20.3",
+    "@sinonjs/fake-timers": "^10.3.0",
+    "@testing-library/react": "^14.0.0",
     "@types/chai": "^4.3.1",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@types/sinonjs__fake-timers": "^8.1.2",
     "chai": "^4.3.6",
-    "esmock": "^1.8.0",
-    "happy-dom": "^7.6.6",
-    "tinyspy": "^1.0.0"
+    "esmock": "^2.3.1",
+    "happy-dom": "^9.20.3",
+    "tinyspy": "^2.1.1"
   },
   "scripts": {
     "pretest": "rm -f log.log && node src/in-source/main && node src/esmock/main",
     "test": "",
-    "posttest": "testfinder \"src/**/*.js\" | bash -c \"IS_TEST=1 NODE_OPTIONS='--loader=esmock --loader=@larsthorup/esm-tracer' xargs testrunner\""
+    "posttest": "testfinder \"src/**/*.js\" | bash -c \"IS_TEST=1 NODE_OPTIONS='--loader=esmock --loader=@larsthorup/esm-tracer' xargs testrunner\"",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

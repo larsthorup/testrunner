@@ -5,10 +5,11 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
-    "c8": "^7.12.0"
+    "c8": "^8.0.0"
   },
   "scripts": {
-    "test": "c8 testrunner src/coverage.test.js"
+    "test": "c8 testrunner src/coverage.test.js",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

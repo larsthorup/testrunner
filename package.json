@@ -4,16 +4,16 @@
   "scripts": {
     "install:comparisons": "cd comparisons/esm && npm install && cd ../ts && npm install",
     "postinstall": "npm run install:comparisons",
-    "pretest": "prettier . --check && eslint . && tsc && npm run test:comparisons",
+    "pretest": "prettier . --check && eslint . && npm run tsc && npm run test:comparisons",
     "prettier": "prettier . --write",
     "test": "npm test --workspaces",
     "test:comparisons": "cd comparisons/esm && npm test && cd ../ts && npm test",
-    "tsc": "tsc"
+    "tsc": "npm run tsc --workspaces"
   },
   "workspaces": [
     "packages/testfinder",
-    "packages/testrunner",
     "packages/console-reporter-plugin",
+    "packages/testrunner",
     "packages/only-testrunner-plugin",
     "packages/skip-testrunner-plugin",
     "packages/testutils",
@@ -34,10 +34,10 @@
     "packages/blog/1.7-threads"
   ],
   "devDependencies": {
-    "@types/node": "^17.0.40",
+    "@types/node": "^20.3.3",
     "eslint": "^8.17.0",
     "prettier": "^2.6.2",
-    "typescript": "^4.7.3"
+    "typescript": "^5.1.6"
   },
   "prettier": {
     "endOfLine": "auto"

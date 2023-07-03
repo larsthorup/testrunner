@@ -3,17 +3,11 @@
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
-    "lib": ["es2020"],
+    "lib": ["es2020", "DOM"],
     "module": "node16",
     "noEmit": true,
     "strict": true,
     "types": ["node"]
   },
-  "exclude": [
-    "comparisons",
-    "node_modules",
-    "packages/demo/evhaus-test-runner-benchmarks",
-    "packages/demo/transpiling"
-  ],
   "include": ["**/*.js", "**/*.ts"]
 }

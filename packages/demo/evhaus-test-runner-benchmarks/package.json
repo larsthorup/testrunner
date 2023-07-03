@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && testfinder \"dist/*/*.test.js\" | xargs testrunner"
+    "test": "tsc && testfinder \"dist/*/*.test.js\" | xargs testrunner",
+    "tsc": "exit 0"
   },
   "repository": {
     "type": "git",
@@ -19,16 +20,16 @@
   },
   "homepage": "https://github.com/larsthorup/testrunner#readme",
   "dependencies": {
-    "@blueprintjs/icons": "^4.10.1",
-    "@floating-ui/react-dom-interactions": "^0.10.3",
+    "@blueprintjs/icons": "^5.0.0",
+    "@floating-ui/react": "^0.24.3",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
-    "framer-motion": "^7.6.5"
+    "framer-motion": "^10.12.18"
   },
   "devDependencies": {
     "@testing-library/user-event": "^14.4.3",
     "chai-jest-matchers": "0.1.0",
     "identity-obj-proxy": "^3.0.0",
-    "tinyspy": "^1.0.2"
+    "tinyspy": "^2.1.1"
   }
 }

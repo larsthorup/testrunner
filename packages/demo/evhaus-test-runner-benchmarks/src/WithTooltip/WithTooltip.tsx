@@ -13,8 +13,8 @@ import {
   useHover,
   useInteractions,
   useRole,
-} from "@floating-ui/react-dom-interactions";
-import type { Coords, Placement } from "@floating-ui/react-dom-interactions";
+} from "@floating-ui/react";
+import type { Coords, Placement } from "@floating-ui/react";
 import React, { cloneElement, forwardRef, useRef, useState } from "react";
 import clsx from "clsx";
 import styles from "./WithTooltip.module.css.js";
@@ -70,9 +70,8 @@ const WithTooltip = forwardRef<HTMLElement, PropsType>(
 
     const {
       context,
-      floating,
       placement: calculatedPlacement,
-      reference,
+      refs: { floating, reference },
       strategy,
       x,
       y,
